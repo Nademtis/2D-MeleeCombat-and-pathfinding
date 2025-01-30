@@ -9,7 +9,6 @@ var should_walk = false
 
 func _ready() -> void:
 	speed = randi_range(speed - 10 ,speed + 10)
-	#hello
 func _physics_process(delta: float) -> void:
 	if not player or not should_walk:
 		return
