@@ -1,0 +1,6 @@
+res://main.tscn
+res://tileset.tres
+res://player/player.tscn
+res://player/attack.tscn
+res://plants/tree.tscn
+res://enemy/enemy.tscn

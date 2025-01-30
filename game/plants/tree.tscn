@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://757tjyb5cnfj"]
+
+[ext_resource type="Texture2D" uid="uid://cklef76r14lyt" path="res://assets/plants/tree_stump.png" id="1_18bvy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nywb4"]
+radius = 8.0
+
+[node name="tree" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_18bvy")
+
+[node name="Area2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_nywb4")
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+radius = 2.0
+affect_navigation_mesh = true
