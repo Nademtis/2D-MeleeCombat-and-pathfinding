@@ -14,12 +14,13 @@ func _ready() -> void:
 	speed = randi_range(speed - 10 ,speed + 10)
 	
 func take_damage():
+	set_velocity(Vector2.ZERO)
 	animation_player.play("enemy_hit")
 	hp = hp - 1
 	if hp <= 0:
 		queue_free()
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	movement()
 
 #only chase after some timeout

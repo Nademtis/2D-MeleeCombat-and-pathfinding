@@ -1,8 +1,10 @@
 extends Node2D
+class_name axe
 
 @onready var attack_cool_down: Timer = $attackCoolDown
 const ATTACK = preload("res://player/attack.tscn")
 var can_attack = true
+
 
 func _on_attack_cool_down_timeout() -> void:
 	can_attack = true
@@ -18,6 +20,8 @@ func attack():
 	var attack_instance = ATTACK.instantiate()
 	
 	var direction = point - global_position
+	Events.emit_signal("player_attacked", direction)
+	
 	var angle_radians = direction.angle()
 	attack_instance.rotation = angle_radians + PI
 
