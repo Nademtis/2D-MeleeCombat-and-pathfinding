@@ -41,6 +41,18 @@ tracks/2/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Area2D/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_w3xfp"]
 resource_name = "attack"
@@ -53,10 +65,10 @@ tracks/0/path = NodePath("Sprite2D:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
+"times": PackedFloat32Array(0, 0.25),
 "transitions": PackedFloat32Array(0.233258, 6.06286),
 "update": 0,
-"values": [-1.0472, 0.523599]
+"values": [-1.0472, 1.13446]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -77,10 +89,22 @@ tracks/2/path = NodePath("Sprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.04, 0.11, 0.18),
+"times": PackedFloat32Array(0, 0.08, 0.15, 0.24),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [1, 2, 3, 4]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Area2D/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nseh8"]
@@ -105,3 +129,12 @@ libraries = {
 "": SubResource("AnimationLibrary_nseh8")
 }
 autoplay = "attack"
+
+[node name="Area2D" type="Area2D" parent="." groups=["player_attack"]]
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2(-25, -5)
+scale = Vector2(1, 0.7)
+polygon = PackedVector2Array(11, -25.7143, 17, -34.2857, 25, -41.4286, 34, -34.2857, 38, -27.1429, 43, -15.7143, 40, -1.42857, 25, 7.14286, 6, -1.42857, 6, -15.7143)
+disabled = true
