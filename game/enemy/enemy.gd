@@ -4,6 +4,7 @@ class_name enemy
 @export var speed: float = 70
 @export var hp: float = 5
 var should_walk = false
+@export var should_chase = false
 
 @onready var navigation_agent_2d: NavigationAgent2D = $NavigationAgent2D
 @onready var player: Node2D = get_node("/root/main/player")
@@ -21,7 +22,8 @@ func take_damage():
 		queue_free()
 
 func _physics_process(_delta: float) -> void:
-	movement()
+	if should_chase:
+		movement()
 
 #only chase after some timeout
 func _on_start_nav_timeout() -> void:

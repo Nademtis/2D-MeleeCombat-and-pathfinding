@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cw0twtd575n66"]
+[gd_scene load_steps=7 format=3 uid="uid://cw0twtd575n66"]
 
 [ext_resource type="Script" path="res://player/attack.gd" id="1_adh8c"]
 [ext_resource type="Texture2D" uid="uid://dryhsj3u2nonq" path="res://assets/player/axe_attack_1.png" id="1_h2dbb"]
@@ -53,6 +53,83 @@ tracks/3/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:flip_h")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_hfigp"]
+resource_name = "attack_L"
+length = 0.3
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.26),
+"transitions": PackedFloat32Array(0.233258, 0.233258),
+"update": 0,
+"values": [1.13446, -1.0472]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.08, 0.15, 0.24),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Area2D/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:flip_h")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_w3xfp"]
 resource_name = "attack"
@@ -65,8 +142,8 @@ tracks/0/path = NodePath("Sprite2D:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25),
-"transitions": PackedFloat32Array(0.233258, 6.06286),
+"times": PackedFloat32Array(0, 0.26),
+"transitions": PackedFloat32Array(0.233258, 0.233258),
 "update": 0,
 "values": [-1.0472, 1.13446]
 }
@@ -106,11 +183,24 @@ tracks/3/keys = {
 "update": 1,
 "values": [false, true]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:flip_h")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nseh8"]
 _data = {
 "RESET": SubResource("Animation_ayq74"),
-"attack": SubResource("Animation_w3xfp")
+"attack_L": SubResource("Animation_hfigp"),
+"attack_R": SubResource("Animation_w3xfp")
 }
 
 [node name="attack" type="Node2D"]
@@ -128,7 +218,7 @@ hframes = 5
 libraries = {
 "": SubResource("AnimationLibrary_nseh8")
 }
-autoplay = "attack"
+autoplay = "attack_R"
 
 [node name="Area2D" type="Area2D" parent="." groups=["player_attack"]]
 monitoring = false

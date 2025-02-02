@@ -1,11 +1,10 @@
 res://main.tscn
 res://tileset.tres
 res://player/player.tscn
-res://player/attack.tscn
 res://plants/tree.tscn
 res://enemy/enemy.tscn
+res://player/attack.tscn
 res://enemy/enemy.gd
-res://player/attack.gd
 res://player/scripts/player.gd
+res://player/attack.gd
 res://player/axe.gd
-res://autoloads/Events.gd

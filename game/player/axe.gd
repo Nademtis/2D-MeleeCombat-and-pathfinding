@@ -13,11 +13,21 @@ func _on_attack_cool_down_timeout() -> void:
 func _input(event):
 	if event.is_action_pressed("click"):
 		if (can_attack):
-			attack()
+			attack(true)
+	if event.is_action_pressed("rightClick"):
+		if (can_attack):
+			attack(false)
 
-func attack():
+func attack(attack_right: bool):
 	var point = get_global_mouse_position()
-	var attack_instance = ATTACK.instantiate()
+	var attack_instance = ATTACK.instantiate() #error here
+	
+	#setup right or left
+	if attack_right:
+		attack_instance.initialize(true)
+	else:
+		attack_instance.initialize(false)
+		
 	
 	var direction = point - global_position
 	Events.emit_signal("player_attacked", direction)

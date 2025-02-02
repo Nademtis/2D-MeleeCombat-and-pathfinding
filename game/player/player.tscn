@@ -56,7 +56,7 @@ rotation = -1.5708
 script = ExtResource("3_8ikbw")
 
 [node name="attackCoolDown" type="Timer" parent="axe"]
-wait_time = 0.2
+wait_time = 0.3
 one_shot = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

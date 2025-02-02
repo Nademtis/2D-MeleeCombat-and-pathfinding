@@ -9,9 +9,15 @@ class_name Player
 @export var deceleration: float = 800
 
 #player attack dash
-@export var attack_dash_speed: float = 5
-@export var attack_dash_duration: float = 0.1
+@export var attack_dash_speed: float = 65
+@export var attack_dash_duration: float = 0.05
+
 #var is_dashing = false
+
+var attack_dash_start_position: Vector2
+var attack_dash_target_position: Vector2
+var attack_dash_elapsed_time: float = 0.0
+var attack_dash_direction: Vector2 = Vector2.ZERO
 
 enum MovementState{WALKING, ATTACKING, DASHING}
 var movement_state = MovementState.WALKING
@@ -26,18 +32,35 @@ func _process(delta: float) -> void:
 		MovementState.WALKING:
 			move_player(delta)
 		MovementState.ATTACKING:
-			
+			handle_attack_dash(delta)  # New function for smooth dash
 			pass
 		MovementState.DASHING:
 			pass
-		
 	anim_player()
 
-func attack_dash(direction : Vector2):
+func attack_dash(direction: Vector2):
 	set_movement_state(MovementState.ATTACKING)
-	
+	attack_dash_start_position = global_position
+	attack_dash_direction = direction.normalized()
+	attack_dash_target_position = attack_dash_start_position + attack_dash_direction * (attack_dash_speed * attack_dash_duration)
+	attack_dash_elapsed_time = 0.0  # Reset timer
+
+func handle_attack_dash(delta: float):
+	attack_dash_elapsed_time += delta
+	var t = attack_dash_elapsed_time / attack_dash_duration  # Normalized time (0 to 1)
+	t = clamp(t, 0, 1)  # Ensure t stays within bounds
+
+	# Lerp the player's position smoothly
+	global_position = attack_dash_start_position.lerp(attack_dash_target_position, t)
+
+	# Dash complete
+	if t >= 1.0:
+		pass
+		#set_movement_state(MovementState.WALKING)
+
 func set_movement_state(new_state : MovementState):
-	var old_state = movement_state
+	var old_state: MovementState = movement_state
+	print(MovementState.keys()[old_state])
 	
 	match new_state:
 		MovementState.WALKING:
