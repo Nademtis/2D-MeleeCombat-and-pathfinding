@@ -1,0 +1,113 @@
+[gd_scene load_steps=8 format=3 uid="uid://bo0vn1x8dpsfe"]
+
+[ext_resource type="Script" path="res://enemy/enemy.gd" id="1_gbhi2"]
+[ext_resource type="Texture2D" uid="uid://d3ran3xjja84e" path="res://icon.svg" id="1_t0df5"]
+
+[sub_resource type="Animation" id="Animation_c1pwt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.1, 0.1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.666667, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_7bgrk"]
+resource_name = "enemy_hit"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.105, 0.105), Vector2(0.1, 0.1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.666667, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xnb4n"]
+_data = {
+"RESET": SubResource("Animation_c1pwt"),
+"enemy_hit": SubResource("Animation_7bgrk")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x51ix"]
+radius = 4.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f156x"]
+radius = 8.0
+
+[node name="enemy" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_gbhi2")
+speed = null
+hp = 50.0
+should_chase_debug = null
+knockback_duration = null
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0.666667, 0, 0, 1)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_t0df5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xnb4n")
+}
+
+[node name="movement_CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_x51ix")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+target_desired_distance = 6.0
+path_max_distance = 1000.0
+avoidance_enabled = true
+time_horizon_obstacles = 1.0
+
+[node name="startNav" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+autostart = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="hitbox" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_f156x")
+
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
+[connection signal="timeout" from="startNav" to="." method="_on_start_nav_timeout"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

@@ -6,7 +6,7 @@ class_name Player
 #player movement
 @export var max_speed: float = 100
 @export var acceleration: float = 2000
-@export var deceleration: float = 800
+@export var deceleration: float = 500
 
 #player attack dash
 @export var attack_dash_speed: float = 200

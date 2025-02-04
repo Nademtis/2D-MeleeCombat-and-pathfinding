@@ -12,7 +12,6 @@ var knockback_force: Vector2 = Vector2.ZERO
 var knockback_timer: float = 0.0
 
 @onready var navigation_agent_2d: NavigationAgent2D = $NavigationAgent2D
-@onready var player: Node2D = get_node("/root/main/player")
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
@@ -24,7 +23,7 @@ func take_damage():
 	
 	# Apply knockback away from the player
 	var knockback_strength = 200  # Adjust for desired knockback power
-	var direction = (global_position - player.global_position).normalized()
+	var direction = (global_position - PlayerStats.player_position).normalized()
 	
 	knockback_force = direction * knockback_strength
 	knockback_timer = knockback_duration
@@ -41,7 +40,7 @@ func _physics_process(delta: float) -> void:
 # Only chase after some timeout
 func _on_start_nav_timeout() -> void:
 	should_walk = true
-	navigation_agent_2d.target_position = player.global_position
+	navigation_agent_2d.target_position = PlayerStats.player_position
 
 # Used for avoidance
 func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
@@ -57,14 +56,14 @@ func movement(delta: float) -> void:
 		
 		# Reduce knockback over time (linear decay)
 		knockback_timer -= delta
-		knockback_force = knockback_force.lerp(Vector2.ZERO, delta * 5)  # Smooth decay
+		knockback_force = knockback_force.lerp(Vector2.ZERO, delta * 2)  # Smooth decay
 		return  # Skip normal movement during knockback
 
 	# Normal movement logic
-	if not player or not should_walk:
+	if not should_walk:
 		return
 	
-	navigation_agent_2d.target_position = player.global_position
+	navigation_agent_2d.target_position = PlayerStats.player_position
 	var direction = (navigation_agent_2d.get_next_path_position() - global_position).normalized()
 	
 	var intended_velocity = direction * speed
