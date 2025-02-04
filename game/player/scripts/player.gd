@@ -4,9 +4,9 @@ class_name Player
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 #player movement
-@export var max_speed: float = 100
-@export var acceleration: float = 2000
-@export var deceleration: float = 500
+@export var max_speed: float = 85 #100
+@export var acceleration: float = 60 #2000
+@export var deceleration: float = 80 #500
 
 #player attack dash
 @export var attack_dash_speed: float = 200
@@ -24,13 +24,13 @@ var movement_state = MovementState.WALKING
 
 func _ready() -> void:
 	Events.connect("player_attacked", attack_dash) #TODO
-	pass
-
-
 
 func _process(delta: float) -> void:
 	PlayerStats.player_position = global_position #update player position for enemies
+	anim_player()
 	
+	
+func _physics_process(delta: float) -> void:
 	match movement_state:
 		MovementState.WALKING:
 			move_player(delta)
@@ -39,7 +39,8 @@ func _process(delta: float) -> void:
 			pass
 		MovementState.DASHING:
 			pass
-	anim_player()
+	move_and_slide()
+	
 
 func attack_dash(direction: Vector2):
 	set_movement_state(MovementState.ATTACKING)
@@ -87,25 +88,33 @@ func move_player(delta):
 
 	# apply acceleration when input is detected
 	if input_vector != Vector2.ZERO:
-		velocity = velocity.move_toward(input_vector * max_speed, acceleration * delta)
+		#velocity = velocity.move_toward(input_vector * max_speed, acceleration * delta)
+		velocity = lerp(velocity, input_vector * max_speed, acceleration * delta)
+
 	# Apply deceleration when no input is detected
 	else:
-		velocity = velocity.move_toward(Vector2.ZERO, deceleration * delta)
-
-	# Move the player
-	move_and_slide()
+		#velocity = velocity.move_toward(Vector2.ZERO, deceleration * delta)
+		velocity = lerp(velocity, input_vector * max_speed, deceleration * delta)
 
 func anim_player():
-	if velocity.x > 0: # Moving right
-		animated_sprite_2d.play("walk_right")
-	elif velocity.x < 0: # Moving left
-		animated_sprite_2d.play("walk_left")
-	elif velocity.y > 0: # Moving down
-		animated_sprite_2d.play("walk_down")
-	elif velocity.y < 0: # Moving up
-		animated_sprite_2d.play("walk_up")
-	else: # Idle (no movement)
-		animated_sprite_2d.play("idle_down")
+	var input_vector = Vector2(
+		Input.get_action_strength("right") - Input.get_action_strength("left"),
+		Input.get_action_strength("down") - Input.get_action_strength("up")
+	).normalized()
+
+	if input_vector != Vector2.ZERO:
+		if abs(input_vector.x) > abs(input_vector.y):
+			if input_vector.x > 0:
+				animated_sprite_2d.play("walk_right")
+			else:
+				animated_sprite_2d.play("walk_left")
+		else:
+			if input_vector.y > 0:
+				animated_sprite_2d.play("walk_down")
+			else:
+				animated_sprite_2d.play("walk_up")
+	else:
+		animated_sprite_2d.play("idle_down")  # Default idle animation
 
 
 func _on_attack_cool_down_timeout() -> void:
