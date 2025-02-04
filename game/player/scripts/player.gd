@@ -5,11 +5,11 @@ class_name Player
 
 #player movement
 @export var max_speed: float = 100
-@export var acceleration: float = 2800
+@export var acceleration: float = 2000
 @export var deceleration: float = 800
 
 #player attack dash
-@export var attack_dash_speed: float = 65
+@export var attack_dash_speed: float = 200
 @export var attack_dash_duration: float = 0.05
 
 #var is_dashing = false
@@ -25,9 +25,12 @@ var movement_state = MovementState.WALKING
 func _ready() -> void:
 	Events.connect("player_attacked", attack_dash) #TODO
 	pass
-	
+
+
 
 func _process(delta: float) -> void:
+	PlayerStats.player_position = global_position #update player position for enemies
+	
 	match movement_state:
 		MovementState.WALKING:
 			move_player(delta)

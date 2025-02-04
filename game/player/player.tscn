@@ -364,13 +364,12 @@ motion_mode = 1
 script = ExtResource("1_f8ifd")
 
 [node name="axe" type="Node2D" parent="."]
-visible = false
 position = Vector2(0, 4)
 rotation = -1.5708
 script = ExtResource("3_8ikbw")
 
 [node name="attackCoolDown" type="Timer" parent="axe"]
-wait_time = 0.3
+wait_time = 0.2
 one_shot = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

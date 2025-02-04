@@ -73,6 +73,7 @@ radius = 8.0
 [node name="enemy" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_gbhi2")
+hp = 50.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 self_modulate = Color(0.666667, 0, 0, 1)
