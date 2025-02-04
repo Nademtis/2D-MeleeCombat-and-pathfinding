@@ -94,12 +94,15 @@ func move_player(delta):
 
 func anim_player():
 	if velocity.x > 0: # Moving right
-		animated_sprite_2d.play("right")
+		animated_sprite_2d.play("walk_right")
 	elif velocity.x < 0: # Moving left
-		animated_sprite_2d.play("left")
-	else: # Idle (no horizontal movement)
-		animated_sprite_2d.play("idle")
-	
+		animated_sprite_2d.play("walk_left")
+	elif velocity.y > 0: # Moving down
+		animated_sprite_2d.play("walk_down")
+	elif velocity.y < 0: # Moving up
+		animated_sprite_2d.play("walk_up")
+	else: # Idle (no movement)
+		animated_sprite_2d.play("idle_down")
 
 
 func _on_attack_cool_down_timeout() -> void:
