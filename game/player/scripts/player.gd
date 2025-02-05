@@ -13,6 +13,8 @@ class_name Player
 @export var attack_dash_duration: float = 0.05
 
 #var is_dashing = false
+@onready var attack_combo_timer: Timer = $attackComboTimer # 
+
 
 var attack_dash_start_position: Vector2
 var attack_dash_target_position: Vector2
@@ -29,7 +31,15 @@ func _process(delta: float) -> void:
 	PlayerStats.player_position = global_position #update player position for enemies
 	anim_player()
 	
+
+#func _input(event: InputEvent) -> void:
+	#if event.is_action_pressed("click") && attack_combo_timer.is_stopped():
+		#animated_sprite_2d.play("attack_1_right")
+		#attack_combo_timer.start()
+	#elif event.is_action_pressed("click") && attack_combo_timer.time_left > 0:
+		#animated_sprite_2d.play("attack_2_right")
 	
+
 func _physics_process(delta: float) -> void:
 	match movement_state:
 		MovementState.WALKING:
@@ -97,6 +107,9 @@ func move_player(delta):
 		velocity = lerp(velocity, input_vector * max_speed, deceleration * delta)
 
 func anim_player():
+	#if animated_sprite_2d.animation == "attack_1_right" || animated_sprite_2d.animation == "attack_2_right":
+	#	return
+
 	var input_vector = Vector2(
 		Input.get_action_strength("right") - Input.get_action_strength("left"),
 		Input.get_action_strength("down") - Input.get_action_strength("up")
@@ -120,3 +133,4 @@ func anim_player():
 func _on_attack_cool_down_timeout() -> void:
 	#attack finished - go back to walking
 	set_movement_state(MovementState.WALKING)
+	pass

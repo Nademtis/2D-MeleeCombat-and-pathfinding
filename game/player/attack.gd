@@ -1,17 +1,29 @@
 extends Node2D
 
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
+#@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
+@onready var animation_player2: AnimationPlayer = $"new attack/AnimationPlayer"
+@onready var sprite_2d: Sprite2D = $"new attack/Sprite2D"
+
 var attack_right = true
 
 func initialize(is_attack_right: bool) -> void:
 	attack_right = is_attack_right
 
 func _ready() -> void:
+	#if attack_right:
+		#animation_player.play("attack_R")
+	#else:
+		#animation_player.play("attack_L")
+		#
 	if attack_right:
-		animation_player.play("attack_R")
+		sprite_2d.flip_h = false
+		animation_player2.play("attack")
 	else:
-		animation_player.play("attack_L")
+		sprite_2d.flip_h = true
+		animation_player2.play("attack")
 		
+
 
 #TODO IF HIT --> object take damage --> kill this
 

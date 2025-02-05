@@ -369,16 +369,19 @@ rotation = -1.5708
 script = ExtResource("3_8ikbw")
 
 [node name="attackCoolDown" type="Timer" parent="axe"]
-wait_time = 0.2
+wait_time = 0.3
+one_shot = true
+
+[node name="attackComboTimer" type="Timer" parent="."]
+wait_time = 0.5
 one_shot = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 1
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_rfhv2")
-animation = &"attack_2_right"
-frame = 4
-frame_progress = 1.0
+animation = &"idle_down"
+autoplay = "idle_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.5, 0.5)

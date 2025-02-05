@@ -4,7 +4,7 @@ class_name enemy
 @export var speed: float = 70
 @export var hp: float = 5
 var should_walk = false
-@export var should_chase_debug = true
+@export var should_chase_debug = false
 
 # Knockback variables
 @export var knockback_duration: float = 0.05
