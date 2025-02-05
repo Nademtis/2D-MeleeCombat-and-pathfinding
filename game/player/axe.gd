@@ -5,6 +5,7 @@ class_name axe
 const ATTACK = preload("res://player/attack.tscn")
 var can_attack = true
 
+#TODO not used currently
 
 func _on_attack_cool_down_timeout() -> void:
 	can_attack = true
@@ -37,7 +38,7 @@ func attack(attack_right: bool):
 
 	#cooldown stuff
 	can_attack = false
-	attack_cool_down.start()
+	#attack_cool_down.start()
 
 	add_child(attack_instance)
 	await get_tree().create_timer(1).timeout

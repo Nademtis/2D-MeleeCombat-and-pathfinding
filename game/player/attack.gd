@@ -7,6 +7,8 @@ extends Node2D
 
 var attack_right = true
 
+#TODO not used currently
+
 func initialize(is_attack_right: bool) -> void:
 	attack_right = is_attack_right
 

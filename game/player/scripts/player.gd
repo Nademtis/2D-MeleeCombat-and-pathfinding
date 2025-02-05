@@ -8,14 +8,17 @@ class_name Player
 @export var acceleration: float = 60 #2000
 @export var deceleration: float = 80 #500
 
+#player attack
+var can_attack = true
+@onready var attack_cool_down: Timer = $attackCoolDown
+
+
 #player attack dash
-@export var attack_dash_speed: float = 200
-@export var attack_dash_duration: float = 0.05
+@export var attack_dash_speed: float = 225
+@export var attack_dash_duration: float = 0.06
+@onready var attack_combo_timer: Timer = $attackComboTimer
 
-#var is_dashing = false
-@onready var attack_combo_timer: Timer = $attackComboTimer # 
-
-
+#below is used for the attack dash
 var attack_dash_start_position: Vector2
 var attack_dash_target_position: Vector2
 var attack_dash_elapsed_time: float = 0.0
@@ -32,13 +35,14 @@ func _process(delta: float) -> void:
 	anim_player()
 	
 
-#func _input(event: InputEvent) -> void:
-	#if event.is_action_pressed("click") && attack_combo_timer.is_stopped():
-		#animated_sprite_2d.play("attack_1_right")
-		#attack_combo_timer.start()
-	#elif event.is_action_pressed("click") && attack_combo_timer.time_left > 0:
-		#animated_sprite_2d.play("attack_2_right")
-	
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("click"):
+		var point = get_global_mouse_position()
+		var direction = point - global_position
+		attack_dash(direction)
+		attack(point)
+
+
 
 func _physics_process(delta: float) -> void:
 	match movement_state:
@@ -59,6 +63,24 @@ func attack_dash(direction: Vector2):
 	attack_dash_target_position = attack_dash_start_position + attack_dash_direction * (attack_dash_speed * attack_dash_duration)
 	attack_dash_elapsed_time = 0.0  # Reset timer
 
+func attack(point : Vector2):
+	if point.x > global_position.x: #attack right
+		if attack_combo_timer.is_stopped():
+			animated_sprite_2d.play("attack_1_right")
+			attack_combo_timer.start()
+		elif attack_combo_timer.time_left > 0:
+			animated_sprite_2d.play("attack_2_right")
+	else: # attack left
+		if attack_combo_timer.is_stopped():
+			animated_sprite_2d.play("attack_1_left")
+			attack_combo_timer.start()
+		elif attack_combo_timer.time_left > 0:
+			animated_sprite_2d.play("attack_2_left")
+			
+	#reset timer
+	attack_cool_down.stop()
+	attack_cool_down.start()
+
 func handle_attack_dash(delta: float):
 	attack_dash_elapsed_time += delta
 	var t = attack_dash_elapsed_time / attack_dash_duration  # Normalized time (0 to 1)
@@ -74,7 +96,7 @@ func handle_attack_dash(delta: float):
 
 func set_movement_state(new_state : MovementState):
 	var old_state: MovementState = movement_state
-	print(MovementState.keys()[old_state])
+	print(MovementState.keys()[new_state])
 	
 	match new_state:
 		MovementState.WALKING:
@@ -98,17 +120,15 @@ func move_player(delta):
 
 	# apply acceleration when input is detected
 	if input_vector != Vector2.ZERO:
-		#velocity = velocity.move_toward(input_vector * max_speed, acceleration * delta)
 		velocity = lerp(velocity, input_vector * max_speed, acceleration * delta)
-
-	# Apply deceleration when no input is detected
-	else:
-		#velocity = velocity.move_toward(Vector2.ZERO, deceleration * delta)
+	else: # Apply deceleration when no input is detected
 		velocity = lerp(velocity, input_vector * max_speed, deceleration * delta)
 
 func anim_player():
 	#if animated_sprite_2d.animation == "attack_1_right" || animated_sprite_2d.animation == "attack_2_right":
 	#	return
+	if movement_state == MovementState.ATTACKING:
+		return
 
 	var input_vector = Vector2(
 		Input.get_action_strength("right") - Input.get_action_strength("left"),
@@ -133,4 +153,5 @@ func anim_player():
 func _on_attack_cool_down_timeout() -> void:
 	#attack finished - go back to walking
 	set_movement_state(MovementState.WALKING)
+	can_attack = true
 	pass
