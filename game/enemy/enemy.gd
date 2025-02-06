@@ -19,7 +19,7 @@ func _ready() -> void:
 	speed = randi_range(speed - 10 ,speed + 10)
 	
 func take_damage():
-	print("enemy hit")
+	#print("enemy hit")
 	set_velocity(Vector2.ZERO)
 	
 	# Apply knockback away from the player

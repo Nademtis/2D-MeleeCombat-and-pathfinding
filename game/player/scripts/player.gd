@@ -16,7 +16,6 @@ var can_attack = true
 @onready var coll_shape_up: CollisionPolygon2D = $attackHitbox/CollShapeUp/collShapeUp
 @onready var coll_shape_down: CollisionPolygon2D = $attackHitbox/CollShapeDown/collShapeDown
 
-
 #player attack dash
 @export var attack_dash_speed: float = 225
 @export var attack_dash_duration: float = 0.06
@@ -131,7 +130,6 @@ func set_movement_state(new_state : MovementState):
 			
 		MovementState.DASHING:
 			pass
-		
 
 func move_player(delta):
 	#var direction: Vector2 = Vector2.ZERO
@@ -204,7 +202,6 @@ func turn_on_attack_collision(direction: String):
 	coll_shape_down.disabled = true
 	coll_shape_right.disabled = true
 	coll_shape_left.disabled = true
-
 
 func _on_attack_cool_down_timeout() -> void:
 	#attack finished - go back to walking

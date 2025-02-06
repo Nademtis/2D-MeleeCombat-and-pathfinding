@@ -564,7 +564,7 @@ one_shot = true
 z_index = 1
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_rfhv2")
-animation = &"attack_1_down"
+animation = &"idle_down"
 autoplay = "idle_down"
 
 [node name="PlayerCollisionShape2D" type="CollisionShape2D" parent="."]
@@ -600,6 +600,7 @@ polygon = PackedVector2Array(-20, -11, 16, -7, 24, -3, 25, 18, 8, 37, -15, 33, -
 disabled = true
 
 [node name="CollShapeDown" type="Area2D" parent="attackHitbox" groups=["player_attack"]]
+visible = false
 monitoring = false
 
 [node name="collShapeDown" type="CollisionPolygon2D" parent="attackHitbox/CollShapeDown"]
