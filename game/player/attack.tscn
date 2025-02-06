@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://player/attack.gd" id="1_adh8c"]
 [ext_resource type="Texture2D" uid="uid://dryhsj3u2nonq" path="res://assets/player/axe_attack_1.png" id="1_h2dbb"]
 [ext_resource type="Texture2D" uid="uid://cxjwq87qs2bxh" path="res://assets/player/idle_down.png" id="3_n44ke"]
-[ext_resource type="Texture2D" uid="uid://bsfotebtfx7t6" path="res://assets/player/attack/attack_anim.png" id="4_k660l"]
 
 [sub_resource type="Animation" id="Animation_ayq74"]
 length = 0.001
@@ -205,6 +204,9 @@ _data = {
 "attack_R": SubResource("Animation_w3xfp")
 }
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fpu1e"]
+load_path = "res://.godot/imported/attack_anim.png-3e1ca390ac15ffef5c65b72b1e4926cd.ctex"
+
 [sub_resource type="Animation" id="Animation_6l0ao"]
 length = 0.001
 tracks/0/type = "value"
@@ -334,7 +336,6 @@ _data = {
 }
 
 [node name="attack" type="Node2D"]
-visible = false
 script = ExtResource("1_adh8c")
 
 [node name="Sprite2D_old_axe" type="Sprite2D" parent="."]
@@ -360,7 +361,6 @@ polygon = PackedVector2Array(11, -25.7143, 17, -34.2857, 25, -41.4286, 34, -34.2
 disabled = true
 
 [node name="DEBUG KILL THIS" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(1, -8)
 scale = Vector2(2, 2)
 texture = ExtResource("3_n44ke")
@@ -372,7 +372,7 @@ hframes = 6
 visible = false
 position = Vector2(0, -18)
 scale = Vector2(2, 2)
-texture = ExtResource("4_k660l")
+texture = SubResource("CompressedTexture2D_fpu1e")
 flip_h = true
 hframes = 5
 frame = 1

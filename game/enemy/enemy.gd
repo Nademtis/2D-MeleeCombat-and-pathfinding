@@ -6,7 +6,7 @@ class_name enemy
 var should_walk = false
 @export var should_chase_debug = true
 
-# Knockback variables
+# Knockback variablesd
 @export var knockback_duration: float = 0.05
 var knockback_force: Vector2 = Vector2.ZERO
 var knockback_timer: float = 0.0
@@ -19,6 +19,7 @@ func _ready() -> void:
 	speed = randi_range(speed - 10 ,speed + 10)
 	
 func take_damage():
+	print("enemy hit")
 	set_velocity(Vector2.ZERO)
 	
 	# Apply knockback away from the player
