@@ -1,5 +1,6 @@
 res://main.tscn
 res://tileset.tres
+res://tileSet_1.tres
 res://player/player.tscn
 res://plants/tree.tscn
 res://enemy/enemy.tscn

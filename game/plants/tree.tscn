@@ -18,3 +18,4 @@ shape = SubResource("CircleShape2D_nywb4")
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
 radius = 2.0
 affect_navigation_mesh = true
+carve_navigation_mesh = true
