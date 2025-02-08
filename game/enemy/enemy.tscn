@@ -94,7 +94,6 @@ target_desired_distance = 6.0
 path_max_distance = 1000.0
 avoidance_enabled = true
 time_horizon_obstacles = 1.0
-debug_enabled = true
 
 [node name="startNav" type="Timer" parent="."]
 wait_time = 0.5

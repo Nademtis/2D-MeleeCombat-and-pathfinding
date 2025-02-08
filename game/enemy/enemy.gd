@@ -16,7 +16,7 @@ var knockback_timer: float = 0.0
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func _ready() -> void:
-	speed = randi_range(speed - 10 ,speed + 10)
+	speed = randi_range(speed - 10, speed + 10)
 	
 func take_damage():
 	#print("enemy hit")
