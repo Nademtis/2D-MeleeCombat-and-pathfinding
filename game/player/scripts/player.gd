@@ -48,7 +48,7 @@ func _process(_delta: float) -> void:
 	
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("click" )&& can_attack or left_click_held_down && can_attack :
+	if event.is_action_pressed("click" ) && can_attack or left_click_held_down && can_attack :
 		var point = get_global_mouse_position()
 		var direction = point - global_position
 		attack_dash(direction)
@@ -87,7 +87,8 @@ func attack(point : Vector2):
 	combo_count += 1
 	can_attack = false
 	
-	if combo_count >= max_combo: 
+	if combo_count >= max_combo:
+		#freeze_frame(0.15, 0.25)
 		attack_cool_down.start()
 	else:
 		attack_small_delay.start()
@@ -193,6 +194,17 @@ func turn_on_attack_collision(direction: String):
 	coll_shape_down.disabled = true
 	coll_shape_right.disabled = true
 	coll_shape_left.disabled = true
+
+func freeze_frame(duration: float, slow_motion_scale: float = 0.0) -> void:
+	print("freezing")
+	#Engine.time_scale = slow_motion_scale
+	#await get_tree().create_timer(duration, false).timeout  # Run timer in unscaled time
+	#Engine.time_scale = 1.0  # Restore normal speed
+	Engine.time_scale = slow_motion_scale
+	await(get_tree().create_timer(duration, true, false, true).timeout)
+	Engine.time_scale = 1
+	
+	
 
 func _on_attack_cool_down_timeout() -> void: 
 	#attack and combo finished - go back to walking

@@ -53,7 +53,6 @@ func movement(delta: float) -> void:
 	# Apply knockback first if active
 	if knockback_timer > 0:
 		velocity = knockback_force
-		#move_and_slide()
 		
 		# Reduce knockback over time (linear decay)
 		knockback_timer -= delta
