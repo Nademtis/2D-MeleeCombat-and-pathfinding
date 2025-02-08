@@ -10,6 +10,7 @@ class_name Player
 
 #input
 var left_click_held_down = false
+var dash_held_down = false
 
 #player attack & combo
 var can_attack: bool = true
@@ -26,11 +27,12 @@ var max_combo : int = 3
 @onready var coll_shape_down: CollisionPolygon2D = $attackHitbox/CollShapeDown/collShapeDown
 
 #player dash
-@export var dash_speed: float = 500
-@export var dash_duration : float = 0.1
+@export var dash_speed: float = 500 #500
+@export var dash_duration : float = 0.12 # 0.1
 var can_dash = true
 var dash_direction : Vector2
 var dash_elapsed_time : float = 0.0
+var dash_start_speed : float
 @onready var dash_cooldown: Timer = $dashCooldown
 
 #below is used for the attack dash
@@ -49,6 +51,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	PlayerStats.player_position = global_position #update player position for global access
 	left_click_held_down = Input.is_action_pressed("click")
+	dash_held_down = Input.is_action_pressed("dash")
 	anim_player()
 	
 	#print(MovementState.keys()[movement_state])
@@ -59,7 +62,7 @@ func _input(event: InputEvent) -> void:
 		var direction = point - global_position
 		setup_attack_dash(direction)
 		attack(point)
-	if event.is_action_pressed("dash") && movement_state == MovementState.WALKING && can_dash:
+	if event.is_action_pressed("dash") && can_dash && movement_state == MovementState.WALKING or dash_held_down && can_dash && movement_state == MovementState.WALKING:
 		setup_dash()
 
 func _physics_process(delta: float) -> void:
@@ -99,7 +102,6 @@ func setup_attack_dash(direction: Vector2):
 	attack_dash_direction = direction.normalized()
 	attack_dash_elapsed_time = 0.0  # Reset timer
 	
-
 func handle_attack_dash(delta: float):
 	attack_dash_elapsed_time += delta
 	var t = attack_dash_elapsed_time / attack_dash_duration
@@ -111,7 +113,6 @@ func handle_attack_dash(delta: float):
 		velocity = Vector2.ZERO
 
 func setup_dash():
-	print("dash setup")
 	var input_vector = Vector2(
 		Input.get_action_strength("right") - Input.get_action_strength("left"),
 		Input.get_action_strength("down") - Input.get_action_strength("up")
@@ -120,14 +121,17 @@ func setup_dash():
 		set_movement_state(MovementState.DASHING)
 		dash_direction = input_vector
 		dash_elapsed_time = 0.0 # Reset timer
+		dash_start_speed = dash_speed  # Store initial speed
 		dash_cooldown.start()
 		can_dash = false
 
 func handle_dashing(delta: float):
 	dash_elapsed_time += delta
-	var t = dash_elapsed_time / dash_duration
-	t = clamp(t, 0, 1)
-	velocity = dash_direction * dash_speed * (1 - t)
+	var t = clamp(dash_elapsed_time / dash_duration, 0, 1)
+
+	# Smoothly reduce velocity using lerp
+	velocity = lerp(dash_start_speed, 0.0, t) * dash_direction
+
 	if t >= 1.0:
 		velocity = Vector2.ZERO
 		set_movement_state(MovementState.WALKING)
