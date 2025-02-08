@@ -8,13 +8,18 @@ class_name Player
 @export var acceleration: float = 60 #2000
 @export var deceleration: float = 80 #500
 
+#input
+var left_click_held_down = false
+
 #player attack & combo
 var can_attack: bool = true
 var combo_count : int = 0
 var max_combo : int = 3
 @onready var attack_small_delay: Timer = $attackDelay #timewindow to make combo
 @onready var attack_cool_down: Timer = $attackCoolDown # cooldown between attacks
+@onready var attack_combo: Timer = $attackCombo
 
+#collisions
 @onready var coll_shape_left: CollisionPolygon2D = $attackHitbox/CollShapeLeft/collShapeLeft
 @onready var coll_shape_right: CollisionPolygon2D = $attackHitbox/CollShapeRight/collShapeRight
 @onready var coll_shape_up: CollisionPolygon2D = $attackHitbox/CollShapeUp/collShapeUp
@@ -37,12 +42,13 @@ func _ready() -> void:
 	Events.connect("player_attacked", attack_dash) #TODO
 
 func _process(_delta: float) -> void:
-	#print(combo_count)
 	PlayerStats.player_position = global_position #update player position for enemies
+	left_click_held_down = Input.is_action_pressed("click")
 	anim_player()
+	
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("click") && can_attack:
+	if event.is_action_pressed("click" )&& can_attack or left_click_held_down && can_attack :
 		var point = get_global_mouse_position()
 		var direction = point - global_position
 		attack_dash(direction)
@@ -81,53 +87,11 @@ func attack(point : Vector2):
 	combo_count += 1
 	can_attack = false
 	
-	
 	if combo_count >= max_combo: 
 		attack_cool_down.start()
 	else:
 		attack_small_delay.start()
-	
-	
-	
-	
-	
-	
-	#if attack_direction == "right": #attack right
-		#turn_on_attack_collision("right")
-		#if attack_combo_timer.is_stopped():
-			#animated_sprite_2d.play("attack_1_right")
-			#attack_combo_timer.start()
-		#elif attack_combo_timer.time_left > 0:
-			#animated_sprite_2d.play("attack_2_right")
-			#
-	#elif attack_direction == "left": # attack left
-		#turn_on_attack_collision("left")
-		#if attack_combo_timer.is_stopped():
-			#animated_sprite_2d.play("attack_1_left")
-			#attack_combo_timer.start()
-		#elif attack_combo_timer.time_left > 0:
-			#animated_sprite_2d.play("attack_2_left")
-			#
-	#elif attack_direction == "up": # attack up
-		#turn_on_attack_collision("up")
-		#if attack_combo_timer.is_stopped():
-			#animated_sprite_2d.play("attack_1_up")
-			#attack_combo_timer.start()
-		#elif attack_combo_timer.time_left > 0:
-			#animated_sprite_2d.play("attack_2_up")
-			#
-	#elif attack_direction == "down": # attack down
-		#turn_on_attack_collision("down")
-		#if attack_combo_timer.is_stopped():
-			#animated_sprite_2d.play("attack_1_down")
-			#attack_combo_timer.start()
-		#elif attack_combo_timer.time_left > 0:
-			#animated_sprite_2d.play("attack_2_down")
-	
-	#reset timer
-	#attack_cool_down.stop()
-	#attack_cool_down.start()
-	#can_attack = false
+		attack_combo.start()
 
 func handle_attack_dash(delta: float):
 	attack_dash_elapsed_time += delta
@@ -232,24 +196,24 @@ func turn_on_attack_collision(direction: String):
 
 func _on_attack_cool_down_timeout() -> void: 
 	#attack and combo finished - go back to walking
-	#set_movement_state(MovementState.WALKING)
 	can_attack = true
 	combo_count = 0
 	pass
 
-
 func _on_attack_delay_timeout() -> void:
-	#set_movement_state(MovementState.WALKING)
 	if attack_cool_down.time_left > 0:
 		print("combo ended starting longer cooldown")
 		return
 	else:
 		can_attack = true
-	pass # Replace with function body.
 
+func _on_attack_combo_timeout() -> void:
+	#combo reset if no attack - checking if other cooldown are ongoing before resetting
+	if not attack_small_delay.time_left > 0 && not attack_cool_down.time_left > 0 :
+		#push_warning("no attack, resetting combo")
+		combo_count = 0
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite_2d.animation.begins_with("attack_"):
-		print(animated_sprite_2d.animation + " finished")
+		#print(animated_sprite_2d.animation + " finished")
 		set_movement_state(MovementState.WALKING)
-	pass # Replace with function body.
