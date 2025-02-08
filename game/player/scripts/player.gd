@@ -25,12 +25,17 @@ var max_combo : int = 3
 @onready var coll_shape_up: CollisionPolygon2D = $attackHitbox/CollShapeUp/collShapeUp
 @onready var coll_shape_down: CollisionPolygon2D = $attackHitbox/CollShapeDown/collShapeDown
 
-#player attack dash
-@export var attack_dash_speed: float = 225
-@export var attack_dash_duration: float = 0.06
+#player dash
+@export var dash_speed: float = 500
+@export var dash_duration : float = 0.1
+var can_dash = true
+var dash_direction : Vector2
+var dash_elapsed_time : float = 0.0
+@onready var dash_cooldown: Timer = $dashCooldown
 
 #below is used for the attack dash
-var attack_dash_start_position: Vector2
+@export var attack_dash_speed: float = 225
+@export var attack_dash_duration: float = 0.1
 var attack_dash_target_position: Vector2
 var attack_dash_elapsed_time: float = 0.0
 var attack_dash_direction: Vector2 = Vector2.ZERO
@@ -39,20 +44,23 @@ enum MovementState{WALKING, ATTACKING, DASHING}
 var movement_state = MovementState.WALKING
 
 func _ready() -> void:
-	Events.connect("player_attacked", attack_dash) #TODO
+	Events.connect("player_attacked", setup_attack_dash) #TODO
 
 func _process(_delta: float) -> void:
-	PlayerStats.player_position = global_position #update player position for enemies
+	PlayerStats.player_position = global_position #update player position for global access
 	left_click_held_down = Input.is_action_pressed("click")
 	anim_player()
 	
+	#print(MovementState.keys()[movement_state])
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("click" ) && can_attack or left_click_held_down && can_attack :
+	if event.is_action_pressed("click") && can_attack or left_click_held_down && can_attack:
 		var point = get_global_mouse_position()
 		var direction = point - global_position
-		attack_dash(direction)
+		setup_attack_dash(direction)
 		attack(point)
+	if event.is_action_pressed("dash") && movement_state == MovementState.WALKING && can_dash:
+		setup_dash()
 
 func _physics_process(delta: float) -> void:
 	match movement_state:
@@ -60,18 +68,10 @@ func _physics_process(delta: float) -> void:
 			move_player(delta)
 		MovementState.ATTACKING:
 			handle_attack_dash(delta)
-			pass
 		MovementState.DASHING:
-			pass
+			handle_dashing(delta)
 	move_and_slide()
 	
-
-func attack_dash(direction: Vector2):
-	set_movement_state(MovementState.ATTACKING)
-	attack_dash_start_position = global_position
-	attack_dash_direction = direction.normalized()
-	attack_dash_target_position = attack_dash_start_position + attack_dash_direction * (attack_dash_speed * attack_dash_duration)
-	attack_dash_elapsed_time = 0.0  # Reset timer
 
 func attack(point : Vector2):
 	var attack_direction = get_attack_direction()
@@ -94,34 +94,56 @@ func attack(point : Vector2):
 		attack_small_delay.start()
 		attack_combo.start()
 
+func setup_attack_dash(direction: Vector2):
+	set_movement_state(MovementState.ATTACKING)
+	attack_dash_direction = direction.normalized()
+	attack_dash_elapsed_time = 0.0  # Reset timer
+	
+
 func handle_attack_dash(delta: float):
 	attack_dash_elapsed_time += delta
-	var t = attack_dash_elapsed_time / attack_dash_duration  # Normalized time (0 to 1)
-	t = clamp(t, 0, 1)  # Ensure t stays within bounds
+	var t = attack_dash_elapsed_time / attack_dash_duration
+	t = clamp(t, 0, 1)
 
-	# Lerp the player's position smoothly
-	global_position = attack_dash_start_position.lerp(attack_dash_target_position, t)
+	velocity = attack_dash_direction * attack_dash_speed * (1 - t)
 
-	# Dash complete
 	if t >= 1.0:
-		pass
-		#set_movement_state(MovementState.WALKING)
+		velocity = Vector2.ZERO
+
+func setup_dash():
+	print("dash setup")
+	var input_vector = Vector2(
+		Input.get_action_strength("right") - Input.get_action_strength("left"),
+		Input.get_action_strength("down") - Input.get_action_strength("up")
+	).normalized()
+	if input_vector != Vector2.ZERO:
+		set_movement_state(MovementState.DASHING)
+		dash_direction = input_vector
+		dash_elapsed_time = 0.0 # Reset timer
+		dash_cooldown.start()
+		can_dash = false
+
+func handle_dashing(delta: float):
+	dash_elapsed_time += delta
+	var t = dash_elapsed_time / dash_duration
+	t = clamp(t, 0, 1)
+	velocity = dash_direction * dash_speed * (1 - t)
+	if t >= 1.0:
+		velocity = Vector2.ZERO
+		set_movement_state(MovementState.WALKING)
+
 
 func set_movement_state(new_state : MovementState):
 	#var old_state: MovementState = movement_state
 	#print(MovementState.keys()[new_state])
-	
 	match new_state:
 		MovementState.WALKING:
 			movement_state = MovementState.WALKING
-			
 		MovementState.ATTACKING:
-			#max_speed = max_speed * 0.25 #lerp this value back up to 1.0
 			movement_state = MovementState.ATTACKING
-			pass
-			
 		MovementState.DASHING:
-			pass
+			movement_state = MovementState.DASHING
+			
 
 func move_player(delta):
 	#var direction: Vector2 = Vector2.ZERO
@@ -229,3 +251,8 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite_2d.animation.begins_with("attack_"):
 		#print(animated_sprite_2d.animation + " finished")
 		set_movement_state(MovementState.WALKING)
+
+
+func _on_dash_cooldown_timeout() -> void:
+	can_dash = true
+	pass # Replace with function body.

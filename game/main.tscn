@@ -28,7 +28,7 @@ y_sort_enabled = true
 position = Vector2(-92, 13)
 
 [node name="Camera2D" type="Camera2D" parent="player"]
-zoom = Vector2(2.5, 2.5)
+zoom = Vector2(3, 3)
 process_callback = 0
 position_smoothing_enabled = true
 position_smoothing_speed = 15.0

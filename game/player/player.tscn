@@ -564,6 +564,10 @@ one_shot = true
 wait_time = 0.5
 one_shot = true
 
+[node name="dashCooldown" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 1
 scale = Vector2(2, 2)
@@ -615,4 +619,5 @@ disabled = true
 [connection signal="timeout" from="attackDelay" to="." method="_on_attack_delay_timeout"]
 [connection signal="timeout" from="attackCombo" to="." method="_on_attack_combo_timeout"]
 [connection signal="timeout" from="attackCoolDown" to="." method="_on_attack_cool_down_timeout"]
+[connection signal="timeout" from="dashCooldown" to="." method="_on_dash_cooldown_timeout"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
