@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dryhsj3u2nonq"
-path="res://.godot/imported/axe_attack_1.png-a0ee59b21ce9240d0dc8dc800ca80d78.ctex"
+uid="uid://bsrn83r5jl1aw"
+path="res://.godot/imported/tileset.png-f15c48513938bb8c73d02c054f47e260.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/player/axe_attack_1.png"
-dest_files=["res://.godot/imported/axe_attack_1.png-a0ee59b21ce9240d0dc8dc800ca80d78.ctex"]
+source_file="res://assets/tileset/tileset.png"
+dest_files=["res://.godot/imported/tileset.png-f15c48513938bb8c73d02c054f47e260.ctex"]
 
 [params]
 
