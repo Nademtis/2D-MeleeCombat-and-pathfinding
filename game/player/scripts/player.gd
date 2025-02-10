@@ -4,9 +4,9 @@ class_name Player
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 #player movement
-@export var max_speed: float = 85 #100
-@export var acceleration: float = 60 #2000
-@export var deceleration: float = 80 #500
+@export var max_speed: float = 105 #100
+@export var acceleration: float = 19 #2000
+@export var deceleration: float = 95 #500
 
 #input
 var left_click_held_down = false
@@ -27,8 +27,8 @@ var max_combo : int = 3
 @onready var coll_shape_down: CollisionPolygon2D = $attackHitbox/CollShapeDown/collShapeDown
 
 #player dash
-@export var dash_speed: float = 500 #500
-@export var dash_duration : float = 0.12 # 0.1
+@export var dash_speed: float = 550 #500
+@export var dash_duration : float = 0.13 # 0.1
 var can_dash = true
 var dash_direction : Vector2
 var dash_elapsed_time : float = 0.0

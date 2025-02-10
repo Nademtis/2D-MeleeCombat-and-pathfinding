@@ -8,6 +8,8 @@ var should_walk = false
 
 # Knockback variablesd
 @export var knockback_duration: float = 0.05
+@export var knockback_strength = 150
+
 var knockback_force: Vector2 = Vector2.ZERO
 var knockback_timer: float = 0.0
 
@@ -23,7 +25,6 @@ func take_damage():
 	set_velocity(Vector2.ZERO)
 	
 	# Apply knockback away from the player
-	var knockback_strength = 200  # Adjust for desired knockback power
 	var direction = (global_position - PlayerStats.player_position).normalized()
 	
 	knockback_force = direction * knockback_strength

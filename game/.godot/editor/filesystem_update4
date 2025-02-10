@@ -5,3 +5,5 @@ res://plants/tree.tscn
 res://enemy/enemy.tscn
 res://player/attack.tscn
 res://tileset.tres
+res://enemy/enemy.gd
+res://player/scripts/player.gd
