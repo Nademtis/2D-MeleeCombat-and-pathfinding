@@ -68,7 +68,7 @@ _data = {
 radius = 4.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f156x"]
-radius = 8.0
+radius = 3.16228
 
 [node name="enemy" type="CharacterBody2D"]
 motion_mode = 1
@@ -90,10 +90,11 @@ visible = false
 shape = SubResource("CircleShape2D_x51ix")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-target_desired_distance = 6.0
-path_max_distance = 1000.0
+path_desired_distance = 5.0
 avoidance_enabled = true
+time_horizon_agents = 5.0
 time_horizon_obstacles = 1.0
+debug_enabled = true
 
 [node name="startNav" type="Timer" parent="."]
 wait_time = 0.5

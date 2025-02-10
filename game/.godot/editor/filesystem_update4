@@ -7,3 +7,4 @@ res://player/attack.tscn
 res://tileset.tres
 res://enemy/enemy.gd
 res://player/scripts/player.gd
+res://nav/navRegion.gd
