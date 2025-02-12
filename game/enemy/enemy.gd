@@ -18,6 +18,7 @@ var knockback_timer: float = 0.0
 
 @onready var navigation_agent_2d: NavigationAgent2D = $NavigationAgent2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var animated_sprite_2d: AnimatedSprite2D = $animatedSprite2D
 
 func _ready() -> void:
 	blackboard = bt_player.blackboard

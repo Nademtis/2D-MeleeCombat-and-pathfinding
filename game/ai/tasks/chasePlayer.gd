@@ -10,19 +10,7 @@ func _tick(delta: float) -> Status:
 	var enemy: Enemy = agent as Enemy
 	if not enemy:
 		return FAILURE
-	
-	## Handle knockback (interrupts movement)
-	#if enemy.knockback_timer > 0:
-		#enemy.velocity = enemy.knockback_force
-		#enemy.knockback_timer -= delta
-		#enemy.knockback_force = enemy.knockback_force.lerp(Vector2.ZERO, delta * 5)
-		#if enemy.knockback_timer <= 0:
-			#blackboard.set_var("is_knocked_back", false)  # Reset knockback state
-		#return RUNNING
 
-	# Update navigation target
-	# Set the target position
-	# Set the target position
 	enemy.navigation_agent_2d.target_position = PlayerStats.player_position
 
 	# Get the next position along the path

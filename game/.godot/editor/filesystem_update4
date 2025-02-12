@@ -7,3 +7,4 @@ res://plants/tree.tscn
 res://enemy/enemy.tscn
 res://player/scripts/player.gd
 res://ai/tasks/chasePlayer.gd
+res://ai/tasks/updateAnimation.gd

@@ -296,9 +296,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4n6x1")
 }],
-"loop": false,
+"loop": true,
 "name": &"walk_left",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -327,7 +327,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk_right",
-"speed": 5.0
+"speed": 10.0
 }]
 
 [sub_resource type="Animation" id="Animation_c1pwt"]
@@ -406,7 +406,7 @@ hp = 50.0
 
 [node name="animatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_dwchd")
-animation = &"walk_right"
+animation = &"attack_right"
 autoplay = "idle"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

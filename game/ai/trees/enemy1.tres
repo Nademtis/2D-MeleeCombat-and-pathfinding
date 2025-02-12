@@ -1,14 +1,21 @@
-[gd_resource type="BehaviorTree" load_steps=5 format=3 uid="uid://bydt1cu64pyu2"]
+[gd_resource type="BehaviorTree" load_steps=8 format=3 uid="uid://bydt1cu64pyu2"]
 
 [ext_resource type="Script" path="res://ai/tasks/chasePlayer.gd" id="1_5n44a"]
+[ext_resource type="Script" path="res://ai/tasks/updateAnimation.gd" id="2_2772s"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_lxptq"]
 
 [sub_resource type="BTAction" id="BTAction_ny1iw"]
 script = ExtResource("1_5n44a")
 
+[sub_resource type="BTAction" id="BTAction_cu66n"]
+script = ExtResource("2_2772s")
+
+[sub_resource type="BTParallel" id="BTParallel_q1n42"]
+children = [SubResource("BTAction_ny1iw"), SubResource("BTAction_cu66n")]
+
 [sub_resource type="BTSelector" id="BTSelector_ccgqp"]
-children = [SubResource("BTAction_ny1iw")]
+children = [SubResource("BTParallel_q1n42")]
 
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_lxptq")
