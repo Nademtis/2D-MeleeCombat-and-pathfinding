@@ -76,7 +76,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 
-func attack(point : Vector2):
+func attack(_point : Vector2):
 	var attack_direction = get_attack_direction()
 	match combo_count:
 		0:

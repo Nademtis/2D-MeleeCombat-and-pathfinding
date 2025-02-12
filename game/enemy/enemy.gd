@@ -1,5 +1,8 @@
 extends CharacterBody2D
-class_name enemy
+class_name Enemy
+
+@onready var bt_player: BTPlayer = $BTPlayer
+var blackboard: Blackboard
 
 @export var speed: float = 70
 @export var hp: float = 5
@@ -14,10 +17,15 @@ var knockback_force: Vector2 = Vector2.ZERO
 var knockback_timer: float = 0.0
 
 @onready var navigation_agent_2d: NavigationAgent2D = $NavigationAgent2D
-@onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func _ready() -> void:
+	blackboard = bt_player.blackboard
+	blackboard.set_var("chase_speed", speed)  # Store enemy speed in the blackboard
+	blackboard.set_var("safe_velocity", Vector2.ZERO)  # Ensure safe_velocity always exists
+	blackboard.set_var("is_knocked_back", false)
+	
+	@warning_ignore("narrowing_conversion")
 	speed = randi_range(speed - 10, speed + 10)
 	
 func take_damage():
@@ -35,20 +43,23 @@ func take_damage():
 	if hp <= 0:
 		queue_free()
 
-func _physics_process(delta: float) -> void:
-	if should_chase_debug:
-		movement(delta)
+func _physics_process(_delta: float) -> void:
+	move_and_slide()
+	#pass
+	#if should_chase_debug:
+	#	movement(_delta)
 
 # Only chase after some timeout
 func _on_start_nav_timeout() -> void:
 	should_walk = true
-	navigation_agent_2d.target_position = PlayerStats.player_position
+	#navigation_agent_2d.target_position = PlayerStats.player_position
 
 # Used for avoidance
 func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
-	var delta = 1.0 / Engine.physics_ticks_per_second
-	velocity = velocity.lerp(safe_velocity, 5 * delta)
-	move_and_slide()
+	#var delta = 1.0 / Engine.physics_ticks_per_second
+	#velocity = velocity.lerp(safe_velocity, 5 * delta)
+	blackboard.set_var("safe_velocity", safe_velocity)
+	#move_and_slide()
 	
 
 func movement(delta: float) -> void:

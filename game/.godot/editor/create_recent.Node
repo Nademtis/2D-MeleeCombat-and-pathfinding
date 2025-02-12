@@ -1,6 +1,6 @@
+AnimatedSprite2D
 BTPlayer
 TileMapLayer
-AnimatedSprite2D
 Timer
 PointLight2D
 DirectionalLight2D
@@ -12,4 +12,3 @@ Area2D
 Node
 AnimationPlayer
 StaticBody2D
-NavigationRegion2D
