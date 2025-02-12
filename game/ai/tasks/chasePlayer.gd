@@ -3,9 +3,6 @@ extends BTAction
 
 
 func _tick(delta: float) -> Status:
-	if agent.should_walk == false:
-		return FAILURE
-	
 	# Get the enemy reference
 	var enemy: Enemy = agent as Enemy
 	if not enemy:
@@ -20,13 +17,11 @@ func _tick(delta: float) -> Status:
 		return FAILURE  # No path available
 
 	# Get chase speed from the blackboard
-	var chase_speed = blackboard.get_var("chase_speed", enemy.speed)
-
+	var chase_speed = blackboard.get_var("chase_speed", enemy.speed, true)
 	# Compute intended velocity
 	var intended_velocity = direction * chase_speed
-
 	# Apply avoidance (if available)
-	var safe_velocity = blackboard.get_var("safe_velocity", Vector2.ZERO)
+	var safe_velocity = blackboard.get_var("safe_velocity", Vector2.ZERO, true)
 	
 	if safe_velocity != Vector2.ZERO:
 		enemy.velocity = enemy.velocity.lerp(safe_velocity, 10 * delta) # 5
