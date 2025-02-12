@@ -94,7 +94,6 @@ path_desired_distance = 5.0
 avoidance_enabled = true
 time_horizon_agents = 5.0
 time_horizon_obstacles = 1.0
-debug_enabled = true
 
 [node name="startNav" type="Timer" parent="."]
 wait_time = 0.5

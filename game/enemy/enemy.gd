@@ -6,7 +6,7 @@ class_name enemy
 var should_walk = false
 @export var should_chase_debug = true
 
-# Knockback variablesd
+# Knockback variables
 @export var knockback_duration: float = 0.05
 @export var knockback_strength = 150
 
@@ -38,7 +38,6 @@ func take_damage():
 func _physics_process(delta: float) -> void:
 	if should_chase_debug:
 		movement(delta)
-	move_and_slide()
 
 # Only chase after some timeout
 func _on_start_nav_timeout() -> void:
@@ -49,6 +48,7 @@ func _on_start_nav_timeout() -> void:
 func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 	var delta = 1.0 / Engine.physics_ticks_per_second
 	velocity = velocity.lerp(safe_velocity, 5 * delta)
+	move_and_slide()
 	
 
 func movement(delta: float) -> void:
