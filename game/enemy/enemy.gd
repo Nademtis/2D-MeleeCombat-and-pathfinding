@@ -21,13 +21,13 @@ var knockback_timer: float = 0.0
 @onready var animated_sprite_2d: AnimatedSprite2D = $animatedSprite2D
 
 func _ready() -> void:
+	@warning_ignore("narrowing_conversion")
+	speed = randi_range(speed - 10, speed + 10)
+	
 	blackboard = bt_player.blackboard
 	blackboard.set_var("chase_speed", speed)  # Store enemy speed in the blackboard
 	blackboard.set_var("safe_velocity", Vector2.ZERO)  # Ensure safe_velocity always exists
 	blackboard.set_var("is_knocked_back", false)
-	
-	@warning_ignore("narrowing_conversion")
-	speed = randi_range(speed - 10, speed + 10)
 	
 func take_damage():
 	#print("enemy hit")
@@ -63,25 +63,25 @@ func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 	#move_and_slide()
 	
 
-func movement(delta: float) -> void:
-	# Apply knockback first if active
-	if knockback_timer > 0:
-		velocity = knockback_force
-		
-		# Reduce knockback over time (linear decay)
-		knockback_timer -= delta
-		knockback_force = knockback_force.lerp(Vector2.ZERO, delta * 2)  # Smooth decay
-		return  # Skip normal movement during knockback
-
-	# Normal movement logic
-	if not should_walk:
-		return
-	
-	navigation_agent_2d.target_position = PlayerStats.player_position
-	var direction = (navigation_agent_2d.get_next_path_position() - global_position).normalized()
-	
-	var intended_velocity = direction * speed
-	navigation_agent_2d.velocity = intended_velocity
+#func movement(delta: float) -> void:
+	## Apply knockback first if active
+	#if knockback_timer > 0:
+		#velocity = knockback_force
+		#
+		## Reduce knockback over time (linear decay)
+		#knockback_timer -= delta
+		#knockback_force = knockback_force.lerp(Vector2.ZERO, delta * 2)  # Smooth decay
+		#return  # Skip normal movement during knockback
+#
+	## Normal movement logic
+	#if not should_walk:
+		#return
+	#
+	#navigation_agent_2d.target_position = PlayerStats.player_position
+	#var direction = (navigation_agent_2d.get_next_path_position() - global_position).normalized()
+	#
+	#var intended_velocity = direction * speed
+	#navigation_agent_2d.velocity = intended_velocity
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("player_attack"):

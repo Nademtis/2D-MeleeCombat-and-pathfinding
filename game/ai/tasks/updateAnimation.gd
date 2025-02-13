@@ -16,4 +16,4 @@ func _tick(_delta: float) -> Status:
 	else:
 		anim.play("idle")
 
-	return RUNNING
+	return SUCCESS

@@ -27,4 +27,4 @@ func _tick(delta: float) -> Status:
 		enemy.velocity = enemy.velocity.lerp(safe_velocity, 10 * delta) # 5
 
 	enemy.navigation_agent_2d.velocity = intended_velocity
-	return RUNNING
+	return SUCCESS

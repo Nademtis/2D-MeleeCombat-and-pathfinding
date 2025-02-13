@@ -1,7 +1,5 @@
-res://main.tscn
+res://enemy/enemy.tscn
 res://tileset.tres
 res://ai/trees/enemy1.tres
+res://main.tscn
 res://player/player.tscn
-res://plants/tree.tscn
-res://enemy/enemy.tscn
-res://ai/tasks/chasePlayer.gd
