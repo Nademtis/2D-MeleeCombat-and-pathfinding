@@ -18,7 +18,7 @@ y_sort_enabled = true
 [node name="BG" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="BG"]
-modulate = Color(1, 1, 1, 0.172549)
+modulate = Color(1, 1, 1, 0.858824)
 light_mask = 512
 z_index = -10
 position = Vector2(-143, -22)
@@ -63,10 +63,10 @@ tile_set = ExtResource("2_j6bfy")
 [node name="obstacles" type="Node2D" parent="NavigationRegion2D"]
 
 [node name="enemy" parent="NavigationRegion2D" instance=ExtResource("3_o62aj")]
-position = Vector2(-204, 33)
+position = Vector2(-243, -11)
 
 [node name="enemy2" parent="NavigationRegion2D" instance=ExtResource("3_o62aj")]
-position = Vector2(-187, -48)
+position = Vector2(-157, -90)
 
 [node name="enemy3" parent="NavigationRegion2D" instance=ExtResource("3_o62aj")]
-position = Vector2(-77, 10)
+position = Vector2(-28, -56)

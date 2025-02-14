@@ -6,8 +6,9 @@ var blackboard: Blackboard
 
 @export var speed: float = 70
 @export var hp: float = 5
-var should_walk = false
+var should_chase = false
 @export var should_chase_debug = true
+@export var attack_range_px = 30
 
 # Knockback variables
 @export var knockback_duration: float = 0.05
@@ -52,7 +53,8 @@ func _physics_process(_delta: float) -> void:
 
 # Only chase after some timeout
 func _on_start_nav_timeout() -> void:
-	should_walk = true
+	pass
+	#should_chase = true
 	#navigation_agent_2d.target_position = PlayerStats.player_position
 
 # Used for avoidance
@@ -86,3 +88,10 @@ func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("player_attack"):
 		take_damage()
+
+
+func _on_aggro_area_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player"):
+		should_chase = true
+		
+	pass # Replace with function body.

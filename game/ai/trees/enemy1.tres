@@ -1,9 +1,29 @@
-[gd_resource type="BehaviorTree" load_steps=11 format=3 uid="uid://bydt1cu64pyu2"]
+[gd_resource type="BehaviorTree" load_steps=17 format=3 uid="uid://bydt1cu64pyu2"]
 
 [ext_resource type="Script" path="res://ai/tasks/chasePlayer.gd" id="1_5n44a"]
+[ext_resource type="Script" path="res://ai/tasks/playerIsInRange.gd" id="1_cwjtn"]
 [ext_resource type="Script" path="res://ai/tasks/updateAnimation.gd" id="2_2772s"]
+[ext_resource type="Script" path="res://ai/tasks/enemyAttack.gd" id="2_wqmqn"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_lxptq"]
+
+[sub_resource type="BTAction" id="BTAction_i43bm"]
+script = ExtResource("1_cwjtn")
+range_px = 15
+
+[sub_resource type="BTConsolePrint" id="BTConsolePrint_0uday"]
+text = "enemy can attack"
+
+[sub_resource type="BTAction" id="BTAction_84ex1"]
+script = ExtResource("2_wqmqn")
+attack_animation_name = ""
+attack_charge_animation_name = ""
+
+[sub_resource type="BTWait" id="BTWait_o1han"]
+
+[sub_resource type="BTSequence" id="BTSequence_tlaf4"]
+custom_name = "Attack Sequence"
+children = [SubResource("BTAction_i43bm"), SubResource("BTConsolePrint_0uday"), SubResource("BTAction_84ex1"), SubResource("BTWait_o1han")]
 
 [sub_resource type="BBVariant" id="BBVariant_ho0hb"]
 type = 1
@@ -11,23 +31,21 @@ saved_value = true
 resource_name = "true"
 
 [sub_resource type="BTCheckAgentProperty" id="BTCheckAgentProperty_lrjtb"]
-property = &"should_walk"
+property = &"should_chase"
 value = SubResource("BBVariant_ho0hb")
 
 [sub_resource type="BTAction" id="BTAction_ny1iw"]
 script = ExtResource("1_5n44a")
 
-[sub_resource type="BTSequence" id="BTSequence_trfhn"]
-children = [SubResource("BTCheckAgentProperty_lrjtb"), SubResource("BTAction_ny1iw")]
-
 [sub_resource type="BTAction" id="BTAction_cu66n"]
 script = ExtResource("2_2772s")
 
-[sub_resource type="BTParallel" id="BTParallel_q1n42"]
-children = [SubResource("BTSequence_trfhn"), SubResource("BTAction_cu66n")]
+[sub_resource type="BTSequence" id="BTSequence_trfhn"]
+custom_name = "Chase Logic Sequence"
+children = [SubResource("BTCheckAgentProperty_lrjtb"), SubResource("BTAction_ny1iw"), SubResource("BTAction_cu66n")]
 
 [sub_resource type="BTSelector" id="BTSelector_ccgqp"]
-children = [SubResource("BTParallel_q1n42")]
+children = [SubResource("BTSequence_tlaf4"), SubResource("BTSequence_trfhn")]
 
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_lxptq")

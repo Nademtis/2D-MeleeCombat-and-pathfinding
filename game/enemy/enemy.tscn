@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://bo0vn1x8dpsfe"]
+[gd_scene load_steps=58 format=3 uid="uid://bo0vn1x8dpsfe"]
 
 [ext_resource type="Script" path="res://enemy/enemy.gd" id="1_gbhi2"]
 [ext_resource type="Texture2D" uid="uid://bcorayv1wegpj" path="res://assets/enemy/slasher/attack_left.png" id="2_i23td"]
@@ -397,6 +397,9 @@ radius = 4.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_f156x"]
 radius = 3.16228
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_mw23b"]
+radius = 43.0116
+
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_fyrno"]
 
 [node name="enemy" type="CharacterBody2D"]
@@ -435,6 +438,13 @@ autostart = true
 [node name="hitbox" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_f156x")
 
+[node name="aggroArea" type="Area2D" parent="."]
+monitorable = false
+
+[node name="aggroColl" type="CollisionShape2D" parent="aggroArea"]
+shape = SubResource("CircleShape2D_mw23b")
+debug_color = Color(0.996252, 0.503761, 0.671584, 0.42)
+
 [node name="BTPlayer" type="BTPlayer" parent="."]
 behavior_tree = ExtResource("3_rxslk")
 blackboard_plan = SubResource("BlackboardPlan_fyrno")
@@ -443,3 +453,4 @@ monitor_performance = true
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
 [connection signal="timeout" from="startNav" to="." method="_on_start_nav_timeout"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="aggroArea" to="." method="_on_aggro_area_body_entered"]
