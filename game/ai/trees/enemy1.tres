@@ -1,7 +1,8 @@
-[gd_resource type="BehaviorTree" load_steps=16 format=3 uid="uid://bydt1cu64pyu2"]
+[gd_resource type="BehaviorTree" load_steps=25 format=3 uid="uid://bydt1cu64pyu2"]
 
 [ext_resource type="Script" path="res://ai/tasks/chasePlayer.gd" id="1_5n44a"]
 [ext_resource type="Script" path="res://ai/tasks/playerIsInRange.gd" id="1_cwjtn"]
+[ext_resource type="Script" path="res://ai/tasks/dash.gd" id="2_4r1m4"]
 [ext_resource type="Script" path="res://ai/tasks/updateAnimation.gd" id="2_2772s"]
 [ext_resource type="Script" path="res://ai/tasks/enemyAttack.gd" id="2_wqmqn"]
 
@@ -10,6 +11,40 @@
 [sub_resource type="BTAction" id="BTAction_i43bm"]
 script = ExtResource("1_cwjtn")
 range_px = 30
+
+[sub_resource type="BTAction" id="BTAction_rn83f"]
+script = ExtResource("2_4r1m4")
+total_dash_time = 0.07
+dash_speed = 250.0
+towards_player = true
+
+[sub_resource type="BTProbability" id="BTProbability_cg230"]
+run_chance = 0.2
+children = [SubResource("BTAction_rn83f")]
+
+[sub_resource type="BTSelector" id="BTSelector_xnj4w"]
+children = [SubResource("BTProbability_cg230")]
+
+[sub_resource type="BTAlwaysSucceed" id="BTAlwaysSucceed_0oure"]
+custom_name = "dash towards player"
+children = [SubResource("BTSelector_xnj4w")]
+
+[sub_resource type="BTAction" id="BTAction_acvda"]
+script = ExtResource("2_4r1m4")
+total_dash_time = 0.07
+dash_speed = 250.0
+towards_player = false
+
+[sub_resource type="BTProbability" id="BTProbability_ggdpf"]
+run_chance = 0.2
+children = [SubResource("BTAction_acvda")]
+
+[sub_resource type="BTSelector" id="BTSelector_a5v48"]
+children = [SubResource("BTProbability_ggdpf")]
+
+[sub_resource type="BTAlwaysSucceed" id="BTAlwaysSucceed_gnwks"]
+custom_name = "dash away from player"
+children = [SubResource("BTSelector_a5v48")]
 
 [sub_resource type="BTAction" id="BTAction_84ex1"]
 script = ExtResource("2_wqmqn")
@@ -22,7 +57,7 @@ duration = 0.18
 
 [sub_resource type="BTSequence" id="BTSequence_tlaf4"]
 custom_name = "Attack Sequence"
-children = [SubResource("BTAction_i43bm"), SubResource("BTAction_84ex1"), SubResource("BTWait_o1han")]
+children = [SubResource("BTAction_i43bm"), SubResource("BTAlwaysSucceed_0oure"), SubResource("BTAlwaysSucceed_gnwks"), SubResource("BTAction_84ex1"), SubResource("BTWait_o1han")]
 
 [sub_resource type="BBVariant" id="BBVariant_ho0hb"]
 type = 1

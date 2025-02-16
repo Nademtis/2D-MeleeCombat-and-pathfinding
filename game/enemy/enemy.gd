@@ -41,10 +41,11 @@ func take_damage():
 	bt_player.active = false
 	if hit_stun_timer.is_stopped():
 		hit_stun_timer.start()
-	# Apply knockback away from the player
-	#var direction = (global_position - PlayerStats.player_position).normalized()
-	#knockback_force = direction * knockback_strength
-	#knockback_timer = knockback_duration
+		
+	# setup knockback away from the player
+	var direction = (global_position - PlayerStats.player_position).normalized()
+	knockback_force = direction * knockback_strength
+	knockback_timer = knockback_duration
 	
 	# Flash white using the shader
 	#animated_sprite_2d.play("idle")
@@ -60,10 +61,14 @@ func take_damage():
 		queue_free()
 
 func _physics_process(_delta: float) -> void:
+	if knockback_timer > 0:
+		velocity = knockback_force
+		knockback_timer -= _delta
+		
+		# Gradually reduce knockback force (smooth stop)
+		knockback_force = knockback_force.lerp(Vector2.ZERO, _delta * 22)
+	
 	move_and_slide()
-	#pass
-	#if should_chase_debug:
-	#	movement(_delta)
 
 # Only chase after some timeout
 func _on_start_nav_timeout() -> void:

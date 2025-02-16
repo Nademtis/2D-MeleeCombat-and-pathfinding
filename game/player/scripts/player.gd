@@ -30,6 +30,7 @@ var max_combo : int = 3
 @export var dash_speed: float = 550 #500
 @export var dash_duration : float = 0.13 # 0.1
 var can_dash = true
+var quick_dash_after_attack = true
 var dash_direction : Vector2
 var dash_elapsed_time : float = 0.0
 var dash_start_speed : float
