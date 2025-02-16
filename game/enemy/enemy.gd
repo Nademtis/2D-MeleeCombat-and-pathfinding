@@ -20,8 +20,10 @@ var knockback_timer: float = 0.0
 @onready var navigation_agent_2d: NavigationAgent2D = $NavigationAgent2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var animated_sprite_2d: AnimatedSprite2D = $animatedSprite2D
+@onready var stunned_birds: AnimatedSprite2D = $stunnedBirds
 
 @onready var hit_stun_timer: Timer = $hitStunTimer #when enemy is hit, trigger the timer
+@onready var can_be_stunned_again_timer: Timer = $canBeStunnedAgainTimer
 
 func _ready() -> void:
 	@warning_ignore("narrowing_conversion")
@@ -38,8 +40,10 @@ func _ready() -> void:
 func take_damage():
 	set_velocity(Vector2.ZERO)
 	
-	bt_player.active = false
-	if hit_stun_timer.is_stopped():
+	#bt_player.active = false
+	if hit_stun_timer.is_stopped() && can_be_stunned_again_timer.is_stopped():
+		stunned_birds.visible = true
+		animated_sprite_2d.play("idle")
 		hit_stun_timer.start()
 		
 	# setup knockback away from the player
@@ -61,6 +65,7 @@ func take_damage():
 		queue_free()
 
 func _physics_process(_delta: float) -> void:
+	#print(hit_stun_timer.time_left > 0)
 	if knockback_timer > 0:
 		velocity = knockback_force
 		knockback_timer -= _delta
@@ -69,12 +74,6 @@ func _physics_process(_delta: float) -> void:
 		knockback_force = knockback_force.lerp(Vector2.ZERO, _delta * 22)
 	
 	move_and_slide()
-
-# Only chase after some timeout
-func _on_start_nav_timeout() -> void:
-	pass
-	#should_chase = true
-	#navigation_agent_2d.target_position = PlayerStats.player_position
 
 # Used for avoidance
 func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
@@ -108,11 +107,16 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("player_attack"):
 		take_damage()
 
-
 func _on_aggro_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		should_chase = true
 
 func _on_hit_stun_timer_timeout() -> void:
-	bt_player.active = true
+	#bt_player.active = true
+	stunned_birds.visible = false
+	can_be_stunned_again_timer.start()
 	pass # Replace with function body.
+
+func is_stunned() -> bool:
+	#print("is stunned was called")
+	return hit_stun_timer.time_left > 0

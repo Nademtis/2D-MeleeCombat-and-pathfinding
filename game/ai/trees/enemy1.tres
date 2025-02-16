@@ -1,5 +1,6 @@
-[gd_resource type="BehaviorTree" load_steps=25 format=3 uid="uid://bydt1cu64pyu2"]
+[gd_resource type="BehaviorTree" load_steps=27 format=3 uid="uid://bydt1cu64pyu2"]
 
+[ext_resource type="Script" path="res://ai/tasks/checkIsStunned.gd" id="1_4e3ku"]
 [ext_resource type="Script" path="res://ai/tasks/chasePlayer.gd" id="1_5n44a"]
 [ext_resource type="Script" path="res://ai/tasks/playerIsInRange.gd" id="1_cwjtn"]
 [ext_resource type="Script" path="res://ai/tasks/dash.gd" id="2_4r1m4"]
@@ -7,6 +8,9 @@
 [ext_resource type="Script" path="res://ai/tasks/enemyAttack.gd" id="2_wqmqn"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_lxptq"]
+
+[sub_resource type="BTAction" id="BTAction_eot6s"]
+script = ExtResource("1_4e3ku")
 
 [sub_resource type="BTAction" id="BTAction_i43bm"]
 script = ExtResource("1_cwjtn")
@@ -79,7 +83,7 @@ custom_name = "Chase Logic Sequence"
 children = [SubResource("BTCheckAgentProperty_lrjtb"), SubResource("BTAction_ny1iw"), SubResource("BTAction_cu66n")]
 
 [sub_resource type="BTSelector" id="BTSelector_ccgqp"]
-children = [SubResource("BTSequence_tlaf4"), SubResource("BTSequence_trfhn")]
+children = [SubResource("BTAction_eot6s"), SubResource("BTSequence_tlaf4"), SubResource("BTSequence_trfhn")]
 
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_lxptq")

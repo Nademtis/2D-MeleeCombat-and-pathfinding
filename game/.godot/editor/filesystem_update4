@@ -12,3 +12,4 @@ res://enemy/enemy.gd
 res://player/scripts/player.gd
 res://enemy/hitShader.gdshader
 res://ai/tasks/dash.gd
+res://ai/tasks/checkIsStunned.gd

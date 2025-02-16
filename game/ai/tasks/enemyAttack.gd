@@ -15,6 +15,12 @@ var dash_direction: Vector2 = Vector2.ZERO
 var attack_direction_is_locked : bool = false
 
 func _tick(delta: float) -> Status:
+	if agent.is_stunned():
+		charging = false  # Interrupt charging when stunned
+		dashing = false   # Interrupt dashing when stunned
+		agent.velocity = Vector2.ZERO  # Stop movement while stunned
+		return FAILURE  # Return failure to halt other actions
+	
 	# Handle charging and dashing states
 	if charging or dashing:
 		# Lerp between dash speed and 0 to create the slow down effect
@@ -40,7 +46,6 @@ func _tick(delta: float) -> Status:
 			charging = false
 			start_attack()
 			return RUNNING  # Keep running while dashing
-
 		return RUNNING  # Still charging
 	
 	# Dashing phase
@@ -50,9 +55,7 @@ func _tick(delta: float) -> Status:
 			dashing = false
 			agent.velocity = Vector2.ZERO
 			return SUCCESS  # Attack complete
-
 		return RUNNING  # Still dashing
-
 	return SUCCESS
 
 func play_attack_anim() -> void:
@@ -67,6 +70,7 @@ func play_attack_anim() -> void:
 
 func start_attack() -> void:
 	attack_direction_is_locked = false
+	print("enemy attacked")
 	#var player_position = PlayerStats.player_position
 	#dash_direction = (player_position - agent.global_position).normalized()
 	

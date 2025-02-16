@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://bo0vn1x8dpsfe"]
+[gd_scene load_steps=58 format=3 uid="uid://bo0vn1x8dpsfe"]
 
 [ext_resource type="Script" path="res://enemy/enemy.gd" id="1_gbhi2"]
 [ext_resource type="Texture2D" uid="uid://bcorayv1wegpj" path="res://assets/enemy/slasher/attack_left.png" id="2_i23td"]
@@ -8,6 +8,7 @@
 [ext_resource type="BehaviorTree" uid="uid://bydt1cu64pyu2" path="res://ai/trees/enemy1.tres" id="3_rxslk"]
 [ext_resource type="Texture2D" uid="uid://k00yj0vcoae0" path="res://assets/enemy/slasher/walk_left.png" id="5_idpw5"]
 [ext_resource type="Texture2D" uid="uid://bgi0i8htnrml7" path="res://assets/enemy/slasher/walk_right.png" id="6_1th4o"]
+[ext_resource type="Texture2D" uid="uid://bl3jjaiixbp4" path="res://assets/enemy/enemy_stun_birds.png" id="9_88y8l"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c5g5k"]
 shader = ExtResource("2_xxny7")
@@ -156,7 +157,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ugekd")
 }],
-"loop": false,
+"loop": true,
 "name": &"attack_left",
 "speed": 10.0
 }, {
@@ -173,7 +174,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3dr3t")
 }],
-"loop": false,
+"loop": true,
 "name": &"attack_right",
 "speed": 10.0
 }, {
@@ -337,6 +338,56 @@ radius = 66.0
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_fyrno"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_4p666"]
+atlas = ExtResource("9_88y8l")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rlnvo"]
+atlas = ExtResource("9_88y8l")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c6nbo"]
+atlas = ExtResource("9_88y8l")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6v873"]
+atlas = ExtResource("9_88y8l")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4sm3y"]
+atlas = ExtResource("9_88y8l")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xhro1"]
+atlas = ExtResource("9_88y8l")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lai00"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4p666")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rlnvo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c6nbo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6v873")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4sm3y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xhro1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
 [node name="enemy" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_gbhi2")
@@ -348,6 +399,8 @@ material = SubResource("ShaderMaterial_c5g5k")
 sprite_frames = SubResource("SpriteFrames_dwchd")
 animation = &"idle"
 autoplay = "idle"
+frame = 7
+frame_progress = 0.0711059
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -386,8 +439,19 @@ behavior_tree = ExtResource("3_rxslk")
 blackboard_plan = SubResource("BlackboardPlan_fyrno")
 
 [node name="hitStunTimer" type="Timer" parent="."]
-wait_time = 0.15
+wait_time = 0.5
 one_shot = true
+
+[node name="canBeStunnedAgainTimer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[node name="stunnedBirds" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(0, -7)
+sprite_frames = SubResource("SpriteFrames_lai00")
+autoplay = "default"
+frame_progress = 0.0607094
 
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
 [connection signal="timeout" from="startNav" to="." method="_on_start_nav_timeout"]
