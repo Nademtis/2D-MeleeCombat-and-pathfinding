@@ -3,6 +3,9 @@ res://tileset.tres
 res://ai/trees/enemy1.tres
 res://player/player.tscn
 res://enemy/enemy.tscn
-res://enemy/enemy.gd
-res://ai/tasks/playerIsInRange.gd
+res://player/attack.tscn
 res://ai/tasks/enemyAttack.gd
+res://assets/enemy/attack.tscn
+res://assets/enemy/attack.gd
+res://assets/enemy/enemyAttack.tscn
+res://enemy/enemy.gd

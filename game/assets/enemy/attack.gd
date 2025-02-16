@@ -3,17 +3,17 @@ extends Node2D
 #@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 @onready var animation_player2: AnimationPlayer = $"new attack/AnimationPlayer"
-@onready var sprite_2d: Sprite2D = $"new attack/Sprite2D"
 
-var attack_right = true
 
 #TODO not used currently
 
 func initialize(is_attack_right: bool) -> void:
+	print("attack instansiated")
 	pass
 	#attack_right = is_attack_right
 
-#func _ready() -> void:
+func _ready() -> void:
+	print("attack instansiated")
 	##if attack_right:
 		##animation_player.play("attack_R")
 	##else:

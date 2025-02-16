@@ -28,7 +28,7 @@ func _ready() -> void:
 	blackboard = bt_player.blackboard
 	blackboard.set_var("chase_speed", speed)  # Store enemy speed in the blackboard
 	blackboard.set_var("safe_velocity", Vector2.ZERO)  # Ensure safe_velocity always exists
-	blackboard.set_var("is_knocked_back", false)
+	#blackboard.set_var("is_knocked_back", false)
 	
 func take_damage():
 	#print("enemy hit")
