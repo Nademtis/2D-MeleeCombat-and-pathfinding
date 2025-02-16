@@ -2,51 +2,82 @@ extends BTAction
 
 #@export var attack_animation_name : String
 #@export var attack_charge_animation_name : String
-@export var attack_charge_time : float = 0.3
+@export var attack_charge_time : float = 0.20
+@export var dash_time: float = 0.15  # Time the enemy dashes
+@export var dash_speed: float = 250.0  # Speed of the dash
 const ATTACK = preload("res://assets/enemy/enemyAttack.tscn")
 
-var charging : bool = false
-var charge_timer: float = 0.0  # Tracks time left until attack
+var charging: bool = false
+var charge_timer: float = 0.0
+var dashing: bool = false
+var dash_timer: float = 0.0
+var dash_direction: Vector2 = Vector2.ZERO
+var attack_direction_is_locked : bool = false
 
 func _tick(delta: float) -> Status:
-	agent.velocity = Vector2.ZERO
-	var anim: AnimatedSprite2D = agent.animated_sprite_2d
+	# Handle charging and dashing states
+	if charging or dashing:
+		# Lerp between dash speed and 0 to create the slow down effect
+		var current_speed = lerp(dash_speed, 0.0, 1.0 - (dash_timer / dash_time))
+		agent.velocity = dash_direction * current_speed if dashing else Vector2.ZERO
 	
-	if not charging:
-		# Start charging
+	# Charging phase
+	if not charging and not dashing:
 		charging = true
 		charge_timer = attack_charge_time
 		play_attack_anim()
+		#use this position, so player can juke
 	
-	# Reduce charge time each frame
 	if charging:
-		charge_timer -= delta
+		charge_timer -= delta # minus the charge_timer
 		
-		# If charge is complete, perform attack
+		#set dash direction if 25% left
+		if not attack_direction_is_locked and charge_timer <= attack_charge_time * 0.25:
+			dash_direction = (PlayerStats.player_position - agent.global_position).normalized()
+			attack_direction_is_locked = true
+			
 		if charge_timer <= 0:
-			charging = false  # Reset state for next attack
-			
-			# Get the player's position
-			var player_position = PlayerStats.player_position
-			var direction = (player_position - agent.global_position).normalized()
-			
-			# Instantiate the attack
-			var attack_instance = ATTACK.instantiate()
-			attack_instance.global_position = agent.global_position# + (direction * 5) # Adjust offset as needed
-			attack_instance.rotation = direction.angle() + 90
-			
-			# Add to the scene
-			agent.get_tree().current_scene.add_child(attack_instance)
-			
-			return SUCCESS  # Attack finished
+			charging = false
+			start_attack()
+			return RUNNING  # Keep running while dashing
+
+		return RUNNING  # Still charging
 	
-	return RUNNING  # Still charging
+	# Dashing phase
+	if dashing:
+		dash_timer -= delta
+		if dash_timer <= 0:
+			dashing = false
+			agent.velocity = Vector2.ZERO
+			return SUCCESS  # Attack complete
+
+		return RUNNING  # Still dashing
+
+	return SUCCESS
 
 func play_attack_anim() -> void:
 	var anim: AnimatedSprite2D = agent.animated_sprite_2d
 	var player_position = PlayerStats.player_position
+	var direction = (player_position - agent.global_position).normalized()
 	
-	if player_position.x >= agent.global_position.x:
+	if direction.x >= 0:
 		anim.play("attack_right")  # Player is to the right
 	else:
 		anim.play("attack_left")   # Player is to the left
+
+func start_attack() -> void:
+	attack_direction_is_locked = false
+	#var player_position = PlayerStats.player_position
+	#dash_direction = (player_position - agent.global_position).normalized()
+	
+	# Instantiate the attack effect
+	var attack_instance = ATTACK.instantiate()
+	attack_instance.position = dash_direction * 4
+	attack_instance.rotation = dash_direction.angle() + 90
+	
+	#agent.get_tree().current_scene.add_child(attack_instance)
+	agent.add_child(attack_instance)
+	
+	# Start dashing
+	dashing = true
+	dash_timer = dash_time

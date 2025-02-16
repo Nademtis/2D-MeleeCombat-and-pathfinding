@@ -4,7 +4,7 @@ class_name Player
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 #player movement
-@export var max_speed: float = 105 #100
+@export var max_speed: float = 75 #105
 @export var acceleration: float = 19 #2000
 @export var deceleration: float = 95 #500
 

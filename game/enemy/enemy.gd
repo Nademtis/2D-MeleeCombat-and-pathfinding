@@ -21,6 +21,8 @@ var knockback_timer: float = 0.0
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var animated_sprite_2d: AnimatedSprite2D = $animatedSprite2D
 
+@onready var hit_stun_timer: Timer = $hitStunTimer #when enemy is hit, trigger the timer
+
 func _ready() -> void:
 	@warning_ignore("narrowing_conversion")
 	speed = randi_range(speed - 10, speed + 10)
@@ -30,15 +32,27 @@ func _ready() -> void:
 	blackboard.set_var("safe_velocity", Vector2.ZERO)  # Ensure safe_velocity always exists
 	#blackboard.set_var("is_knocked_back", false)
 	
+	if animated_sprite_2d.material is ShaderMaterial:
+		animated_sprite_2d.material = animated_sprite_2d.material.duplicate()
+	
 func take_damage():
-	#print("enemy hit")
 	set_velocity(Vector2.ZERO)
 	
+	bt_player.active = false
+	if hit_stun_timer.is_stopped():
+		hit_stun_timer.start()
 	# Apply knockback away from the player
-	var direction = (global_position - PlayerStats.player_position).normalized()
+	#var direction = (global_position - PlayerStats.player_position).normalized()
+	#knockback_force = direction * knockback_strength
+	#knockback_timer = knockback_duration
 	
-	knockback_force = direction * knockback_strength
-	knockback_timer = knockback_duration
+	# Flash white using the shader
+	#animated_sprite_2d.play("idle")
+	var mat = animated_sprite_2d.material  # Change to match your enemy's sprite node
+	if mat is ShaderMaterial:
+		mat.set_shader_parameter("flash_amount", 1.0)  # Full white
+		await get_tree().create_timer(0.1).timeout  # Flash duration
+		mat.set_shader_parameter("flash_amount", 0.0)  # Reset
 	
 	animation_player.play("enemy_hit")
 	hp -= 1
@@ -93,5 +107,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 func _on_aggro_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		should_chase = true
-		
+
+func _on_hit_stun_timer_timeout() -> void:
+	bt_player.active = true
 	pass # Replace with function body.

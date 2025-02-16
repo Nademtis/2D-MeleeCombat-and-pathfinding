@@ -8,12 +8,11 @@ extends Node2D
 #TODO not used currently
 
 func initialize(is_attack_right: bool) -> void:
-	print("attack instansiated")
 	pass
 	#attack_right = is_attack_right
 
 func _ready() -> void:
-	print("attack instansiated")
+	pass
 	##if attack_right:
 		##animation_player.play("attack_R")
 	##else:
@@ -33,3 +32,9 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	pass
+
+
+func _on_kill_timer_timeout() -> void:
+	queue_free()
+	
+	pass # Replace with function body.

@@ -22,7 +22,7 @@ region = Rect2(192, 0, 64, 64)
 [sub_resource type="SpriteFrames" id="SpriteFrames_atoyv"]
 animations = [{
 "frames": [{
-"duration": 2.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_53te4")
 }, {
 "duration": 1.0,
@@ -92,7 +92,6 @@ disabled = true
 [node name="new attack" type="Node2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="new attack"]
-modulate = Color(0.647059, 0.188235, 0.188235, 1)
 position = Vector2(0, -7)
 sprite_frames = SubResource("SpriteFrames_atoyv")
 autoplay = "default"
@@ -101,3 +100,10 @@ autoplay = "default"
 libraries = {
 "": SubResource("AnimationLibrary_60j6h")
 }
+
+[node name="killTimer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="killTimer" to="." method="_on_kill_timer_timeout"]

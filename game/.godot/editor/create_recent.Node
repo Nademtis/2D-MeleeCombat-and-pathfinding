@@ -1,9 +1,9 @@
+Timer
 AnimatedSprite2D
 CollisionShape2D
 Area2D
 BTPlayer
 TileMapLayer
-Timer
 PointLight2D
 DirectionalLight2D
 Sprite2D
