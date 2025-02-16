@@ -25,6 +25,9 @@ var knockback_timer: float = 0.0
 @onready var hit_stun_timer: Timer = $hitStunTimer #when enemy is hit, trigger the timer
 @onready var can_be_stunned_again_timer: Timer = $canBeStunnedAgainTimer
 
+const DEAD_SLASHER = preload("res://enemy/slasher/dead_slasher.tscn")
+
+
 func _ready() -> void:
 	@warning_ignore("narrowing_conversion")
 	speed = randi_range(speed - 10, speed + 10)
@@ -62,6 +65,9 @@ func take_damage():
 	animation_player.play("enemy_hit")
 	hp -= 1
 	if hp <= 0:
+		var corpse = DEAD_SLASHER.instantiate()
+		corpse.global_position = global_position
+		get_tree().root.add_child(corpse)
 		queue_free()
 
 func _physics_process(_delta: float) -> void:

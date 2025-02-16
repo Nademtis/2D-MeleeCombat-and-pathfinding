@@ -1,6 +1,6 @@
 [gd_scene load_steps=58 format=3 uid="uid://bo0vn1x8dpsfe"]
 
-[ext_resource type="Script" path="res://enemy/enemy.gd" id="1_gbhi2"]
+[ext_resource type="Script" path="res://enemy/slasher/enemy.gd" id="1_gbhi2"]
 [ext_resource type="Texture2D" uid="uid://bcorayv1wegpj" path="res://assets/enemy/slasher/attack_left.png" id="2_i23td"]
 [ext_resource type="Texture2D" uid="uid://dfdvayqy3jk5c" path="res://assets/enemy/slasher/idle.png" id="2_wi76p"]
 [ext_resource type="Shader" path="res://enemy/hitShader.gdshader" id="2_xxny7"]
@@ -388,10 +388,10 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="enemy" type="CharacterBody2D"]
+[node name="slasher" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_gbhi2")
-hp = 15.0
+hp = 2.0
 knockback_duration = 0.1
 
 [node name="animatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -451,7 +451,7 @@ visible = false
 position = Vector2(0, -7)
 sprite_frames = SubResource("SpriteFrames_lai00")
 autoplay = "default"
-frame_progress = 0.0607094
+frame_progress = 0.0319485
 
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
 [connection signal="timeout" from="startNav" to="." method="_on_start_nav_timeout"]

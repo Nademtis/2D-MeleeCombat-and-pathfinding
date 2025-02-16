@@ -13,3 +13,10 @@ res://player/scripts/player.gd
 res://enemy/hitShader.gdshader
 res://ai/tasks/dash.gd
 res://ai/tasks/checkIsStunned.gd
+res://player/playerHp.gd
+res://enemy/dead_slasher.tscn
+res://enemy/slasher/enemyAttack.tscn
+res://enemy/slasher/dead_slasher.tscn
+res://enemy/slasher/enemy.gd
+res://enemy/slasher/slasher.gd
+res://enemy/slasher/slasher.tscn

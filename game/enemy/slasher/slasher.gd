@@ -35,6 +35,7 @@ func _process(_delta: float) -> void:
 
 
 func _on_kill_timer_timeout() -> void:
+
 	queue_free()
 	
 	pass # Replace with function body.

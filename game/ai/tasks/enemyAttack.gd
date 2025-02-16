@@ -5,7 +5,7 @@ extends BTAction
 @export var attack_charge_time : float = 0.20
 @export var dash_time: float = 0.15  # Time the enemy dashes
 @export var dash_speed: float = 250.0  # Speed of the dash
-const ATTACK = preload("res://assets/enemy/enemyAttack.tscn")
+const ATTACK = preload("res://enemy/slasher/enemyAttack.tscn")
 
 var charging: bool = false
 var charge_timer: float = 0.0
@@ -70,7 +70,6 @@ func play_attack_anim() -> void:
 
 func start_attack() -> void:
 	attack_direction_is_locked = false
-	print("enemy attacked")
 	#var player_position = PlayerStats.player_position
 	#dash_direction = (player_position - agent.global_position).normalized()
 	

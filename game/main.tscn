@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://do8w6k3c3cbwe" path="res://assets/BG/Space Background (6).png" id="1_mmddu"]
 [ext_resource type="PackedScene" uid="uid://bgcsvqqyjw1qp" path="res://player/player.tscn" id="2_4ufcd"]
 [ext_resource type="TileSet" uid="uid://csjgovmgnve74" path="res://tileset.tres" id="2_j6bfy"]
-[ext_resource type="PackedScene" uid="uid://bo0vn1x8dpsfe" path="res://enemy/enemy.tscn" id="3_o62aj"]
+[ext_resource type="PackedScene" uid="uid://bo0vn1x8dpsfe" path="res://enemy/slasher/slasher.tscn" id="3_o62aj"]
 [ext_resource type="Script" path="res://nav/navRegion.gd" id="3_yhg7q"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_3ejb3"]

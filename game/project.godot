@@ -24,6 +24,12 @@ PlayerStats="*res://autoloads/PlayerStats.gd"
 
 shapes/navigation/geometry_edge_color=Color(1.05888e-06, 0.664767, 0.667923, 1)
 
+[file_customization]
+
+folder_colors={
+"res://assets/": "purple"
+}
+
 [global_group]
 
 player_attack=""

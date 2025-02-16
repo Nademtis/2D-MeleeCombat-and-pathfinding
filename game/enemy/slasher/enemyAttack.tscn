@@ -1,22 +1,22 @@
 [gd_scene load_steps=11 format=3 uid="uid://cw0twtd575n66"]
 
-[ext_resource type="Script" path="res://assets/enemy/attack.gd" id="1_f26br"]
-[ext_resource type="Texture2D" uid="uid://djdaaelwbpj1y" path="res://assets/enemy/enemy_attack.png" id="2_h44ju"]
+[ext_resource type="Script" path="res://enemy/slasher/slasher.gd" id="1_iab3o"]
+[ext_resource type="Texture2D" uid="uid://djdaaelwbpj1y" path="res://assets/enemy/enemy_attack.png" id="2_5x7of"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_53te4"]
-atlas = ExtResource("2_h44ju")
+atlas = ExtResource("2_5x7of")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a5oh7"]
-atlas = ExtResource("2_h44ju")
+atlas = ExtResource("2_5x7of")
 region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d268t"]
-atlas = ExtResource("2_h44ju")
+atlas = ExtResource("2_5x7of")
 region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y5e1w"]
-atlas = ExtResource("2_h44ju")
+atlas = ExtResource("2_5x7of")
 region = Rect2(192, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_atoyv"]
@@ -78,12 +78,12 @@ _data = {
 }
 
 [node name="enemyAttack" type="Node2D"]
-script = ExtResource("1_f26br")
+script = ExtResource("1_iab3o")
 
 [node name="Area2D" type="Area2D" parent="." groups=["enemy_attack"]]
 monitoring = false
 
-[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Area2D" groups=["enemy_attack"]]
 position = Vector2(-24, 1)
 scale = Vector2(1, 0.7)
 polygon = PackedVector2Array(11, -25.7143, 17, -34.2857, 25, -41.4286, 34, -34.2857, 38, -27.1429, 43, -15.7143, 40, -1.42857, 25, 7.14286, 6, -1.42857, 6, -15.7143)
@@ -100,6 +100,7 @@ autoplay = "default"
 libraries = {
 "": SubResource("AnimationLibrary_60j6h")
 }
+autoplay = "attack"
 
 [node name="killTimer" type="Timer" parent="."]
 wait_time = 0.4
