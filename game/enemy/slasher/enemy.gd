@@ -6,6 +6,7 @@ var blackboard: Blackboard
 
 @export var speed: float = 70
 @export var hp: float = 5
+@export var poise: float = 3
 var should_chase = false
 @export var should_chase_debug = true
 @export var attack_range_px = 30
@@ -26,7 +27,8 @@ var knockback_timer: float = 0.0
 @onready var can_be_stunned_again_timer: Timer = $canBeStunnedAgainTimer
 
 const DEAD_SLASHER = preload("res://enemy/slasher/dead_slasher.tscn")
-@onready var health_bar: HealthBar = $healthBar
+@onready var health_bar: HealthBar= $healthBar
+@onready var poise_bar: PoiseBar= $PoiseBar
 
 
 func _ready() -> void:
@@ -39,6 +41,7 @@ func _ready() -> void:
 	#blackboard.set_var("is_knocked_back", false)
 	
 	health_bar.init_health(hp)
+	poise_bar.init_health(poise)
 	
 	if animated_sprite_2d.material is ShaderMaterial:
 		animated_sprite_2d.material = animated_sprite_2d.material.duplicate()

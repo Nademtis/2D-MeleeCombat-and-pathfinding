@@ -1,4 +1,4 @@
-[gd_scene load_steps=97 format=3 uid="uid://bgcsvqqyjw1qp"]
+[gd_scene load_steps=98 format=3 uid="uid://bgcsvqqyjw1qp"]
 
 [ext_resource type="Script" path="res://player/scripts/player.gd" id="1_f8ifd"]
 [ext_resource type="Script" path="res://player/playerHp.gd" id="2_2qend"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://3mocxak2iha2" path="res://assets/player/attack/attack2_left.png" id="7_onb85"]
 [ext_resource type="Texture2D" uid="uid://734ut78pktf8" path="res://assets/player/attack/attack2_right.png" id="8_r462q"]
 [ext_resource type="Texture2D" uid="uid://bndvh0o6velsx" path="res://assets/player/attack/attack2_up.png" id="9_ybgkb"]
+[ext_resource type="PackedScene" uid="uid://bl6mp8fxmbsbv" path="res://ui/health_bar.tscn" id="16_7v68j"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_trkf0"]
 atlas = ExtResource("2_3cqs7")
@@ -640,7 +641,8 @@ radius = 7.0
 motion_mode = 1
 script = ExtResource("1_f8ifd")
 
-[node name="Node" type="Node" parent="."]
+[node name="hp" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("2_2qend")
 
 [node name="attackDelay" type="Timer" parent="."]
@@ -713,9 +715,28 @@ monitorable = false
 position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_teql3")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="healthBar" parent="CanvasLayer/MarginContainer" instance=ExtResource("16_7v68j")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(192, 24)
+layout_mode = 2
+
 [connection signal="timeout" from="attackDelay" to="." method="_on_attack_delay_timeout"]
 [connection signal="timeout" from="attackCombo" to="." method="_on_attack_combo_timeout"]
 [connection signal="timeout" from="attackCoolDown" to="." method="_on_attack_cool_down_timeout"]
 [connection signal="timeout" from="dashCooldown" to="." method="_on_dash_cooldown_timeout"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
-[connection signal="area_entered" from="hurtbox" to="Node" method="_on_hurtbox_area_entered"]
+[connection signal="area_entered" from="hurtbox" to="hp" method="_on_hurtbox_area_entered"]

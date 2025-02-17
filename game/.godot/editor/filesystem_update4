@@ -14,3 +14,9 @@ res://enemy/slasher/slasher.gd
 res://ai/tasks/playerIsInRange.gd
 res://healthBar.gd
 res://ui/health_bar.tscn
+res://ui/poise_bar.tscn
+res://ui/healthBar.gd
+res://ui/PoiseBar.gd
+res://player/scripts/player.gd
+res://player/playerHp.gd
+res://autoloads/Events.gd

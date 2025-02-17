@@ -43,11 +43,20 @@ var attack_dash_target_position: Vector2
 var attack_dash_elapsed_time: float = 0.0
 var attack_dash_direction: Vector2 = Vector2.ZERO
 
+#ui
+@onready var health_bar: HealthBar = %healthBar
+
+
 enum MovementState{WALKING, ATTACKING, DASHING}
 var movement_state = MovementState.WALKING
 
 func _ready() -> void:
 	Events.connect("player_attacked", setup_attack_dash) #TODO
+	Events.connect("player_hp_changed", update_hp_ui)
+	
+	var player_hp_node: PlayerHP = $hp  # Reference to the hp node
+	print(player_hp_node.hp)
+	health_bar.init_health(player_hp_node.hp, true)  # Set initial health
 
 func _process(_delta: float) -> void:
 	PlayerStats.player_position = global_position #update player position for global access
@@ -223,7 +232,6 @@ func turn_on_attack_collision(direction: String):
 	coll_shape_left.disabled = true
 
 func freeze_frame(duration: float, slow_motion_scale: float = 0.0) -> void:
-	print("freezing")
 	#Engine.time_scale = slow_motion_scale
 	#await get_tree().create_timer(duration, false).timeout  # Run timer in unscaled time
 	#Engine.time_scale = 1.0  # Restore normal speed
@@ -261,3 +269,6 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 func _on_dash_cooldown_timeout() -> void:
 	can_dash = true
 	pass # Replace with function body.
+
+func update_hp_ui(new_hp : float)-> void:
+	health_bar._set_health(new_hp)
