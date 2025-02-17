@@ -76,7 +76,7 @@ children = [SubResource("BTSelector_a5v48")]
 
 [sub_resource type="BTAction" id="BTAction_84ex1"]
 script = ExtResource("2_wqmqn")
-attack_charge_time = 0.45
+attack_charge_time = 0.25
 dash_time = 0.15
 dash_speed = 190.0
 

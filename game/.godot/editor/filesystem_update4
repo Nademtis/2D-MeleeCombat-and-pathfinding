@@ -10,3 +10,5 @@ res://ai/tasks/checkIsStunned.gd
 res://ai/tasks/dash.gd
 res://enemy/slasher/enemy.gd
 res://ai/tasks/enemyRecentlyHit.gd
+res://enemy/slasher/slasher.gd
+res://ai/tasks/playerIsInRange.gd

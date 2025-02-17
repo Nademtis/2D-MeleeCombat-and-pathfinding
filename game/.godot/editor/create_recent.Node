@@ -1,5 +1,5 @@
-AnimationPlayer
 Sprite2D
+AnimationPlayer
 MarginContainer
 ProgressBar
 Node
@@ -12,4 +12,3 @@ TileMapLayer
 PointLight2D
 DirectionalLight2D
 Node2D
-CollisionPolygon2D
