@@ -26,6 +26,7 @@ var knockback_timer: float = 0.0
 @onready var can_be_stunned_again_timer: Timer = $canBeStunnedAgainTimer
 
 const DEAD_SLASHER = preload("res://enemy/slasher/dead_slasher.tscn")
+@onready var health_bar: HealthBar = $healthBar
 
 
 func _ready() -> void:
@@ -36,6 +37,8 @@ func _ready() -> void:
 	blackboard.set_var("chase_speed", speed)  # Store enemy speed in the blackboard
 	blackboard.set_var("safe_velocity", Vector2.ZERO)  # Ensure safe_velocity always exists
 	#blackboard.set_var("is_knocked_back", false)
+	
+	health_bar.init_health(hp)
 	
 	if animated_sprite_2d.material is ShaderMaterial:
 		animated_sprite_2d.material = animated_sprite_2d.material.duplicate()
@@ -64,6 +67,7 @@ func take_damage():
 	
 	animation_player.play("enemy_hit")
 	hp -= 1
+	health_bar._set_health(hp)
 	if hp <= 0:
 		var corpse = DEAD_SLASHER.instantiate()
 		corpse.global_position = global_position

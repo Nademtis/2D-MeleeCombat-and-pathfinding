@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://bo0vn1x8dpsfe"]
+[gd_scene load_steps=64 format=3 uid="uid://bo0vn1x8dpsfe"]
 
 [ext_resource type="Script" path="res://enemy/slasher/enemy.gd" id="1_gbhi2"]
 [ext_resource type="Texture2D" uid="uid://bcorayv1wegpj" path="res://assets/enemy/slasher/attack_left.png" id="2_i23td"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bgi0i8htnrml7" path="res://assets/enemy/slasher/walk_right.png" id="6_1th4o"]
 [ext_resource type="Texture2D" uid="uid://c2nrn85fdp3by" path="res://assets/enemy/slasher/roll.png" id="6_qfcop"]
 [ext_resource type="Texture2D" uid="uid://bl3jjaiixbp4" path="res://assets/enemy/enemy_stun_birds.png" id="9_88y8l"]
+[ext_resource type="PackedScene" uid="uid://bl6mp8fxmbsbv" path="res://ui/health_bar.tscn" id="11_e3ssg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c5g5k"]
 shader = ExtResource("2_xxny7")
@@ -431,10 +432,10 @@ knockback_duration = 0.1
 [node name="animatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_c5g5k")
 sprite_frames = SubResource("SpriteFrames_dwchd")
-animation = &"roll"
+animation = &"idle"
 autoplay = "idle"
-frame = 3
-frame_progress = 0.371767
+frame = 5
+frame_progress = 0.804112
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -486,6 +487,12 @@ position = Vector2(0, -7)
 sprite_frames = SubResource("SpriteFrames_lai00")
 autoplay = "default"
 frame_progress = 0.0319485
+
+[node name="healthBar" parent="." instance=ExtResource("11_e3ssg")]
+offset_left = -8.0
+offset_top = -12.0
+offset_right = 8.0
+offset_bottom = -10.0
 
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
 [connection signal="timeout" from="startNav" to="." method="_on_start_nav_timeout"]

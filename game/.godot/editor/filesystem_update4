@@ -12,3 +12,5 @@ res://enemy/slasher/enemy.gd
 res://ai/tasks/enemyRecentlyHit.gd
 res://enemy/slasher/slasher.gd
 res://ai/tasks/playerIsInRange.gd
+res://healthBar.gd
+res://ui/health_bar.tscn

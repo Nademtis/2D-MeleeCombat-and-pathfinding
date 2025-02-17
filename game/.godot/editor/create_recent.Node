@@ -1,11 +1,11 @@
+Timer
+ProgressBar
 Sprite2D
 AnimationPlayer
 MarginContainer
-ProgressBar
 Node
 CollisionShape2D
 Area2D
-Timer
 AnimatedSprite2D
 BTPlayer
 TileMapLayer
