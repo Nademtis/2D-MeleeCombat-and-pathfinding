@@ -126,3 +126,6 @@ func _on_hit_stun_timer_timeout() -> void:
 func is_stunned() -> bool:
 	#print("is stunned was called")
 	return hit_stun_timer.time_left > 0
+
+func recently_hit() -> bool:
+	return hit_stun_timer.time_left > 0 or can_be_stunned_again_timer.time_left > 0

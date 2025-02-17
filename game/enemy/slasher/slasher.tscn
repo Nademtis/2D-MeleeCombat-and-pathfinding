@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://bo0vn1x8dpsfe"]
+[gd_scene load_steps=63 format=3 uid="uid://bo0vn1x8dpsfe"]
 
 [ext_resource type="Script" path="res://enemy/slasher/enemy.gd" id="1_gbhi2"]
 [ext_resource type="Texture2D" uid="uid://bcorayv1wegpj" path="res://assets/enemy/slasher/attack_left.png" id="2_i23td"]
@@ -8,6 +8,7 @@
 [ext_resource type="BehaviorTree" uid="uid://bydt1cu64pyu2" path="res://ai/trees/enemy1.tres" id="3_rxslk"]
 [ext_resource type="Texture2D" uid="uid://k00yj0vcoae0" path="res://assets/enemy/slasher/walk_left.png" id="5_idpw5"]
 [ext_resource type="Texture2D" uid="uid://bgi0i8htnrml7" path="res://assets/enemy/slasher/walk_right.png" id="6_1th4o"]
+[ext_resource type="Texture2D" uid="uid://c2nrn85fdp3by" path="res://assets/enemy/slasher/roll.png" id="6_qfcop"]
 [ext_resource type="Texture2D" uid="uid://bl3jjaiixbp4" path="res://assets/enemy/enemy_stun_birds.png" id="9_88y8l"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c5g5k"]
@@ -77,6 +78,22 @@ region = Rect2(768, 0, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_hwyr3"]
 atlas = ExtResource("2_wi76p")
 region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tqouh"]
+atlas = ExtResource("6_qfcop")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ewpxx"]
+atlas = ExtResource("6_qfcop")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_08p1v"]
+atlas = ExtResource("6_qfcop")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wgn88"]
+atlas = ExtResource("6_qfcop")
+region = Rect2(512, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ocxi7"]
 atlas = ExtResource("5_idpw5")
@@ -206,6 +223,23 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tqouh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ewpxx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_08p1v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wgn88")
+}],
+"loop": true,
+"name": &"roll",
+"speed": 9.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -391,16 +425,16 @@ animations = [{
 [node name="slasher" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_gbhi2")
-hp = 2.0
+hp = 8.0
 knockback_duration = 0.1
 
 [node name="animatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_c5g5k")
 sprite_frames = SubResource("SpriteFrames_dwchd")
-animation = &"idle"
+animation = &"roll"
 autoplay = "idle"
-frame = 7
-frame_progress = 0.0711059
+frame = 3
+frame_progress = 0.371767
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

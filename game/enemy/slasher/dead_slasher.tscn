@@ -2,6 +2,21 @@
 
 [ext_resource type="Texture2D" uid="uid://ci4dy6v58xqsj" path="res://assets/enemy/slasher/dead.png" id="1_vrt5o"]
 
+[sub_resource type="Animation" id="Animation_uirid"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_r6axj"]
 resource_name = "dead"
 length = 0.5
@@ -16,21 +31,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 0.63728, 1, 1),
 "update": 0,
 "values": [Vector2(0, -4), Vector2(0, 0), Vector2(0, -3), Vector2(0, -5), Vector2(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_uirid"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i5sjh"]
