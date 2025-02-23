@@ -56,7 +56,12 @@ func _tick(delta: float) -> Status:
 			agent.velocity = Vector2.ZERO
 			return SUCCESS  # Attack complete
 		return RUNNING  # Still dashing
+	
+	#go back to idle when done
+	#var anim: AnimatedSprite2D = agent.animated_sprite_2d
+	#anim.play("idle")
 	return SUCCESS
+	
 
 func play_attack_anim() -> void:
 	var anim: AnimatedSprite2D = agent.animated_sprite_2d
@@ -65,8 +70,10 @@ func play_attack_anim() -> void:
 	
 	if direction.x >= 0:
 		anim.play("attack_right")  # Player is to the right
+		
 	else:
 		anim.play("attack_left")   # Player is to the left
+		
 
 func start_attack() -> void:
 	attack_direction_is_locked = false
@@ -75,7 +82,7 @@ func start_attack() -> void:
 	
 	# Instantiate the attack effect
 	var attack_instance = ATTACK.instantiate()
-	attack_instance.position = dash_direction * 4
+	attack_instance.position = dash_direction
 	attack_instance.rotation = dash_direction.angle() + 90
 	
 	#agent.get_tree().current_scene.add_child(attack_instance)

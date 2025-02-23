@@ -81,7 +81,7 @@ dash_time = 0.15
 dash_speed = 190.0
 
 [sub_resource type="BTWait" id="BTWait_o1han"]
-duration = 0.18
+duration = 0.75
 
 [sub_resource type="BTSequence" id="BTSequence_tlaf4"]
 custom_name = "Attack Sequence"

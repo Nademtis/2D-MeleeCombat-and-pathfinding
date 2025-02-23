@@ -1,6 +1,6 @@
-res://ui
-res://assets/enemy
 res://assets/enemy/slasher
+res://assets/enemy
+res://ui
 res://enemy
 res://player
 res://nav

@@ -30,7 +30,6 @@ const DEAD_SLASHER = preload("res://enemy/slasher/dead_slasher.tscn")
 @onready var health_bar: HealthBar= $healthBar
 @onready var poise_bar: PoiseBar= $PoiseBar
 
-
 func _ready() -> void:
 	@warning_ignore("narrowing_conversion")
 	speed = randi_range(speed - 10, speed + 10)
