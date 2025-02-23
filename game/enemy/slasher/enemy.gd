@@ -57,7 +57,14 @@ func update_indicator() -> void:
 		enemy_direction_indicator.visible = true
 		
 		enemy_direction_indicator.look_at(PlayerStats.player_position)
-		#also change color if attacking or close to can attack other things
+		if global_position.distance_to(PlayerStats.player_position) <= 40:
+			enemy_direction_indicator.self_modulate = Color("#a53030") #ed
+			print("red")
+		elif global_position.distance_to(PlayerStats.player_position) <= 50:
+			enemy_direction_indicator.self_modulate = Color("#cf573c") #orange
+			print("orange")
+		else:
+			enemy_direction_indicator.self_modulate = Color.WHITE #white
 	else:
 		enemy_direction_indicator.visible = false
 

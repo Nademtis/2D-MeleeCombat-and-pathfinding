@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://bo0vn1x8dpsfe"]
+[gd_scene load_steps=63 format=3 uid="uid://bo0vn1x8dpsfe"]
 
 [ext_resource type="Script" path="res://enemy/slasher/enemy.gd" id="1_gbhi2"]
 [ext_resource type="Texture2D" uid="uid://dfdvayqy3jk5c" path="res://assets/enemy/slasher/idle.png" id="2_wi76p"]
@@ -383,6 +383,43 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="Animation" id="Animation_ujavc"]
+resource_name = "indicateAttacking"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemyDirectionIndicator:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(3.06425, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(7.5, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_qxijt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemyDirectionIndicator:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bsjd6"]
+_data = {
+"RESET": SubResource("Animation_qxijt"),
+"indicateAttacking": SubResource("Animation_ujavc")
+}
+
 [node name="slasher" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_gbhi2")
@@ -464,6 +501,11 @@ offset_bottom = -11.0
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("13_kife2")
 offset = Vector2(15, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="indicator"]
+libraries = {
+"": SubResource("AnimationLibrary_bsjd6")
+}
 
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
 [connection signal="timeout" from="startNav" to="." method="_on_start_nav_timeout"]

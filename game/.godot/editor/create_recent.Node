@@ -1,3 +1,4 @@
+AnimationPlayer
 Sprite2D
 Node2D
 MarginContainer
@@ -5,7 +6,6 @@ HealthBar
 CanvasLayer
 Timer
 ProgressBar
-AnimationPlayer
 Node
 CollisionShape2D
 Area2D
