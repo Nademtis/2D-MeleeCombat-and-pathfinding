@@ -9,6 +9,8 @@ extends Node2D
 
 
 func _ready() -> void:
+	animated_sprite_2d.play("attack3")
+	#animation_player.play("coll")
 	pass
 
 
@@ -18,8 +20,8 @@ func _on_kill_timer_timeout() -> void:
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	animated_sprite_2d.play("attack2")
-	animation_player.play("coll")
+	#animated_sprite_2d.play("attack3")
+	#animation_player.play("coll")
 	pass # Replace with function body.
 
 

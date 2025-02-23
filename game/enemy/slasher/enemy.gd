@@ -30,6 +30,9 @@ const DEAD_SLASHER = preload("res://enemy/slasher/dead_slasher.tscn")
 @onready var health_bar: HealthBar= $healthBar
 @onready var poise_bar: PoiseBar= $PoiseBar
 
+@onready var enemy_direction_indicator: Sprite2D = $indicator/EnemyDirectionIndicator
+
+
 func _ready() -> void:
 	@warning_ignore("narrowing_conversion")
 	speed = randi_range(speed - 10, speed + 10)
@@ -44,7 +47,16 @@ func _ready() -> void:
 	
 	if animated_sprite_2d.material is ShaderMaterial:
 		animated_sprite_2d.material = animated_sprite_2d.material.duplicate()
+
+func _process(delta: float) -> void:
+	update_indicator()
+
+
+func update_indicator() -> void:
+	if should_chase:
+		enemy_direction_indicator.look_at(PlayerStats.player_position)
 	
+
 func take_damage():
 	set_velocity(Vector2.ZERO)
 	

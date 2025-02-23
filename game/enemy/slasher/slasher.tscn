@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://bo0vn1x8dpsfe"]
+[gd_scene load_steps=60 format=3 uid="uid://bo0vn1x8dpsfe"]
 
 [ext_resource type="Script" path="res://enemy/slasher/enemy.gd" id="1_gbhi2"]
 [ext_resource type="Texture2D" uid="uid://dfdvayqy3jk5c" path="res://assets/enemy/slasher/idle.png" id="2_wi76p"]
@@ -12,38 +12,15 @@
 [ext_resource type="Texture2D" uid="uid://bl3jjaiixbp4" path="res://assets/enemy/enemy_stun_birds.png" id="9_88y8l"]
 [ext_resource type="PackedScene" uid="uid://bl6mp8fxmbsbv" path="res://ui/health_bar.tscn" id="11_e3ssg"]
 [ext_resource type="PackedScene" uid="uid://cbu1acdxkc7x" path="res://ui/poise_bar.tscn" id="12_cdie7"]
+[ext_resource type="Texture2D" uid="uid://doeqr5frqqfwc" path="res://assets/enemy/enemy_direction_indicator.png" id="13_kife2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c5g5k"]
 shader = ExtResource("2_xxny7")
 shader_parameter/flash_amount = 0.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_c54lg"]
-atlas = ExtResource("3_1npk0")
-region = Rect2(384, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vei7g"]
-atlas = ExtResource("3_1npk0")
-region = Rect2(256, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_usv8w"]
-atlas = ExtResource("3_1npk0")
-region = Rect2(128, 0, 128, 128)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_xk8u5"]
 atlas = ExtResource("3_1npk0")
 region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_to48a"]
-atlas = ExtResource("4_0qlqf")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_miic3"]
-atlas = ExtResource("4_0qlqf")
-region = Rect2(128, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_oxvyc"]
-atlas = ExtResource("4_0qlqf")
-region = Rect2(256, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b0bxo"]
 atlas = ExtResource("4_0qlqf")
@@ -165,53 +142,17 @@ region = Rect2(896, 0, 128, 128)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_c54lg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vei7g")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_usv8w")
-}, {
-"duration": 7.0,
 "texture": SubResource("AtlasTexture_xk8u5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_usv8w")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vei7g")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_c54lg")
 }],
 "loop": true,
 "name": &"attack_left",
 "speed": 10.0
 }, {
 "frames": [{
-"duration": 0.3,
-"texture": SubResource("AtlasTexture_to48a")
-}, {
-"duration": 0.3,
-"texture": SubResource("AtlasTexture_miic3")
-}, {
-"duration": 0.3,
-"texture": SubResource("AtlasTexture_oxvyc")
-}, {
-"duration": 6.0,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_b0bxo")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_oxvyc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_miic3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_to48a")
 }],
-"loop": false,
+"loop": true,
 "name": &"attack_right",
 "speed": 10.0
 }, {
@@ -451,10 +392,8 @@ knockback_duration = 0.1
 [node name="animatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_c5g5k")
 sprite_frames = SubResource("SpriteFrames_dwchd")
-animation = &"attack_right"
+animation = &"idle"
 autoplay = "idle"
-frame = 6
-frame_progress = 1.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -518,6 +457,13 @@ offset_left = -8.0
 offset_top = -12.0
 offset_right = 8.0
 offset_bottom = -11.0
+
+[node name="indicator" type="Node2D" parent="."]
+
+[node name="EnemyDirectionIndicator" type="Sprite2D" parent="indicator"]
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("13_kife2")
+offset = Vector2(15, 0)
 
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
 [connection signal="timeout" from="startNav" to="." method="_on_start_nav_timeout"]

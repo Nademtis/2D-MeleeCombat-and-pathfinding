@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=33 format=3 uid="uid://bydt1cu64pyu2"]
+[gd_resource type="BehaviorTree" load_steps=34 format=3 uid="uid://bydt1cu64pyu2"]
 
 [ext_resource type="Script" path="res://ai/tasks/checkIsStunned.gd" id="1_4e3ku"]
 [ext_resource type="Script" path="res://ai/tasks/chasePlayer.gd" id="1_5n44a"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://ai/tasks/dash.gd" id="2_4r1m4"]
 [ext_resource type="Script" path="res://ai/tasks/updateAnimation.gd" id="2_2772s"]
 [ext_resource type="Script" path="res://ai/tasks/enemyAttack.gd" id="2_wqmqn"]
+[ext_resource type="Script" path="res://ai/tasks/AnimAndWait.gd" id="6_phwbw"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_lxptq"]
 
@@ -76,16 +77,18 @@ children = [SubResource("BTSelector_a5v48")]
 
 [sub_resource type="BTAction" id="BTAction_84ex1"]
 script = ExtResource("2_wqmqn")
-attack_charge_time = 0.25
-dash_time = 0.15
-dash_speed = 190.0
+attack_charge_time = 0.1
+dash_time = 0.18
+dash_speed = 250.0
 
-[sub_resource type="BTWait" id="BTWait_o1han"]
-duration = 0.75
+[sub_resource type="BTAction" id="BTAction_lkhap"]
+script = ExtResource("6_phwbw")
+anim_name = "idle"
+wait_time = 0.5
 
 [sub_resource type="BTSequence" id="BTSequence_tlaf4"]
 custom_name = "Attack Sequence"
-children = [SubResource("BTAction_i43bm"), SubResource("BTAlwaysSucceed_0oure"), SubResource("BTAlwaysSucceed_gnwks"), SubResource("BTAction_84ex1"), SubResource("BTWait_o1han")]
+children = [SubResource("BTAction_i43bm"), SubResource("BTAlwaysSucceed_0oure"), SubResource("BTAlwaysSucceed_gnwks"), SubResource("BTAction_84ex1"), SubResource("BTAction_lkhap")]
 
 [sub_resource type="BBVariant" id="BBVariant_ho0hb"]
 type = 1

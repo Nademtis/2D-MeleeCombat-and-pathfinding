@@ -57,9 +57,6 @@ func _tick(delta: float) -> Status:
 			return SUCCESS  # Attack complete
 		return RUNNING  # Still dashing
 	
-	#go back to idle when done
-	#var anim: AnimatedSprite2D = agent.animated_sprite_2d
-	#anim.play("idle")
 	return SUCCESS
 	
 
@@ -82,8 +79,8 @@ func start_attack() -> void:
 	
 	# Instantiate the attack effect
 	var attack_instance = ATTACK.instantiate()
-	attack_instance.position = dash_direction
-	attack_instance.rotation = dash_direction.angle() + 90
+	attack_instance.position = dash_direction * 2
+	attack_instance.rotation = dash_direction.angle()
 	
 	#agent.get_tree().current_scene.add_child(attack_instance)
 	agent.add_child(attack_instance)

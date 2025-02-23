@@ -1,10 +1,10 @@
+Sprite2D
 Node2D
 MarginContainer
 HealthBar
 CanvasLayer
 Timer
 ProgressBar
-Sprite2D
 AnimationPlayer
 Node
 CollisionShape2D
@@ -12,4 +12,3 @@ Area2D
 AnimatedSprite2D
 BTPlayer
 TileMapLayer
-PointLight2D

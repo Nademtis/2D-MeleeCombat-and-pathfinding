@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://cw0twtd575n66"]
+[gd_scene load_steps=30 format=3 uid="uid://cw0twtd575n66"]
 
 [ext_resource type="Script" path="res://enemy/slasher/slasher.gd" id="1_iab3o"]
 [ext_resource type="Texture2D" uid="uid://djdaaelwbpj1y" path="res://assets/enemy/enemy_attack.png" id="2_5x7of"]
 [ext_resource type="Texture2D" uid="uid://ce3cbqqqwu2j5" path="res://assets/enemy/enemy_attack2.png" id="3_0mjuw"]
+[ext_resource type="Texture2D" uid="uid://vms83mqy1k0q" path="res://assets/enemy/slasher/attack_right2_dagger_only.png" id="4_furdy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_53te4"]
 atlas = ExtResource("2_5x7of")
@@ -48,6 +49,42 @@ region = Rect2(640, 0, 128, 128)
 atlas = ExtResource("3_0mjuw")
 region = Rect2(768, 0, 128, 128)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_fac1x"]
+atlas = ExtResource("4_furdy")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ilixl"]
+atlas = ExtResource("4_furdy")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uf553"]
+atlas = ExtResource("4_furdy")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q8g2r"]
+atlas = ExtResource("4_furdy")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o2047"]
+atlas = ExtResource("4_furdy")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ary4m"]
+atlas = ExtResource("4_furdy")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_afek0"]
+atlas = ExtResource("4_furdy")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yyx5w"]
+atlas = ExtResource("4_furdy")
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_brui7"]
+atlas = ExtResource("4_furdy")
+region = Rect2(1024, 0, 128, 128)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_atoyv"]
 animations = [{
 "frames": [{
@@ -92,6 +129,38 @@ animations = [{
 "loop": false,
 "name": &"attack2",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_fac1x")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_ilixl")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_uf553")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_q8g2r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o2047")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ary4m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_afek0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yyx5w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_brui7")
+}],
+"loop": false,
+"name": &"attack3",
+"speed": 12.0
 }]
 
 [sub_resource type="Animation" id="Animation_6l0ao"]
@@ -206,18 +275,17 @@ monitoring = false
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="Area2D" groups=["enemy_attack"]]
 position = Vector2(-24, 1)
 scale = Vector2(1, 0.7)
-polygon = PackedVector2Array(11, -25.7143, 17, -34.2857, 25, -41.4286, 34, -34.2857, 38, -27.1429, 43, -15.7143, 40, -1.42857, 25, 7.14286, 6, -1.42857, 6, -15.7143)
+polygon = PackedVector2Array(14, -15.7143, 23, -18.5714, 33, -15.7143, 39, -10, 41, 1.42857, 35, 15.7143, 26, 20, 15, 18.5714, 12, 15.7143)
 disabled = true
 
 [node name="new attack" type="Node2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="new attack"]
-rotation = -1.5708
+position = Vector2(-2, 0)
 sprite_frames = SubResource("SpriteFrames_atoyv")
-animation = &"attack2"
-autoplay = "attack2"
-frame = 6
-frame_progress = 1.0
+animation = &"attack3"
+autoplay = "attack3"
+frame = 5
 
 [node name="Node2D" type="Node2D" parent="new attack"]
 visible = false
@@ -233,7 +301,7 @@ hframes = 5
 libraries = {
 "": SubResource("AnimationLibrary_60j6h")
 }
-autoplay = "attack"
+autoplay = "coll"
 
 [node name="killTimer" type="Timer" parent="."]
 wait_time = 0.8
