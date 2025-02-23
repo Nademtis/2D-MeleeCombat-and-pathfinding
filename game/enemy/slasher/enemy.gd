@@ -54,8 +54,12 @@ func _process(delta: float) -> void:
 
 func update_indicator() -> void:
 	if should_chase:
+		enemy_direction_indicator.visible = true
+		
 		enemy_direction_indicator.look_at(PlayerStats.player_position)
-	
+		#also change color if attacking or close to can attack other things
+	else:
+		enemy_direction_indicator.visible = false
 
 func take_damage():
 	set_velocity(Vector2.ZERO)
