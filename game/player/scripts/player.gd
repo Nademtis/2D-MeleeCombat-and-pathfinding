@@ -4,9 +4,9 @@ class_name Player
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 #player movement
-@export var max_speed: float = 75 #105
-@export var acceleration: float = 19 #2000
-@export var deceleration: float = 95 #500
+@export var max_speed: float = 75
+@export var acceleration: float = 12
+@export var deceleration: float = 95
 
 #input
 var left_click_held_down = false
@@ -64,16 +64,23 @@ func _process(_delta: float) -> void:
 	dash_held_down = Input.is_action_pressed("dash")
 	anim_player()
 	
-	#print(MovementState.keys()[movement_state])
-
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("click") && can_attack or left_click_held_down && can_attack:
+	if Input.is_action_pressed("click") && can_attack or left_click_held_down && can_attack:
 		var point = get_global_mouse_position()
 		var direction = point - global_position
 		setup_attack_dash(direction)
 		attack(point)
-	if event.is_action_pressed("dash") && can_dash && movement_state == MovementState.WALKING or dash_held_down && can_dash && movement_state == MovementState.WALKING:
+	if Input.is_action_pressed("dash") && can_dash && movement_state == MovementState.WALKING or dash_held_down && can_dash && movement_state == MovementState.WALKING:
 		setup_dash()
+
+func _input(event: InputEvent) -> void:
+	#if event.is_action_pressed("click") && can_attack or left_click_held_down && can_attack:
+		#var point = get_global_mouse_position()
+		#var direction = point - global_position
+		#setup_attack_dash(direction)
+		#attack(point)
+	#if event.is_action_pressed("dash") && can_dash && movement_state == MovementState.WALKING or dash_held_down && can_dash && movement_state == MovementState.WALKING:
+		#setup_dash()
+	pass
 
 func _physics_process(delta: float) -> void:
 	match movement_state:

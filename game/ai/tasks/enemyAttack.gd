@@ -46,7 +46,7 @@ func _tick(delta: float) -> Status:
 		if not attack_direction_is_locked:
 			dash_direction = (PlayerStats.player_position - agent.global_position).normalized()
 			
-			if charge_timer <= attack_charge_time * 0.25: # Lock direction when charge_timer reaches 25% left
+			if charge_timer <= attack_charge_time * 0.20: # Lock direction when charge_timer reaches 25% left
 				attack_direction_is_locked = true
 		# Update attack indicator every tick
 		agent.update_attack_indicator(dash_direction, charge_timer)
@@ -88,7 +88,7 @@ func start_attack() -> void:
 	
 	# Instantiate the attack effect
 	var attack_instance = ATTACK.instantiate()
-	attack_instance.position = dash_direction * 2
+	attack_instance.position = dash_direction * 3
 	attack_instance.rotation = dash_direction.angle()
 	
 	#agent.get_tree().current_scene.add_child(attack_instance)

@@ -68,8 +68,6 @@ func update_attack_indicator(direction: Vector2, time_left : float) -> void:
 	attack_indicator_parent.look_at(target_position)
 	
 	var charge_progress = clamp(time_left / attack_charge_time, 0.0, 1.0)
-	print(charge_progress)
-	# Calculate the color transition (white → red)
 	
 	# Define colors
 	var start_color = Color.WHITE  # White (#FFFFFF)

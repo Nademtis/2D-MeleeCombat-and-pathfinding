@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://bo0vn1x8dpsfe"]
+[gd_scene load_steps=74 format=3 uid="uid://bo0vn1x8dpsfe"]
 
 [ext_resource type="Script" path="res://enemy/slasher/enemy.gd" id="1_gbhi2"]
 [ext_resource type="Texture2D" uid="uid://dfdvayqy3jk5c" path="res://assets/enemy/slasher/idle.png" id="2_wi76p"]
@@ -23,11 +23,35 @@
 shader = ExtResource("2_xxny7")
 shader_parameter/flash_amount = 0.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xk8u5"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_4gs06"]
+atlas = ExtResource("3_1npk0")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0egi8"]
+atlas = ExtResource("3_1npk0")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7mx58"]
+atlas = ExtResource("3_1npk0")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qk727"]
 atlas = ExtResource("3_1npk0")
 region = Rect2(0, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_b0bxo"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_b3wr5"]
+atlas = ExtResource("4_0qlqf")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wnhg4"]
+atlas = ExtResource("4_0qlqf")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x6hof"]
+atlas = ExtResource("4_0qlqf")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ljgtw"]
 atlas = ExtResource("4_0qlqf")
 region = Rect2(384, 0, 128, 128)
 
@@ -147,19 +171,37 @@ region = Rect2(896, 0, 128, 128)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_xk8u5")
+"texture": SubResource("AtlasTexture_4gs06")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0egi8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7mx58")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qk727")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_left",
-"speed": 10.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_b0bxo")
+"texture": SubResource("AtlasTexture_b3wr5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wnhg4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x6hof")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ljgtw")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_right",
-"speed": 10.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -434,7 +476,7 @@ knockback_duration = 0.1
 [node name="animatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_c5g5k")
 sprite_frames = SubResource("SpriteFrames_dwchd")
-animation = &"idle"
+animation = &"attack_left"
 autoplay = "idle"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
