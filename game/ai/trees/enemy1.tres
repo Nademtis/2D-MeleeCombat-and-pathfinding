@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=34 format=3 uid="uid://bydt1cu64pyu2"]
+[gd_resource type="BehaviorTree" load_steps=33 format=3 uid="uid://bydt1cu64pyu2"]
 
 [ext_resource type="Script" path="res://ai/tasks/checkIsStunned.gd" id="1_4e3ku"]
 [ext_resource type="Script" path="res://ai/tasks/chasePlayer.gd" id="1_5n44a"]
@@ -28,12 +28,9 @@ animation_name = "roll"
 run_chance = 0.01
 children = [SubResource("BTAction_aqw5u")]
 
-[sub_resource type="BTConsolePrint" id="BTConsolePrint_c17c5"]
-text = "rolled"
-
 [sub_resource type="BTSequence" id="BTSequence_rlhlw"]
 custom_name = "roll away sequence"
-children = [SubResource("BTAction_mdk34"), SubResource("BTProbability_0ymdo"), SubResource("BTConsolePrint_c17c5")]
+children = [SubResource("BTAction_mdk34"), SubResource("BTProbability_0ymdo")]
 
 [sub_resource type="BTAction" id="BTAction_i43bm"]
 script = ExtResource("1_cwjtn")
@@ -78,7 +75,7 @@ children = [SubResource("BTSelector_a5v48")]
 [sub_resource type="BTAction" id="BTAction_84ex1"]
 script = ExtResource("2_wqmqn")
 attack_charge_time = 0.55
-dash_time = 0.18
+dash_time = 0.2
 dash_speed = 250.0
 
 [sub_resource type="BTAction" id="BTAction_lkhap"]

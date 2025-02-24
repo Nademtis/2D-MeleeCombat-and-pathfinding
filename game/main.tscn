@@ -72,9 +72,3 @@ position = Vector2(-157, -90)
 
 [node name="enemy3" parent="NavigationRegion2D" instance=ExtResource("3_o62aj")]
 position = Vector2(-28, -56)
-
-[node name="enemy4" parent="NavigationRegion2D" instance=ExtResource("3_o62aj")]
-position = Vector2(-28, 113)
-
-[node name="w" parent="NavigationRegion2D" instance=ExtResource("3_o62aj")]
-position = Vector2(129, 94)

@@ -6,7 +6,5 @@ res://player/player.tscn
 res://enemy/slasher/enemyAttack.tscn
 res://enemy/slasher/dead_slasher.tscn
 res://enemy/slasher/slasher.tscn
-res://enemy/slasher/enemy.gd
-res://enemy/slasher/slasher.gd
 res://ai/tasks/enemyAttack.gd
-res://player/scripts/player.gd
+res://enemy/slasher/enemy.gd

@@ -476,7 +476,7 @@ knockback_duration = 0.1
 [node name="animatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_c5g5k")
 sprite_frames = SubResource("SpriteFrames_dwchd")
-animation = &"attack_left"
+animation = &"attack_right"
 autoplay = "idle"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -528,7 +528,7 @@ visible = false
 position = Vector2(0, -7)
 sprite_frames = SubResource("SpriteFrames_lai00")
 autoplay = "default"
-frame_progress = 0.813785
+frame_progress = 0.557552
 
 [node name="healthBar" parent="." instance=ExtResource("11_e3ssg")]
 offset_left = -8.0
@@ -543,7 +543,6 @@ offset_right = 8.0
 offset_bottom = -11.0
 
 [node name="walkIndicator" type="Node2D" parent="."]
-visible = false
 
 [node name="EnemyDirectionIndicator" type="Sprite2D" parent="walkIndicator"]
 scale = Vector2(0.75, 0.75)

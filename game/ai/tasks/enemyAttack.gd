@@ -49,7 +49,7 @@ func _tick(delta: float) -> Status:
 			if charge_timer <= attack_charge_time * 0.20: # Lock direction when charge_timer reaches 25% left
 				attack_direction_is_locked = true
 		# Update attack indicator every tick
-		agent.update_attack_indicator(dash_direction, charge_timer)
+		agent.update_attack_indicator(dash_direction, charge_timer) #TODO uncomment
 			
 		if charge_timer <= 0:
 			charging = false
