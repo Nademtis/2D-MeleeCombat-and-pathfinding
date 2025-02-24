@@ -1,13 +1,11 @@
-res://enemy/slasher/enemyAttack.tscn
+res://main.tscn
 res://tileset.tres
 res://enemy/hitShader.gdshader
 res://ai/trees/enemy1.tres
-res://main.tscn
 res://player/player.tscn
+res://enemy/slasher/enemyAttack.tscn
 res://enemy/slasher/dead_slasher.tscn
 res://enemy/slasher/slasher.tscn
+res://enemy/slasher/enemy.gd
 res://enemy/slasher/slasher.gd
 res://ai/tasks/enemyAttack.gd
-res://ai/tasks/AnimAndWait.gd
-res://ai/tasks/updateAnimation.gd
-res://enemy/slasher/enemy.gd

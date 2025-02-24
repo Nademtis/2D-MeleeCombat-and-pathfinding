@@ -15,7 +15,9 @@ var dash_direction: Vector2 = Vector2.ZERO
 var attack_direction_is_locked : bool = false
 
 func _tick(delta: float) -> Status:
+	blackboard.set_var("is_Attacking", true)
 	if agent.is_stunned():
+		blackboard.set_var("is_Attacking", false)
 		charging = false  # Interrupt charging when stunned
 		dashing = false   # Interrupt dashing when stunned
 		agent.velocity = Vector2.ZERO  # Stop movement while stunned
@@ -27,7 +29,7 @@ func _tick(delta: float) -> Status:
 		var current_speed = lerp(dash_speed, 0.0, 1.0 - (dash_timer / dash_time))
 		agent.velocity = dash_direction * current_speed if dashing else Vector2.ZERO
 	
-	# Charging phase
+	# Start Charging phase
 	if not charging and not dashing:
 		charging = true
 		charge_timer = attack_charge_time
@@ -35,12 +37,16 @@ func _tick(delta: float) -> Status:
 		#use this position, so player can juke
 	
 	if charging:
-		charge_timer -= delta # minus the charge_timer
-		
-		#set dash direction if 25% left
-		if not attack_direction_is_locked and charge_timer <= attack_charge_time * 0.25:
+		charge_timer -= delta  # Reduce charge timer
+
+		# Update dash direction every tick until 25% charge time is left
+		if not attack_direction_is_locked:
 			dash_direction = (PlayerStats.player_position - agent.global_position).normalized()
-			attack_direction_is_locked = true
+			
+			if charge_timer <= attack_charge_time * 0.25: # Lock direction when charge_timer reaches 25% left
+				attack_direction_is_locked = true
+		# Update attack indicator every tick
+		agent.update_attack_indicator(dash_direction)
 			
 		if charge_timer <= 0:
 			charging = false
@@ -54,9 +60,9 @@ func _tick(delta: float) -> Status:
 		if dash_timer <= 0:
 			dashing = false
 			agent.velocity = Vector2.ZERO
+			blackboard.set_var("is_Attacking", false) #attack is done
 			return SUCCESS  # Attack complete
 		return RUNNING  # Still dashing
-	
 	return SUCCESS
 	
 

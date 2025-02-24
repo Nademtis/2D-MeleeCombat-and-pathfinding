@@ -1,8 +1,8 @@
 [gd_scene load_steps=30 format=3 uid="uid://cw0twtd575n66"]
 
 [ext_resource type="Script" path="res://enemy/slasher/slasher.gd" id="1_iab3o"]
-[ext_resource type="Texture2D" uid="uid://djdaaelwbpj1y" path="res://assets/enemy/enemy_attack.png" id="2_5x7of"]
-[ext_resource type="Texture2D" uid="uid://ce3cbqqqwu2j5" path="res://assets/enemy/enemy_attack2.png" id="3_0mjuw"]
+[ext_resource type="Texture2D" uid="uid://djdaaelwbpj1y" path="res://assets/enemy/slasher/attack/enemy_attack.png" id="2_5x7of"]
+[ext_resource type="Texture2D" uid="uid://ce3cbqqqwu2j5" path="res://assets/enemy/slasher/attack/enemy_attack2.png" id="3_0mjuw"]
 [ext_resource type="Texture2D" uid="uid://vms83mqy1k0q" path="res://assets/enemy/slasher/attack_right2_dagger_only.png" id="4_furdy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_53te4"]
@@ -253,10 +253,10 @@ tracks/0/path = NodePath("../Area2D/CollisionShape2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.06),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.3, 0.47),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [false, true]
+"values": [true, false, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_60j6h"]
@@ -278,26 +278,26 @@ scale = Vector2(1, 0.7)
 polygon = PackedVector2Array(14, -15.7143, 23, -18.5714, 33, -15.7143, 39, -10, 41, 1.42857, 35, 15.7143, 26, 20, 15, 18.5714, 12, 15.7143)
 disabled = true
 
-[node name="new attack" type="Node2D" parent="."]
+[node name="newAttack" type="Node2D" parent="."]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="new attack"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="newAttack"]
 position = Vector2(-2, 0)
 sprite_frames = SubResource("SpriteFrames_atoyv")
 animation = &"attack3"
-autoplay = "attack3"
-frame = 5
+frame = 8
+frame_progress = 1.0
 
-[node name="Node2D" type="Node2D" parent="new attack"]
+[node name="Node2D" type="Node2D" parent="newAttack"]
 visible = false
 position = Vector2(0, -7)
 
-[node name="attackIndicator" type="Sprite2D" parent="new attack/Node2D"]
+[node name="attackIndicator" type="Sprite2D" parent="newAttack/Node2D"]
 modulate = Color(0.647059, 0.188235, 0.188235, 0.733333)
 self_modulate = Color(0.647059, 0.188235, 0.188235, 0.733333)
 texture = ExtResource("2_5x7of")
 hframes = 5
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="new attack"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="newAttack"]
 libraries = {
 "": SubResource("AnimationLibrary_60j6h")
 }
@@ -308,6 +308,6 @@ wait_time = 0.8
 one_shot = true
 autostart = true
 
-[connection signal="animation_finished" from="new attack/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
-[connection signal="animation_finished" from="new attack/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="newAttack/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="frame_changed" from="newAttack/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="timeout" from="killTimer" to="." method="_on_kill_timer_timeout"]

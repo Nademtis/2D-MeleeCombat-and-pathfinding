@@ -30,7 +30,8 @@ const DEAD_SLASHER = preload("res://enemy/slasher/dead_slasher.tscn")
 @onready var health_bar: HealthBar= $healthBar
 @onready var poise_bar: PoiseBar= $PoiseBar
 
-@onready var enemy_direction_indicator: Sprite2D = $indicator/EnemyDirectionIndicator
+@onready var enemy_direction_indicator: Sprite2D = $walkIndicator/EnemyDirectionIndicator
+@onready var attack_indicator_parent: Node2D = $attackIndicator
 
 
 func _ready() -> void:
@@ -40,6 +41,7 @@ func _ready() -> void:
 	blackboard = bt_player.blackboard
 	blackboard.set_var("chase_speed", speed)  # Store enemy speed in the blackboard
 	blackboard.set_var("safe_velocity", Vector2.ZERO)  # Ensure safe_velocity always exists
+	blackboard.set_var("is_Attacking", false)
 	#blackboard.set_var("is_knocked_back", false)
 	
 	health_bar.init_health(hp)
@@ -49,20 +51,31 @@ func _ready() -> void:
 		animated_sprite_2d.material = animated_sprite_2d.material.duplicate()
 
 func _process(delta: float) -> void:
-	update_indicator()
+	var isAttacking = blackboard.get_var("is_Attacking")
+	if isAttacking:
+		enemy_direction_indicator.visible = false
+		attack_indicator_parent.visible = true
+		#enable attack direction indicator and animate
+		pass
+	else:
+		attack_indicator_parent.visible = false
+		update_walk_indicator()
+		
 
+func update_attack_indicator(direction: Vector2) -> void:
+	# Calculate the global target position by adding direction to the enemy's position
+	var target_position = global_position + direction
+	attack_indicator_parent.look_at(target_position)
 
-func update_indicator() -> void:
+func update_walk_indicator() -> void:
 	if should_chase:
 		enemy_direction_indicator.visible = true
 		
 		enemy_direction_indicator.look_at(PlayerStats.player_position)
 		if global_position.distance_to(PlayerStats.player_position) <= 40:
 			enemy_direction_indicator.self_modulate = Color("#a53030") #ed
-			print("red")
 		elif global_position.distance_to(PlayerStats.player_position) <= 50:
 			enemy_direction_indicator.self_modulate = Color("#cf573c") #orange
-			print("orange")
 		else:
 			enemy_direction_indicator.self_modulate = Color.WHITE #white
 	else:

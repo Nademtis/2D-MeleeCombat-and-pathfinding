@@ -1,11 +1,10 @@
 extends Node2D
+class_name EnemyAttack
 
+@onready var animation_player: AnimationPlayer = $"newAttack/AnimationPlayer"
+@onready var animated_sprite_2d: AnimatedSprite2D = $"newAttack/AnimatedSprite2D"
 
-@onready var animation_player: AnimationPlayer = $"new attack/AnimationPlayer"
-@onready var animated_sprite_2d: AnimatedSprite2D = $"new attack/AnimatedSprite2D"
-
-
-#TODO not used currently
+@onready var collision_shape_2d: CollisionPolygon2D = $Area2D/CollisionShape2D
 
 
 func _ready() -> void:
@@ -18,15 +17,16 @@ func _ready() -> void:
 func _on_kill_timer_timeout() -> void:
 	queue_free()
 
-
-func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	#animated_sprite_2d.play("attack3")
-	#animation_player.play("coll")
-	pass # Replace with function body.
-
-
 func _on_animated_sprite_2d_animation_finished() -> void:
-	#whole attack done
 	queue_free()
+
+
+func _on_animated_sprite_2d_frame_changed() -> void:
+	if not animated_sprite_2d: # null check
+		return
 	
-	pass # Replace with function body.
+	if animated_sprite_2d.animation == "attack3" and animated_sprite_2d.frame == 5:
+		collision_shape_2d.disabled = false
+	else:
+		collision_shape_2d.disabled = true
+		

@@ -23,6 +23,8 @@ PlayerStats="*res://autoloads/PlayerStats.gd"
 [debug]
 
 shapes/navigation/geometry_edge_color=Color(1.05888e-06, 0.664767, 0.667923, 1)
+shapes/navigation/agent_path_color=Color(1, 0, 0, 0.47451)
+shapes/avoidance/agents_radius_color=Color(1, 1, 0, 0.733333)
 
 [file_customization]
 
