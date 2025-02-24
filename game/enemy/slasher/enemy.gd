@@ -30,9 +30,10 @@ const DEAD_SLASHER = preload("res://enemy/slasher/dead_slasher.tscn")
 @onready var health_bar: HealthBar= $healthBar
 @onready var poise_bar: PoiseBar= $PoiseBar
 
+#ui indicator stuff
 @onready var enemy_direction_indicator: Sprite2D = $walkIndicator/EnemyDirectionIndicator
 @onready var attack_indicator_parent: Node2D = $attackIndicator
-
+var attack_charge_time : float = 0
 
 func _ready() -> void:
 	@warning_ignore("narrowing_conversion")
@@ -53,19 +54,43 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	var isAttacking = blackboard.get_var("is_Attacking")
 	if isAttacking:
-		enemy_direction_indicator.visible = false
-		attack_indicator_parent.visible = true
-		#enable attack direction indicator and animate
+		enemy_direction_indicator.visible = false #disable walk indicator
+		attack_indicator_parent.visible = true #enable the attack indicator
 		pass
 	else:
-		attack_indicator_parent.visible = false
-		update_walk_indicator()
+		attack_indicator_parent.visible = false #disable attack indicator
+		update_walk_indicator() # if not attacking, update walk indicator
 		
 
-func update_attack_indicator(direction: Vector2) -> void:
-	# Calculate the global target position by adding direction to the enemy's position
+func update_attack_indicator(direction: Vector2, time_left : float) -> void:
+	# calculate global target position by adding direction to the enemy's position
 	var target_position = global_position + direction
 	attack_indicator_parent.look_at(target_position)
+	
+	var charge_progress = clamp(time_left / attack_charge_time, 0.0, 1.0)
+	print(charge_progress)
+	# Calculate the color transition (white → red)
+	
+	# Define colors
+	var start_color = Color.WHITE  # White (#FFFFFF)
+	var end_color = Color("a53030")  # Red (#A53030)
+
+	# Interpolate between white and red based on charge progress
+	var current_color = start_color.lerp(end_color, 1.0 - charge_progress)
+
+	# Get all Sprite2D children of attack_indicator_parent
+	var sprites = attack_indicator_parent.get_children()
+
+	# Determine how many sprites should be visible based on charge_progress
+	var total_sprites = sprites.size()
+	var visible_count = ceil(total_sprites * (1.0 - charge_progress))  # More appear as charge progresses
+
+	for i in range(total_sprites):
+		var sprite = sprites[i] as Sprite2D
+		if sprite:
+			sprite.visible = i < visible_count
+			# Apply color change (white → red)
+			sprite.modulate = current_color
 
 func update_walk_indicator() -> void:
 	if should_chase:

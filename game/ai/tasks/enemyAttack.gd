@@ -14,6 +14,9 @@ var dash_timer: float = 0.0
 var dash_direction: Vector2 = Vector2.ZERO
 var attack_direction_is_locked : bool = false
 
+func _enter() -> void:
+	agent.attack_charge_time = attack_charge_time
+
 func _tick(delta: float) -> Status:
 	blackboard.set_var("is_Attacking", true)
 	if agent.is_stunned():
@@ -38,7 +41,7 @@ func _tick(delta: float) -> Status:
 	
 	if charging:
 		charge_timer -= delta  # Reduce charge timer
-
+		
 		# Update dash direction every tick until 25% charge time is left
 		if not attack_direction_is_locked:
 			dash_direction = (PlayerStats.player_position - agent.global_position).normalized()
@@ -46,7 +49,7 @@ func _tick(delta: float) -> Status:
 			if charge_timer <= attack_charge_time * 0.25: # Lock direction when charge_timer reaches 25% left
 				attack_direction_is_locked = true
 		# Update attack indicator every tick
-		agent.update_attack_indicator(dash_direction)
+		agent.update_attack_indicator(dash_direction, charge_timer)
 			
 		if charge_timer <= 0:
 			charging = false

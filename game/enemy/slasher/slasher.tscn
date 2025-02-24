@@ -501,6 +501,7 @@ offset_right = 8.0
 offset_bottom = -11.0
 
 [node name="walkIndicator" type="Node2D" parent="."]
+visible = false
 
 [node name="EnemyDirectionIndicator" type="Sprite2D" parent="walkIndicator"]
 scale = Vector2(0.75, 0.75)
@@ -513,7 +514,6 @@ libraries = {
 }
 
 [node name="attackIndicator" type="Node2D" parent="."]
-visible = false
 
 [node name="EnemyIndicator1" type="Sprite2D" parent="attackIndicator"]
 position = Vector2(5.5, -0.5)
