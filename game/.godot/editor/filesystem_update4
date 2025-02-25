@@ -13,3 +13,4 @@ res://autoloads/ParticleFX.gd
 res://player/scripts/player.gd
 res://ai/tasks/dash.gd
 res://ai/tasks/enemyAttack.gd
+res://enemy/slasher/enemy.gd

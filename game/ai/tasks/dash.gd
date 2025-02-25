@@ -37,3 +37,6 @@ func setup_dash() -> void:
 	
 	dash_timer = total_dash_time
 	dash_has_been_setup = true  # Prevent multiple setups
+	
+	if animation_name != "idle":
+		ParticleFX.spawn_dash_effect(dash_direction, agent.global_position, 0.50)
