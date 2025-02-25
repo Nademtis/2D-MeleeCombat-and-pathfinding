@@ -7,8 +7,8 @@ class_name PoiseBar
 var poise: float : set = _set_poise
 
 
-func init_health(_health : float) -> void:
-	poise = _health
+func init_poise(_poise : float) -> void:
+	poise = _poise
 	max_value = poise
 	value = poise
 	damage_bar.max_value = poise

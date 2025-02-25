@@ -55,7 +55,6 @@ func _ready() -> void:
 	Events.connect("player_hp_changed", update_hp_ui)
 	
 	var player_hp_node: PlayerHP = $hp  # Reference to the hp node
-	print(player_hp_node.hp)
 	health_bar.init_health(player_hp_node.hp, true)  # Set initial health
 
 func _process(_delta: float) -> void:
@@ -72,7 +71,7 @@ func _process(_delta: float) -> void:
 	if Input.is_action_pressed("dash") && can_dash && movement_state == MovementState.WALKING or dash_held_down && can_dash && movement_state == MovementState.WALKING:
 		setup_dash()
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	#if event.is_action_pressed("click") && can_attack or left_click_held_down && can_attack:
 		#var point = get_global_mouse_position()
 		#var direction = point - global_position

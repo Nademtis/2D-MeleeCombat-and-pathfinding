@@ -6,7 +6,9 @@ var blackboard: Blackboard
 
 @export var speed: float = 70
 @export var hp: float = 5
-@export var poise: float = 3
+@export var max_poise: float = 30
+var current_poise = max_poise
+
 var should_chase = false
 @export var should_chase_debug = true
 @export var attack_range_px = 30
@@ -33,7 +35,7 @@ const DEAD_SLASHER = preload("res://enemy/slasher/dead_slasher.tscn")
 #ui indicator stuff
 @onready var enemy_direction_indicator: Sprite2D = $walkIndicator/EnemyDirectionIndicator
 @onready var attack_indicator_parent: Node2D = $attackIndicator
-var attack_charge_time : float = 0
+var attack_charge_time : float = 0 #this is used for attack UI, is set in attack task as export variable
 
 func _ready() -> void:
 	@warning_ignore("narrowing_conversion")
@@ -46,20 +48,22 @@ func _ready() -> void:
 	#blackboard.set_var("is_knocked_back", false)
 	
 	health_bar.init_health(hp)
-	poise_bar.init_health(poise)
+	poise_bar.init_poise(max_poise)
 	
 	if animated_sprite_2d.material is ShaderMaterial:
 		animated_sprite_2d.material = animated_sprite_2d.material.duplicate()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
+	#everything below is for the Attack and Movement UI
 	var isAttacking = blackboard.get_var("is_Attacking")
-	if isAttacking:
-		enemy_direction_indicator.visible = false #disable walk indicator
-		attack_indicator_parent.visible = true #enable the attack indicator
-		pass
-	else:
-		attack_indicator_parent.visible = false #disable attack indicator
-		update_walk_indicator() # if not attacking, update walk indicator
+	if false:
+		if isAttacking:
+			enemy_direction_indicator.visible = false #disable walk indicator
+			attack_indicator_parent.visible = true #enable the attack indicator
+			pass
+		else:
+			attack_indicator_parent.visible = false #disable attack indicator
+			update_walk_indicator() # if not attacking, update walk indicator
 		
 
 func update_attack_indicator(direction: Vector2, time_left : float) -> void:
@@ -107,11 +111,7 @@ func update_walk_indicator() -> void:
 func take_damage():
 	set_velocity(Vector2.ZERO)
 	
-	#bt_player.active = false
-	if hit_stun_timer.is_stopped() && can_be_stunned_again_timer.is_stopped():
-		stunned_birds.visible = true
-		animated_sprite_2d.play("idle")
-		hit_stun_timer.start()
+	
 		
 	# setup knockback away from the player
 	var direction = (global_position - PlayerStats.player_position).normalized()
@@ -126,9 +126,20 @@ func take_damage():
 		await get_tree().create_timer(0.1).timeout  # Flash duration
 		mat.set_shader_parameter("flash_amount", 0.0)  # Reset
 	
+	#everything UI and visualss
 	animation_player.play("enemy_hit")
 	hp -= 1
 	health_bar._set_health(hp)
+	
+	current_poise = current_poise - 1*7
+	poise_bar._set_poise(current_poise)
+	
+	#bt_player.active = false
+	if hit_stun_timer.is_stopped() && can_be_stunned_again_timer.is_stopped():
+		stunned_birds.visible = true
+		animated_sprite_2d.play("idle")
+		hit_stun_timer.start()
+	
 	if hp <= 0:
 		var corpse = DEAD_SLASHER.instantiate()
 		corpse.global_position = global_position
@@ -136,14 +147,12 @@ func take_damage():
 		queue_free()
 
 func _physics_process(_delta: float) -> void:
-	#print(hit_stun_timer.time_left > 0)
 	if knockback_timer > 0:
 		velocity = knockback_force
 		knockback_timer -= _delta
 		
 		# Gradually reduce knockback force (smooth stop)
 		knockback_force = knockback_force.lerp(Vector2.ZERO, _delta * 22)
-	
 	move_and_slide()
 
 # Used for avoidance
