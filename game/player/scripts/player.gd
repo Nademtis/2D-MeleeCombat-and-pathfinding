@@ -140,6 +140,8 @@ func setup_dash():
 		dash_start_speed = dash_speed  # Store initial speed
 		dash_cooldown.start()
 		can_dash = false
+		
+		ParticleFX.spawn_dash_effect(dash_direction, global_position, 0.50)
 
 func handle_dashing(delta: float):
 	dash_elapsed_time += delta

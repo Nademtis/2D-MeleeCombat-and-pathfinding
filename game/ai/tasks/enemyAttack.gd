@@ -96,4 +96,6 @@ func start_attack() -> void:
 	
 	# Start dashing
 	dashing = true
+	ParticleFX.spawn_dash_effect(dash_direction, agent.global_position, 0.50)
+
 	dash_timer = dash_time

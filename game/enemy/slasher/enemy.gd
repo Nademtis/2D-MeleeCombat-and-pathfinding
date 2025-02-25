@@ -10,6 +10,7 @@ var blackboard: Blackboard
 @export var regain_poise_amount : float = 0.5
 var current_poise = max_poise
 @onready var regain_poise_timer: Timer = $regainPoiseTimer
+@onready var recently_hit_timer: Timer = $recentlyHitTimer
 
 
 var should_chase = false
@@ -61,7 +62,6 @@ func _process(_delta: float) -> void:
 	if not is_stunned():
 		if current_poise < max_poise and regain_poise_timer.is_stopped():
 			regain_poise_timer.start()
-	
 	
 	#everything below is for the Attack and Movement UI
 	var isAttacking = blackboard.get_var("is_Attacking")
@@ -119,7 +119,7 @@ func update_walk_indicator() -> void:
 
 func take_damage():
 	set_velocity(Vector2.ZERO)
-	
+	recently_hit_timer.start() #used for enemy behavior (rolling away)
 	# setup knockback away from the player
 	var direction = (global_position - PlayerStats.player_position).normalized()
 	knockback_force = direction * knockback_strength
@@ -207,7 +207,7 @@ func is_stunned() -> bool:
 	return hit_stun_timer.time_left > 0
 
 func recently_hit() -> bool:
-	return hit_stun_timer.time_left > 0
+	return recently_hit_timer.time_left > 0
 
 
 func _on_regain_poise_timer_timeout() -> void:

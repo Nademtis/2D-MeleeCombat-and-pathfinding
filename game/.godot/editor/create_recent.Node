@@ -1,5 +1,6 @@
-Node
+AnimatedSprite2D
 Timer
+Node
 GPUParticles2D
 Node2D
 AnimationPlayer
@@ -10,5 +11,4 @@ CanvasLayer
 ProgressBar
 CollisionShape2D
 Area2D
-AnimatedSprite2D
 BTPlayer
