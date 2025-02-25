@@ -17,7 +17,7 @@ func init_poise(_poise : float) -> void:
 
 func _set_poise(new_poise):
 	var prev_poise = poise
-	poise = min(max_value, new_poise)
+	poise = new_poise
 	value = poise
 	visible = true
 	
@@ -25,6 +25,15 @@ func _set_poise(new_poise):
 		timer.start()
 	else:
 		damage_bar.value = poise
+
+func add_poise_ui(new_poise) -> void:
+	poise = new_poise
+	value = poise
+
+func start_poise_regeneration(duration: float) -> void:
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "value", max_value, duration).set_trans(Tween.TRANS_LINEAR)
+	tween.tween_property(damage_bar, "value", max_value, duration).set_trans(Tween.TRANS_LINEAR)
 
 func _on_timer_timeout() -> void:
 	damage_bar.value = poise

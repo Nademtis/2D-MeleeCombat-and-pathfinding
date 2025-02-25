@@ -7,7 +7,10 @@ var blackboard: Blackboard
 @export var speed: float = 70
 @export var hp: float = 5
 @export var max_poise: float = 30
+@export var regain_poise_amount : float = 0.5
 var current_poise = max_poise
+@onready var regain_poise_timer: Timer = $regainPoiseTimer
+
 
 var should_chase = false
 @export var should_chase_debug = true
@@ -54,6 +57,12 @@ func _ready() -> void:
 		animated_sprite_2d.material = animated_sprite_2d.material.duplicate()
 
 func _process(_delta: float) -> void:
+	#is for regaining poise when not stunned and not max poise
+	if not is_stunned():
+		if current_poise < max_poise and regain_poise_timer.is_stopped():
+			regain_poise_timer.start()
+	
+	
 	#everything below is for the Attack and Movement UI
 	var isAttacking = blackboard.get_var("is_Attacking")
 	if false:
@@ -111,8 +120,6 @@ func update_walk_indicator() -> void:
 func take_damage():
 	set_velocity(Vector2.ZERO)
 	
-	
-		
 	# setup knockback away from the player
 	var direction = (global_position - PlayerStats.player_position).normalized()
 	knockback_force = direction * knockback_strength
@@ -131,14 +138,15 @@ func take_damage():
 	hp -= 1
 	health_bar._set_health(hp)
 	
-	current_poise = current_poise - 1*7
-	poise_bar._set_poise(current_poise)
-	
-	#bt_player.active = false
-	if hit_stun_timer.is_stopped() && can_be_stunned_again_timer.is_stopped():
-		stunned_birds.visible = true
-		animated_sprite_2d.play("idle")
-		hit_stun_timer.start()
+	if not is_stunned():
+		current_poise = current_poise - 1*7
+		if current_poise <= 0: # stun logic
+			stunned_birds.visible = true
+			animated_sprite_2d.play("idle")
+			hit_stun_timer.start()
+			poise_bar.start_poise_regeneration(hit_stun_timer.wait_time)
+		
+		poise_bar._set_poise(current_poise) #update poise UI
 	
 	if hp <= 0:
 		var corpse = DEAD_SLASHER.instantiate()
@@ -192,14 +200,16 @@ func _on_aggro_area_body_entered(body: Node2D) -> void:
 		should_chase = true
 
 func _on_hit_stun_timer_timeout() -> void:
-	#bt_player.active = true
+	current_poise = max_poise # not update UI since regenarate poise is called
 	stunned_birds.visible = false
-	can_be_stunned_again_timer.start()
-	pass # Replace with function body.
 
 func is_stunned() -> bool:
-	#print("is stunned was called")
 	return hit_stun_timer.time_left > 0
 
 func recently_hit() -> bool:
-	return hit_stun_timer.time_left > 0 or can_be_stunned_again_timer.time_left > 0
+	return hit_stun_timer.time_left > 0
+
+
+func _on_regain_poise_timer_timeout() -> void:
+	current_poise += regain_poise_amount
+	poise_bar.add_poise_ui(current_poise)

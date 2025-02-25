@@ -516,11 +516,14 @@ behavior_tree = ExtResource("3_rxslk")
 blackboard_plan = SubResource("BlackboardPlan_fyrno")
 
 [node name="hitStunTimer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 2.0
 one_shot = true
 
 [node name="canBeStunnedAgainTimer" type="Timer" parent="."]
 wait_time = 1.5
+one_shot = true
+
+[node name="regainPoiseTimer" type="Timer" parent="."]
 one_shot = true
 
 [node name="stunnedBirds" type="AnimatedSprite2D" parent="."]
@@ -537,6 +540,7 @@ offset_right = 8.0
 offset_bottom = -12.0
 
 [node name="PoiseBar" parent="." instance=ExtResource("12_cdie7")]
+visible = false
 offset_left = -8.0
 offset_top = -11.0
 offset_right = 8.0
@@ -585,3 +589,4 @@ texture = ExtResource("18_yynyb")
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="aggroArea" to="." method="_on_aggro_area_body_entered"]
 [connection signal="timeout" from="hitStunTimer" to="." method="_on_hit_stun_timer_timeout"]
+[connection signal="timeout" from="regainPoiseTimer" to="." method="_on_regain_poise_timer_timeout"]
