@@ -28,7 +28,6 @@ func setup_particle_fx(direction: Vector2, opacity: float = 1):
 		animation = "E"
 
 func _ready() -> void:
-	print(animation)
 	animated_sprite_2d.self_modulate = color
 	animated_sprite_2d.play(animation)
 

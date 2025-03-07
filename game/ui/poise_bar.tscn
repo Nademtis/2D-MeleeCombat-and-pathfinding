@@ -1,11 +1,13 @@
 [gd_scene load_steps=6 format=3 uid="uid://cbu1acdxkc7x"]
 
-[ext_resource type="Script" path="res://ui/PoiseBar.gd" id="1_pd8dv"]
+[ext_resource type="Script" uid="uid://c0eaytj5lm15f" path="res://ui/PoiseBar.gd" id="1_pd8dv"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qlnyf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oxu22"]
 bg_color = Color(0.478431, 0.211765, 0.482353, 1)
+shadow_color = Color(0.0313726, 0.0313726, 0.0313726, 0.196078)
+shadow_size = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hc1lc"]
 bg_color = Color(0, 0, 0, 0.54902)

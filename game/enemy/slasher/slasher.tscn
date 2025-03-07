@@ -1,8 +1,8 @@
 [gd_scene load_steps=74 format=3 uid="uid://bo0vn1x8dpsfe"]
 
-[ext_resource type="Script" path="res://enemy/slasher/enemy.gd" id="1_gbhi2"]
+[ext_resource type="Script" uid="uid://bgn2un525vayh" path="res://enemy/slasher/enemy.gd" id="1_gbhi2"]
 [ext_resource type="Texture2D" uid="uid://dfdvayqy3jk5c" path="res://assets/enemy/slasher/idle.png" id="2_wi76p"]
-[ext_resource type="Shader" path="res://enemy/hitShader.gdshader" id="2_xxny7"]
+[ext_resource type="Shader" uid="uid://ix5hd8ouejhu" path="res://enemy/hitShader.gdshader" id="2_xxny7"]
 [ext_resource type="Texture2D" uid="uid://gmg84k6nfrbj" path="res://assets/enemy/slasher/attack_left2.png" id="3_1npk0"]
 [ext_resource type="BehaviorTree" uid="uid://bydt1cu64pyu2" path="res://ai/trees/enemy1.tres" id="3_rxslk"]
 [ext_resource type="Texture2D" uid="uid://p6n5u1mgeys7" path="res://assets/enemy/slasher/attack_right2.png" id="4_0qlqf"]
@@ -365,8 +365,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xnb4n"]
 _data = {
-"RESET": SubResource("Animation_c1pwt"),
-"enemy_hit": SubResource("Animation_7bgrk")
+&"RESET": SubResource("Animation_c1pwt"),
+&"enemy_hit": SubResource("Animation_7bgrk")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x51ix"]
@@ -463,14 +463,15 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bsjd6"]
 _data = {
-"RESET": SubResource("Animation_qxijt"),
-"indicateAttacking": SubResource("Animation_ujavc")
+&"RESET": SubResource("Animation_qxijt"),
+&"indicateAttacking": SubResource("Animation_ujavc")
 }
 
 [node name="slasher" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_gbhi2")
 hp = 10.0
+regain_poise_amount = 1.0
 knockback_duration = 0.1
 
 [node name="animatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -481,7 +482,7 @@ autoplay = "idle"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_xnb4n")
+&"": SubResource("AnimationLibrary_xnb4n")
 }
 
 [node name="movement_CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -524,6 +525,7 @@ wait_time = 1.5
 one_shot = true
 
 [node name="regainPoiseTimer" type="Timer" parent="."]
+wait_time = 0.25
 one_shot = true
 
 [node name="recentlyHitTimer" type="Timer" parent="."]
@@ -560,7 +562,7 @@ offset = Vector2(12, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="walkIndicator"]
 libraries = {
-"": SubResource("AnimationLibrary_bsjd6")
+&"": SubResource("AnimationLibrary_bsjd6")
 }
 
 [node name="attackIndicator" type="Node2D" parent="."]

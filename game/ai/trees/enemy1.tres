@@ -1,13 +1,13 @@
 [gd_resource type="BehaviorTree" load_steps=33 format=3 uid="uid://bydt1cu64pyu2"]
 
-[ext_resource type="Script" path="res://ai/tasks/checkIsStunned.gd" id="1_4e3ku"]
-[ext_resource type="Script" path="res://ai/tasks/chasePlayer.gd" id="1_5n44a"]
-[ext_resource type="Script" path="res://ai/tasks/playerIsInRange.gd" id="1_cwjtn"]
-[ext_resource type="Script" path="res://ai/tasks/enemyRecentlyHit.gd" id="2_2i723"]
-[ext_resource type="Script" path="res://ai/tasks/dash.gd" id="2_4r1m4"]
-[ext_resource type="Script" path="res://ai/tasks/updateAnimation.gd" id="2_2772s"]
-[ext_resource type="Script" path="res://ai/tasks/enemyAttack.gd" id="2_wqmqn"]
-[ext_resource type="Script" path="res://ai/tasks/AnimAndWait.gd" id="6_phwbw"]
+[ext_resource type="Script" uid="uid://cw1d0jtcsgn64" path="res://ai/tasks/checkIsStunned.gd" id="1_4e3ku"]
+[ext_resource type="Script" uid="uid://b02x37lc8f0d0" path="res://ai/tasks/chasePlayer.gd" id="1_5n44a"]
+[ext_resource type="Script" uid="uid://chm2pee1yt1sy" path="res://ai/tasks/playerIsInRange.gd" id="1_cwjtn"]
+[ext_resource type="Script" uid="uid://n8qk1j2g05uh" path="res://ai/tasks/enemyRecentlyHit.gd" id="2_2i723"]
+[ext_resource type="Script" uid="uid://y4hb8iicihb4" path="res://ai/tasks/dash.gd" id="2_4r1m4"]
+[ext_resource type="Script" uid="uid://ofy5kubwi617" path="res://ai/tasks/updateAnimation.gd" id="2_2772s"]
+[ext_resource type="Script" uid="uid://w5hb1vlauxig" path="res://ai/tasks/enemyAttack.gd" id="2_wqmqn"]
+[ext_resource type="Script" uid="uid://nrx3pk7vh85q" path="res://ai/tasks/AnimAndWait.gd" id="6_phwbw"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_lxptq"]
 

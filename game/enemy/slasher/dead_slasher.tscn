@@ -35,8 +35,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i5sjh"]
 _data = {
-"RESET": SubResource("Animation_uirid"),
-"dead": SubResource("Animation_r6axj")
+&"RESET": SubResource("Animation_uirid"),
+&"dead": SubResource("Animation_r6axj")
 }
 
 [node name="deadSlasher" type="Node2D"]
@@ -46,6 +46,6 @@ texture = ExtResource("1_vrt5o")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_i5sjh")
+&"": SubResource("AnimationLibrary_i5sjh")
 }
 autoplay = "dead"

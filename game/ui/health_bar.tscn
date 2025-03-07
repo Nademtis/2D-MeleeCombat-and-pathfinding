@@ -1,11 +1,13 @@
 [gd_scene load_steps=6 format=3 uid="uid://bl6mp8fxmbsbv"]
 
-[ext_resource type="Script" path="res://ui/healthBar.gd" id="1_abohv"]
+[ext_resource type="Script" uid="uid://dvmwrf3j22wai" path="res://ui/healthBar.gd" id="1_abohv"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qlnyf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oxu22"]
 bg_color = Color(0.27451, 0.509804, 0.196078, 1)
+shadow_color = Color(0.0313726, 0.0313726, 0.0313726, 0.196078)
+shadow_size = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hc1lc"]
 bg_color = Color(0, 0, 0, 0.54902)
@@ -26,6 +28,7 @@ offset_right = 3.392
 offset_bottom = 0.056
 pivot_offset = Vector2(4, 1)
 size_flags_horizontal = 0
+theme_override_constants/outline_size = 1
 theme_override_styles/background = SubResource("StyleBoxEmpty_qlnyf")
 theme_override_styles/fill = SubResource("StyleBoxFlat_oxu22")
 value = 50.0

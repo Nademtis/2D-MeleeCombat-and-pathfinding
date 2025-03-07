@@ -1,6 +1,6 @@
 [gd_scene load_steps=52 format=3 uid="uid://kqn04fj3g3mb"]
 
-[ext_resource type="Script" path="res://misc/particleFX/dash_particle_fx.gd" id="1_cbmcj"]
+[ext_resource type="Script" uid="uid://dbfq4srdm1m0c" path="res://misc/particleFX/dash_particle_fx.gd" id="1_cbmcj"]
 [ext_resource type="Texture2D" uid="uid://dmqk1ent0kdxe" path="res://assets/particleFX/dash_poof_spritesheet.png" id="2_kcyuh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lyxmf"]
