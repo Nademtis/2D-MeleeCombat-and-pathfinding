@@ -45,6 +45,7 @@ var attack_dash_direction: Vector2 = Vector2.ZERO
 
 #ui
 @onready var health_bar: HealthBar = %healthBar
+@onready var canvas_layer: CanvasLayer = $CanvasLayer
 
 
 enum MovementState{WALKING, ATTACKING, DASHING}
@@ -53,6 +54,9 @@ var movement_state = MovementState.WALKING
 func _ready() -> void:
 	Events.connect("player_attacked", setup_attack_dash) #TODO
 	Events.connect("player_hp_changed", update_hp_ui)
+	
+	#this is only to not show the healthbar in main scene
+	canvas_layer.visible = true
 	
 	var player_hp_node: PlayerHP = $hp  # Reference to the hp node
 	health_bar.init_health(player_hp_node.hp, true)  # Set initial health

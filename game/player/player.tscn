@@ -716,6 +716,7 @@ position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_teql3")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
 anchors_preset = 15

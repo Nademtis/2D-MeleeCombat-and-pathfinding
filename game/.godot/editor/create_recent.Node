@@ -1,3 +1,4 @@
+TileMapLayer
 CPUParticles2D
 AnimatedSprite2D
 Timer
@@ -12,4 +13,3 @@ CanvasLayer
 ProgressBar
 CollisionShape2D
 Area2D
-BTPlayer

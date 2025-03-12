@@ -1,7 +1,8 @@
-res://main.tscn
+res://player/player.tscn
 res://tileset.tres
 res://enemy/hitShader.gdshader
 res://ai/trees/enemy1.tres
-res://player/player.tscn
+res://player/scripts/player.gd
+res://main.tscn
 res://enemy/slasher/enemyAttack.tscn
 res://enemy/slasher/dead_slasher.tscn
