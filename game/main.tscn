@@ -32,6 +32,7 @@ shader_parameter/noise_texture = SubResource("NoiseTexture2D_5vw27")
 shader_parameter/distortion = 0.01
 shader_parameter/wave_strenth = 0.1
 shader_parameter/speed = Vector2(0.5, 0.2)
+shader_parameter/blend_factor = 0.5
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kek77"]
 texture = ExtResource("6_5vw27")
