@@ -631,13 +631,15 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ynujc"]
-radius = 14.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_32hag"]
+radius = 1.0
+height = 10.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_teql3"]
 radius = 7.0
 
 [node name="player" type="CharacterBody2D" groups=["player"]]
+y_sort_enabled = true
 motion_mode = 1
 script = ExtResource("1_f8ifd")
 
@@ -667,9 +669,9 @@ sprite_frames = SubResource("SpriteFrames_rfhv2")
 animation = &"idle_down"
 
 [node name="PlayerMovementColl" type="CollisionShape2D" parent="."]
-visible = false
-scale = Vector2(0.5, 0.5)
-shape = SubResource("CircleShape2D_ynujc")
+position = Vector2(0, 8)
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_32hag")
 
 [node name="attackHitbox" type="Node2D" parent="."]
 
@@ -709,6 +711,7 @@ polygon = PackedVector2Array(-16, -2, 14, -1, 20, 0, 23, 13, 18, 25, 1, 31, -17,
 disabled = true
 
 [node name="hurtbox" type="Area2D" parent="."]
+visible = false
 monitorable = false
 
 [node name="hurtboxColl" type="CollisionShape2D" parent="hurtbox"]
