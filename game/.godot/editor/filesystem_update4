@@ -7,3 +7,4 @@ res://player/player.tscn
 res://enemy/slasher/enemyAttack.tscn
 res://enemy/slasher/dead_slasher.tscn
 res://enemy/slasher/slasher.tscn
+res://player/axe.gd
