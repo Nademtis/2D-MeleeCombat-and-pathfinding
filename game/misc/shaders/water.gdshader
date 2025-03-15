@@ -18,10 +18,10 @@ void fragment() {
 	vec2 uv = UV + speed * TIME;
 	vec2 noise = 2.0 * texture(noise_texture, uv).rg - vec2(1.0);
 	COLOR = texture(TEXTURE, UV + noise * wave_strenth); //Sample Water texture
-	
-	vec4 base_color = texture(TEXTURE, UV + noise * wave_strenth); 
+
+	vec4 base_color = texture(TEXTURE, UV + noise * wave_strenth);
     vec4 screen_color = texture(screen_texture, SCREEN_UV + noise * distortion);
-	
+
 	//COLOR *= texture(screen_texture, SCREEN_UV + noise * distortion);
 	COLOR = mix(base_color, base_color * screen_color, blend_factor);
 }
