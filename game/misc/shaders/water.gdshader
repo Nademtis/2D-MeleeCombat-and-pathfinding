@@ -1,13 +1,13 @@
 shader_type canvas_item;
 
-uniform sampler2D screen_texture: hint_screen_texture;
+uniform sampler2D screen_texture: hint_screen_texture, repeat_enable;
 
 uniform sampler2D noise_texture: filter_nearest, repeat_enable;
 
 uniform float distortion = 0.005;
 uniform float wave_strenth = 0.01; //0.01
 uniform vec2 speed = vec2(0.5, 0.2);
-uniform float blend_factor = 0.70; // 0 = only texture, 1 = fully blended with screen
+uniform float blend_factor = 1; // 0 = only texture, 1 = fully blended with screen
 
 // Called for every vertex the material is visible on.
 void vertex() {

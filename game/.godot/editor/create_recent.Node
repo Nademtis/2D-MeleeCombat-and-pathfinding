@@ -1,5 +1,5 @@
-WorldEnvironment
 TileMapLayer
+WorldEnvironment
 Node2D
 CPUParticles2D
 AnimatedSprite2D
@@ -12,4 +12,3 @@ MarginContainer
 HealthBar
 CanvasLayer
 ProgressBar
-CollisionShape2D
