@@ -1,3 +1,4 @@
+CanvasLayer
 TileMapLayer
 WorldEnvironment
 Node2D
@@ -10,5 +11,4 @@ AnimationPlayer
 Sprite2D
 MarginContainer
 HealthBar
-CanvasLayer
 ProgressBar
