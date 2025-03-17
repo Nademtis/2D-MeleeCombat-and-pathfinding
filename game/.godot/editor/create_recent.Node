@@ -1,8 +1,8 @@
 CanvasLayer
+CPUParticles2D
 TileMapLayer
 WorldEnvironment
 Node2D
-CPUParticles2D
 AnimatedSprite2D
 Timer
 Node
