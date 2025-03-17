@@ -1,3 +1,4 @@
+Node
 CanvasLayer
 CPUParticles2D
 TileMapLayer
@@ -5,7 +6,6 @@ WorldEnvironment
 Node2D
 AnimatedSprite2D
 Timer
-Node
 GPUParticles2D
 AnimationPlayer
 Sprite2D
