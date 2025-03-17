@@ -63,6 +63,9 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	PlayerStats.player_position = global_position #update player position for global access
+	PlayerStats.player_velocity = velocity
+	
+	
 	left_click_held_down = Input.is_action_pressed("click")
 	dash_held_down = Input.is_action_pressed("dash")
 	anim_player()
@@ -177,7 +180,8 @@ func move_player(delta):
 		Input.get_action_strength("right") - Input.get_action_strength("left"),
 		Input.get_action_strength("down") - Input.get_action_strength("up")
 	).normalized()
-
+	PlayerStats.player_input_vector = input_vector
+	
 	# apply acceleration when input is detected
 	if input_vector != Vector2.ZERO:
 		velocity = lerp(velocity, input_vector * max_speed, acceleration * delta)
