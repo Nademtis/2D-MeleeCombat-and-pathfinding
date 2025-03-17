@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://twwuip55prjl"]
+[gd_scene load_steps=26 format=4 uid="uid://twwuip55prjl"]
 
 [ext_resource type="Texture2D" uid="uid://do8w6k3c3cbwe" path="res://assets/BG/Space Background (6).png" id="1_mmddu"]
 [ext_resource type="PackedScene" uid="uid://bgcsvqqyjw1qp" path="res://player/player.tscn" id="2_4ufcd"]
@@ -52,6 +52,10 @@ duration = 1.0
 transition = 0
 ease = 2
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yaehf"]
+resource_local_to_scene = true
+size = Vector2(302, 126.125)
+
 [node name="main" type="Node2D"]
 
 [node name="BG" type="Node2D" parent="."]
@@ -69,7 +73,7 @@ texture = ExtResource("1_mmddu")
 y_sort_enabled = true
 
 [node name="player" parent="Ysort" instance=ExtResource("2_4ufcd")]
-position = Vector2(-109, 70)
+position = Vector2(-254, 263)
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Ysort/player"]
 visible = false
@@ -158,7 +162,7 @@ script = ExtResource("12_vivmo")
 
 [node name="Camera2D" type="Camera2D" parent="CameraManager"]
 physics_interpolation_mode = 1
-position = Vector2(-109, 70)
+position = Vector2(-254, 263)
 zoom = Vector2(3.5, 3.5)
 process_callback = 0
 limit_left = -496
@@ -174,7 +178,7 @@ script = ExtResource("12_w48qg")
 
 [node name="FollowPcam" type="Node2D" parent="CameraManager" node_paths=PackedStringArray("follow_target")]
 top_level = true
-position = Vector2(-109, 70)
+position = Vector2(-254, 263)
 script = ExtResource("13_vivmo")
 priority = 1
 follow_mode = 5
@@ -191,9 +195,10 @@ _preview_noise = false
 position = Vector2(-8, 268)
 
 [node name="FreezeCameraAxisArea" parent="." instance=ExtResource("17_yaehf")]
+position = Vector2(-27, 65)
 freeze_axis = 1
 
 [node name="CollisionShape2D" parent="FreezeCameraAxisArea" index="0"]
-position = Vector2(-26, 64)
+shape = SubResource("RectangleShape2D_yaehf")
 
 [editable path="FreezeCameraAxisArea"]

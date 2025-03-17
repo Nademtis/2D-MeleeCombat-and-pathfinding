@@ -3,7 +3,8 @@
 [ext_resource type="Script" uid="uid://dtyi48wdhsbxu" path="res://Camera/freeze_camera_axis.gd" id="1_6c0wf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6c0wf"]
-size = Vector2(315, 133)
+resource_local_to_scene = true
+size = Vector2(302, 134.25)
 
 [node name="FreezeCameraAxisArea" type="Area2D"]
 script = ExtResource("1_6c0wf")
