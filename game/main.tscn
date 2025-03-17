@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://twwuip55prjl"]
+[gd_scene load_steps=25 format=4 uid="uid://twwuip55prjl"]
 
 [ext_resource type="Texture2D" uid="uid://do8w6k3c3cbwe" path="res://assets/BG/Space Background (6).png" id="1_mmddu"]
 [ext_resource type="PackedScene" uid="uid://bgcsvqqyjw1qp" path="res://player/player.tscn" id="2_4ufcd"]
@@ -15,6 +15,8 @@
 [ext_resource type="Script" uid="uid://8nvbual5t681" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="12_w48qg"]
 [ext_resource type="Script" uid="uid://dd1a2amguahsk" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="13_vivmo"]
 [ext_resource type="Script" uid="uid://c2ar1ibtv8pnu" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="14_2cqfq"]
+[ext_resource type="PackedScene" uid="uid://bq8qotefamth2" path="res://Camera/fixedp_cam.tscn" id="16_2cqfq"]
+[ext_resource type="PackedScene" uid="uid://cu1pxa20k8tls" path="res://Camera/freeze_camera_axis_area.tscn" id="17_yaehf"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_3ejb3"]
 outlines = Array[PackedVector2Array]([PackedVector2Array(-432, 41, -449, 236, -313, 355, 307, 398, 278, -46, 137, -288, -426, -253)])
@@ -67,7 +69,7 @@ texture = ExtResource("1_mmddu")
 y_sort_enabled = true
 
 [node name="player" parent="Ysort" instance=ExtResource("2_4ufcd")]
-position = Vector2(-24, 55)
+position = Vector2(-109, 70)
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Ysort/player"]
 visible = false
@@ -139,7 +141,7 @@ tile_set = ExtResource("2_j6bfy")
 
 [node name="enemy" parent="Ysort/ENEMIES" instance=ExtResource("3_o62aj")]
 y_sort_enabled = true
-position = Vector2(45, 284)
+position = Vector2(-61, 276)
 
 [node name="enemy4" parent="Ysort/ENEMIES" instance=ExtResource("3_o62aj")]
 y_sort_enabled = true
@@ -156,8 +158,9 @@ script = ExtResource("12_vivmo")
 
 [node name="Camera2D" type="Camera2D" parent="CameraManager"]
 physics_interpolation_mode = 1
-position = Vector2(-24, 55)
+position = Vector2(-109, 70)
 zoom = Vector2(3.5, 3.5)
+process_callback = 0
 limit_left = -496
 limit_top = -288
 limit_right = 384
@@ -171,8 +174,9 @@ script = ExtResource("12_w48qg")
 
 [node name="FollowPcam" type="Node2D" parent="CameraManager" node_paths=PackedStringArray("follow_target")]
 top_level = true
-position = Vector2(-24, 55)
+position = Vector2(-109, 70)
 script = ExtResource("13_vivmo")
+priority = 1
 follow_mode = 5
 follow_target = NodePath("../../Ysort/player")
 zoom = Vector2(3.5, 3.5)
@@ -182,3 +186,14 @@ follow_damping_value = Vector2(0.15, 0.15)
 draw_limits = true
 limit_target = NodePath("../../Ysort/NavigationRegion2D/TileMap/Water")
 _preview_noise = false
+
+[node name="FIXEDPCam" parent="CameraManager" instance=ExtResource("16_2cqfq")]
+position = Vector2(-8, 268)
+
+[node name="FreezeCameraAxisArea" parent="." instance=ExtResource("17_yaehf")]
+freeze_axis = 1
+
+[node name="CollisionShape2D" parent="FreezeCameraAxisArea" index="0"]
+position = Vector2(-26, 64)
+
+[editable path="FreezeCameraAxisArea"]

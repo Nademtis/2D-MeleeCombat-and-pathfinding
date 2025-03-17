@@ -63,7 +63,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	PlayerStats.player_position = global_position #update player position for global access
-	PlayerStats.player_velocity = velocity
+	#PlayerStats.player_velocity = velocity
 	
 	
 	left_click_held_down = Input.is_action_pressed("click")

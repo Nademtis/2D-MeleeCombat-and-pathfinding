@@ -1,10 +1,16 @@
 extends Node
+class_name CameraManager
+
 var follow_player : bool = true
 
 @export var follow_offset_strength : float = 15
 @export var y_multiplier: float = 1.8  # Increase Y offset strength
 
 @onready var follow_pcam: PhantomCamera2D = $FollowPcam
+
+func _ready() -> void:
+	Events.connect("camera_freeze_axis", freeze_axis)
+	Events.connect("camera_stop_freeze_axis", stop_freeze_axis)
 
 func _process(delta: float) -> void:
 	#refactor to using input vector PlayerStatsplayer_input_vector
@@ -22,5 +28,16 @@ func _process(delta: float) -> void:
 		follow_pcam.set_follow_offset(Vector2.ZERO)
 		
 		
-	print(target_offset)  # Debugging
+	#print(target_offset)  # Debugging
 	
+	
+func freeze_axis (axis: Enums.AXIS) -> void:
+	print("should freeze")
+	if axis == Enums.AXIS.Xaxis:
+		follow_pcam.set_lock_axis(1)
+	if axis == Enums.AXIS.Yaxis:
+		follow_pcam.set_lock_axis(2)
+
+func stop_freeze_axis () -> void:
+	print("stop freeze axis")
+	follow_pcam.set_lock_axis(0)

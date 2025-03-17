@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cu1pxa20k8tls"]
+
+[ext_resource type="Script" uid="uid://dtyi48wdhsbxu" path="res://Camera/freeze_camera_axis.gd" id="1_6c0wf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6c0wf"]
+size = Vector2(315, 133)
+
+[node name="FreezeCameraAxisArea" type="Area2D"]
+script = ExtResource("1_6c0wf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(6.5, -6)
+shape = SubResource("RectangleShape2D_6c0wf")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
