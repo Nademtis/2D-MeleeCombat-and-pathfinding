@@ -73,7 +73,7 @@ texture = ExtResource("1_mmddu")
 y_sort_enabled = true
 
 [node name="player" parent="Ysort" instance=ExtResource("2_4ufcd")]
-position = Vector2(-254, 263)
+position = Vector2(201, 126)
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Ysort/player"]
 visible = false
@@ -152,7 +152,7 @@ y_sort_enabled = true
 position = Vector2(-192, -237)
 
 [node name="enemy2" parent="Ysort/ENEMIES" instance=ExtResource("3_o62aj")]
-position = Vector2(-332, -146)
+position = Vector2(-292, -205)
 
 [node name="enemy3" parent="Ysort/ENEMIES" instance=ExtResource("3_o62aj")]
 position = Vector2(-335, 219)
@@ -162,7 +162,7 @@ script = ExtResource("12_vivmo")
 
 [node name="Camera2D" type="Camera2D" parent="CameraManager"]
 physics_interpolation_mode = 1
-position = Vector2(-254, 263)
+position = Vector2(201, 126)
 zoom = Vector2(3.5, 3.5)
 process_callback = 0
 limit_left = -496
@@ -178,7 +178,7 @@ script = ExtResource("12_w48qg")
 
 [node name="FollowPcam" type="Node2D" parent="CameraManager" node_paths=PackedStringArray("follow_target")]
 top_level = true
-position = Vector2(-254, 263)
+position = Vector2(201, 126)
 script = ExtResource("13_vivmo")
 priority = 1
 follow_mode = 5
@@ -194,8 +194,14 @@ _preview_noise = false
 [node name="FIXEDPCam" parent="CameraManager" instance=ExtResource("16_2cqfq")]
 position = Vector2(-8, 268)
 
+[node name="FIXEDPCam2" parent="CameraManager" instance=ExtResource("16_2cqfq")]
+position = Vector2(-314, 232)
+
+[node name="FIXEDPCam3" parent="CameraManager" instance=ExtResource("16_2cqfq")]
+position = Vector2(-239, -172)
+
 [node name="FreezeCameraAxisArea" parent="." instance=ExtResource("17_yaehf")]
-position = Vector2(-27, 65)
+position = Vector2(-16, 57)
 freeze_axis = 1
 
 [node name="CollisionShape2D" parent="FreezeCameraAxisArea" index="0"]

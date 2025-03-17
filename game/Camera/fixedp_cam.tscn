@@ -7,11 +7,11 @@
 [sub_resource type="Resource" id="Resource_yp5o1"]
 script = ExtResource("2_yuesa")
 duration = 1.0
-transition = 0
-ease = 2
+transition = 1
+ease = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p5eyl"]
-size = Vector2(321, 175)
+size = Vector2(301, 164)
 
 [node name="FIXEDPCam" type="Node2D"]
 script = ExtResource("1_p5eyl")
@@ -24,7 +24,7 @@ metadata/_custom_type_script = "uid://dd1a2amguahsk"
 script = ExtResource("3_yuesa")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0.5, -0.5)
+position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_p5eyl")
 
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]

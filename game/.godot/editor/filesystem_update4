@@ -9,13 +9,6 @@ res://player/player.tscn
 res://enemy/slasher/enemyAttack.tscn
 res://enemy/slasher/dead_slasher.tscn
 res://enemy/slasher/slasher.tscn
-res://Camera/cameraManager.gd
-res://player/scripts/player.gd
-res://autoloads/PlayerStats.gd
-res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd
 res://Camera/fixedp_cam.tscn
-res://Camera/FixedCamera.gd
-res://Camera/freeze_camera_axis.gd
-res://autoloads/Enums.gd
-res://autoloads/Events.gd
 res://Camera/freeze_camera_axis_area.tscn
+res://Camera/cameraManager.gd
