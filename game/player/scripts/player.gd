@@ -20,11 +20,15 @@ var max_combo : int = 3
 @onready var attack_cool_down: Timer = $attackCoolDown # cooldown between attacks
 @onready var attack_combo: Timer = $attackCombo
 
-#collisions
+#attackCollisions
 @onready var coll_shape_left: CollisionPolygon2D = $attackHitbox/CollShapeLeft/collShapeLeft
 @onready var coll_shape_right: CollisionPolygon2D = $attackHitbox/CollShapeRight/collShapeRight
 @onready var coll_shape_up: CollisionPolygon2D = $attackHitbox/CollShapeUp/collShapeUp
 @onready var coll_shape_down: CollisionPolygon2D = $attackHitbox/CollShapeDown/collShapeDown
+
+#check for stair
+@onready var ground_tilemap: TileMapLayer = %ground
+var last_tile_under_player: Vector2i
 
 #player dash
 @export var dash_speed: float = 550 #500
@@ -89,6 +93,8 @@ func _input(_event: InputEvent) -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
+	#var is_on_stair := check_for_stairs() # maybe fix later
+	
 	match movement_state:
 		MovementState.WALKING:
 			move_player(delta)
@@ -96,8 +102,16 @@ func _physics_process(delta: float) -> void:
 			handle_attack_dash(delta)
 		MovementState.DASHING:
 			handle_dashing(delta)
-	move_and_slide()
 	
+	move_and_slide()
+
+func check_for_stairs() -> bool:
+	var current_tile: Vector2i = ground_tilemap.local_to_map(global_position + Vector2(0,8))
+	
+	var tile_data := ground_tilemap.get_cell_tile_data(current_tile)
+	var is_on_stair : bool = tile_data and tile_data.get_custom_data("tileName") == "stair"
+	
+	return is_on_stair
 
 func attack(_point : Vector2):
 	var attack_direction = get_attack_direction()
@@ -161,7 +175,6 @@ func handle_dashing(delta: float):
 		velocity = Vector2.ZERO
 		set_movement_state(MovementState.WALKING)
 
-
 func set_movement_state(new_state : MovementState):
 	#var old_state: MovementState = movement_state
 	#print(MovementState.keys()[new_state])
@@ -187,7 +200,9 @@ func move_player(delta):
 		velocity = lerp(velocity, input_vector * max_speed, acceleration * delta)
 	else: # Apply deceleration when no input is detected
 		velocity = lerp(velocity, input_vector * max_speed, deceleration * delta)
+	
 
+	
 func anim_player():
 	#if animated_sprite_2d.animation == "attack_1_right" || animated_sprite_2d.animation == "attack_2_right":
 	#	return

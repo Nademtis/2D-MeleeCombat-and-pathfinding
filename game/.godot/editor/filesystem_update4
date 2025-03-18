@@ -11,3 +11,5 @@ res://enemy/slasher/dead_slasher.tscn
 res://enemy/slasher/slasher.tscn
 res://Camera/fixedp_cam.tscn
 res://Camera/freeze_camera_axis_area.tscn
+res://player/scripts/player.gd
+res://tileset_stair.tres

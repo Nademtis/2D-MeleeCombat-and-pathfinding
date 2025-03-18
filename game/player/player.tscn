@@ -640,6 +640,7 @@ radius = 7.0
 
 [node name="player" type="CharacterBody2D" groups=["player"]]
 y_sort_enabled = true
+collision_mask = 15
 motion_mode = 1
 script = ExtResource("1_f8ifd")
 

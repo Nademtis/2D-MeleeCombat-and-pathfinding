@@ -1,3 +1,4 @@
+res://
 res://autoloads
 res://Camera
 res://misc/shaders
@@ -12,6 +13,5 @@ res://nav
 res://assets/player
 res://assets/player/attack
 res://assets/tileset
-res://
 res://plants
 res://assets

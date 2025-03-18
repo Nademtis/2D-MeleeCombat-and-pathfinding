@@ -468,6 +468,8 @@ _data = {
 }
 
 [node name="slasher" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 15
 motion_mode = 1
 script = ExtResource("1_gbhi2")
 hp = 10.0
