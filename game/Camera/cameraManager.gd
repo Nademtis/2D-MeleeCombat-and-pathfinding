@@ -42,3 +42,9 @@ func freeze_axis (axis: Enums.AXIS) -> void:
 func stop_freeze_axis () -> void:
 	print("stop freeze axis")
 	follow_pcam.set_lock_axis(0)
+
+
+func _on_follow_pcam_dead_zone_reached(side: Vector2) -> void:
+	#print("side:", side)
+	#print("deadzone reached")
+	pass # Replace with function body.

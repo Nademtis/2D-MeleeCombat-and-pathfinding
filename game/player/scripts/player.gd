@@ -93,7 +93,8 @@ func _input(_event: InputEvent) -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
-	#var is_on_stair := check_for_stairs() # maybe fix later
+	#var stair_direction : String = check_for_stairs()
+	#print(stair_direction)
 	
 	match movement_state:
 		MovementState.WALKING:
@@ -105,13 +106,14 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 
-func check_for_stairs() -> bool:
-	var current_tile: Vector2i = ground_tilemap.local_to_map(global_position + Vector2(0,8))
-	
+func check_for_stairs() -> String:
+	var current_tile: Vector2i = ground_tilemap.local_to_map(global_position + Vector2(0, 8))
 	var tile_data := ground_tilemap.get_cell_tile_data(current_tile)
-	var is_on_stair : bool = tile_data and tile_data.get_custom_data("tileName") == "stair"
 	
-	return is_on_stair
+	if tile_data:
+		var stair_direction = tile_data.get_custom_data("stairDirection")  # Get the stair direction from the tile
+		return stair_direction  # Return the direction ("left", "right", "middle")
+	return ""  # Return an empty string if not on stairs
 
 func attack(_point : Vector2):
 	var attack_direction = get_attack_direction()
@@ -201,8 +203,26 @@ func move_player(delta):
 	else: # Apply deceleration when no input is detected
 		velocity = lerp(velocity, input_vector * max_speed, deceleration * delta)
 	
-
+	# Check if the player is on stairs
+	var stair_direction = check_for_stairs()
 	
+	if stair_direction != "":
+		if stair_direction == "right": 
+			if input_vector.x > 0:  # Moving right on right stairs
+				velocity.y = lerp(velocity.y, velocity.y - max_speed / 4, 0.75)  # Add bias to make the player move diagonally upward right
+			elif input_vector.x < 0:  # Moving left on right stairs
+				velocity.y = lerp(velocity.y, velocity.y + max_speed / 4, 0.75)  # Add bias to make the player move diagonally downward left
+
+		elif stair_direction == "left":
+			if input_vector.x < 0:  # Moving left on left stairs
+				velocity.y = lerp(velocity.y, velocity.y - max_speed / 4, 0.75)  # Add bias to make the player move diagonally upwards
+			elif input_vector.x > 0:  # Moving right on left stairs
+				velocity.y = lerp(velocity.y, velocity.y + max_speed / 4, 0.75)  # Add bias to make the player move diagonally downward
+		velocity *= 0.95
+	elif stair_direction == "middle":
+		# No vertical adjustment for middle stairs, you could add more logic here if needed
+		pass
+
 func anim_player():
 	#if animated_sprite_2d.animation == "attack_1_right" || animated_sprite_2d.animation == "attack_2_right":
 	#	return
