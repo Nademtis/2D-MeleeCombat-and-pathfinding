@@ -1,4 +1,4 @@
-FreezeCameraAxis
+TileMapLayer
 CollisionShape2D
 Area2D
 Node2D
@@ -6,7 +6,6 @@ PhantomCamera2D
 Node
 CanvasLayer
 CPUParticles2D
-TileMapLayer
 WorldEnvironment
 AnimatedSprite2D
 Timer
