@@ -5,13 +5,3 @@ res://ai/trees/enemy1.tres
 res://misc/shaders/water.gdshader
 res://misc/shaders/waterShader_material.tres
 res://misc/shaders/SpecialwaterShader_material.tres
-res://player/player.tscn
-res://enemy/slasher/enemyAttack.tscn
-res://enemy/slasher/dead_slasher.tscn
-res://enemy/slasher/slasher.tscn
-res://Camera/fixedp_cam.tscn
-res://Camera/freeze_camera_axis_area.tscn
-res://Camera/cameraManager.gd
-res://autoloads/Enums.gd
-res://player/movement_tracker.gd
-res://misc/particleFX/dash_particle_fx.tscn

@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=7 format=3 uid="uid://csjgovmgnve74"]
+[gd_resource type="TileSet" load_steps=8 format=3 uid="uid://csjgovmgnve74"]
 
 [ext_resource type="Texture2D" uid="uid://b0yjin833xbmd" path="res://assets/tileset/tileset.png" id="1_731so"]
 [ext_resource type="Texture2D" uid="uid://bfr4mum5uv5ao" path="res://assets/tileset/darkCornerBushesTileset.png" id="1_ej02t"]
@@ -336,6 +336,9 @@ texture = ExtResource("1_ej02t")
 11:3/0/terrains_peering_bit/top_left_corner = 0
 11:3/0/terrains_peering_bit/top_side = 0
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_14fb3"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p0366"]
 texture = ExtResource("2_14fb3")
 0:0/0 = 0
@@ -608,6 +611,8 @@ texture = ExtResource("2_14fb3")
 14:0/0/terrain_set = 2
 14:0/0/terrain = 1
 14:0/0/probability = 0.1
+14:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_14fb3")
+14:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 14:0/0/terrains_peering_bit/right_side = 1
 14:0/0/terrains_peering_bit/bottom_right_corner = 1
 14:0/0/terrains_peering_bit/bottom_side = 1
@@ -1401,6 +1406,8 @@ texture = ExtResource("1_731so")
 0:10/0/custom_data_0 = &"left"
 
 [resource]
+occlusion_layer_0/light_mask = 1
+occlusion_layer_0/sdf_collision = true
 physics_layer_0/collision_layer = 4
 physics_layer_0/collision_mask = 0
 terrain_set_0/mode = 0

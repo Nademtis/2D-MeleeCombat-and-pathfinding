@@ -1,3 +1,4 @@
+GPUParticles2D
 Timer
 PhantomCamera2D
 TileMapLayer
@@ -9,5 +10,4 @@ CanvasLayer
 CPUParticles2D
 WorldEnvironment
 AnimatedSprite2D
-GPUParticles2D
 AnimationPlayer
