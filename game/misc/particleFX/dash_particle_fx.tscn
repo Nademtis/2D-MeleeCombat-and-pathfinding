@@ -386,7 +386,7 @@ animations = [{
 script = ExtResource("1_cbmcj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-z_index = -1
+y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_3tgwy")
 animation = &"W"
 frame = 5

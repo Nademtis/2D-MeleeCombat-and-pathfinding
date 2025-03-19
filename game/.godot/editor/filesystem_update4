@@ -14,3 +14,4 @@ res://Camera/freeze_camera_axis_area.tscn
 res://Camera/cameraManager.gd
 res://autoloads/Enums.gd
 res://player/movement_tracker.gd
+res://misc/particleFX/dash_particle_fx.tscn
