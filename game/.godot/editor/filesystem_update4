@@ -5,3 +5,5 @@ res://ai/trees/enemy1.tres
 res://misc/shaders/water.gdshader
 res://misc/shaders/waterShader_material.tres
 res://misc/shaders/SpecialwaterShader_material.tres
+res://player/player.tscn
+res://enemy/slasher/slasher.tscn

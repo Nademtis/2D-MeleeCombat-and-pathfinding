@@ -640,7 +640,7 @@ radius = 7.0
 
 [node name="player" type="CharacterBody2D" groups=["player"]]
 y_sort_enabled = true
-collision_mask = 15
+collision_mask = 31
 motion_mode = 1
 script = ExtResource("1_f8ifd")
 
@@ -665,7 +665,6 @@ wait_time = 0.5
 one_shot = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-z_index = 1
 sprite_frames = SubResource("SpriteFrames_rfhv2")
 animation = &"idle_down"
 

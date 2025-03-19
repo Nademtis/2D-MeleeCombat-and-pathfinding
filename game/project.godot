@@ -92,6 +92,7 @@ dash={
 2d_physics/layer_2="enemy"
 2d_physics/layer_3="walkableGround"
 2d_physics/layer_4="stairs"
+2d_physics/layer_5="breakables"
 
 [physics]
 
