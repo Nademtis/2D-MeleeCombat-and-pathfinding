@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bgrpqkj2k8hwt"]
+[gd_scene load_steps=6 format=3 uid="uid://bgrpqkj2k8hwt"]
 
 [ext_resource type="Script" uid="uid://ct7y10fojmy0r" path="res://EnvironmentScenes/breakables/breakable.gd" id="1_h0w3q"]
 [ext_resource type="Texture2D" uid="uid://c10h5qu7ll0la" path="res://assets/breakables/vase_1.png" id="2_x3ryi"]
+[ext_resource type="PackedScene" uid="uid://bw2bd6kqy4sh1" path="res://EnvironmentScenes/breakables/breakablePS.tscn" id="3_x3ryi"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_reqw7"]
 radius = 3.0
@@ -32,5 +33,7 @@ collision_mask = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 visible = false
 shape = SubResource("RectangleShape2D_n1j46")
+
+[node name="breakablePS" parent="." instance=ExtResource("3_x3ryi")]
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

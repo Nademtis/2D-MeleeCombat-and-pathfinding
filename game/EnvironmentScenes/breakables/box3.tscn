@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://d4r3sywpr581"]
+[gd_scene load_steps=6 format=3 uid="uid://d4r3sywpr581"]
 
 [ext_resource type="Script" uid="uid://ct7y10fojmy0r" path="res://EnvironmentScenes/breakables/breakable.gd" id="1_e580p"]
 [ext_resource type="Texture2D" uid="uid://dhm37726wm87r" path="res://assets/breakables/box_3.png" id="2_e580p"]
+[ext_resource type="PackedScene" uid="uid://bw2bd6kqy4sh1" path="res://EnvironmentScenes/breakables/breakablePS.tscn" id="3_ulk3y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ulk3y"]
 size = Vector2(7, 4)
@@ -20,11 +21,13 @@ texture = ExtResource("2_e580p")
 offset = Vector2(0, 6)
 
 [node name="moveColl" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(1.5, 10)
 shape = SubResource("RectangleShape2D_ulk3y")
 debug_color = Color(0.951482, 2.31028e-06, 0.563434, 0.42)
 
 [node name="moveColl2" type="CollisionShape2D" parent="."]
+visible = false
 z_index = 1
 position = Vector2(-3, 7)
 shape = SubResource("RectangleShape2D_ulk3y")
@@ -35,8 +38,11 @@ collision_layer = 16
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
 y_sort_enabled = true
 position = Vector2(-1, 5)
 shape = SubResource("RectangleShape2D_n1j46")
+
+[node name="breakablePS" parent="." instance=ExtResource("3_ulk3y")]
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

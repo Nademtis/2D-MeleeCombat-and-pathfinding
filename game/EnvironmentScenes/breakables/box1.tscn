@@ -33,7 +33,6 @@ visible = false
 position = Vector2(0.5, 2)
 shape = SubResource("RectangleShape2D_n1j46")
 
-[node name="GPUParticles2D" parent="." instance=ExtResource("3_a7wna")]
+[node name="breakablePS" parent="." instance=ExtResource("3_a7wna")]
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
-[connection signal="finished" from="GPUParticles2D" to="." method="_on_gpu_particles_2d_finished"]
