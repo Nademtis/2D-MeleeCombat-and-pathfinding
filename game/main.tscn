@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://twwuip55prjl"]
+[gd_scene load_steps=31 format=4 uid="uid://twwuip55prjl"]
 
 [ext_resource type="Texture2D" uid="uid://do8w6k3c3cbwe" path="res://assets/BG/Space Background (6).png" id="1_mmddu"]
 [ext_resource type="PackedScene" uid="uid://bgcsvqqyjw1qp" path="res://player/player.tscn" id="2_4ufcd"]
@@ -25,23 +25,40 @@ source_geometry_mode = 2
 source_geometry_group_name = &"navigation"
 agent_radius = 5.0
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_074og"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kek77"]
 texture = ExtResource("6_5vw27")
 0:0/0 = 0
+0:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_074og")
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_cegan"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w48qg"]
 texture = ExtResource("7_efxa6")
 0:0/0 = 0
+0:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_cegan")
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_82xsv"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vivmo"]
 texture = ExtResource("8_dg77c")
 0:0/0 = 0
+0:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_82xsv")
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_getpj"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2cqfq"]
 texture = ExtResource("9_ycdy4")
 0:0/0 = 0
+0:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_getpj")
 
 [sub_resource type="TileSet" id="TileSet_5vw27"]
+occlusion_layer_0/light_mask = 16
 sources/1 = SubResource("TileSetAtlasSource_kek77")
 sources/2 = SubResource("TileSetAtlasSource_w48qg")
 sources/3 = SubResource("TileSetAtlasSource_vivmo")
@@ -147,7 +164,7 @@ metadata/_edit_lock_ = true
 [node name="breakables" type="TileMapLayer" parent="Ysort/NavigationRegion2D/TileMap"]
 z_index = 1
 y_sort_enabled = true
-tile_map_data = PackedByteArray("AAALAAoAAQAAAAAAAQAOAAoAAQAAAAAAAgARAAgAAQAAAAAAAwAOAAkAAQAAAAAAAgANAAkAAQAAAAAABAATAAkAAQAAAAAABQAQAAcAAQAAAAAABgASAAcAAQAAAAAABwAPAAUAAQAAAAAACAA=")
+tile_map_data = PackedByteArray("AAALAAoAAQAAAAAAAQAOAAoAAQAAAAAAAgARAAgAAQAAAAAAAwAOAAkAAQAAAAAAAgANAAkAAQAAAAAABAATAAkAAQAAAAAABQAQAAcAAQAAAAAABgASAAcAAQAAAAAABwAPAAUAAQAAAAAACAAVAAYAAQAAAAAAAwAVAAcAAQAAAAAAAwAVAAgAAQAAAAAAAwAVAAkAAQAAAAAAAwAUAAsAAQAAAAAAAwAUAAoAAQAAAAAAAwA=")
 tile_set = ExtResource("11_074og")
 metadata/_edit_lock_ = true
 

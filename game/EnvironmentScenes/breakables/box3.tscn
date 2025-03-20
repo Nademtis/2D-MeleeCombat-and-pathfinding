@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bw2bd6kqy4sh1" path="res://EnvironmentScenes/breakables/breakablePS.tscn" id="3_ulk3y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ulk3y"]
-size = Vector2(7, 4)
+size = Vector2(12.5, 9)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n1j46"]
 size = Vector2(14.5, 14)
@@ -22,14 +22,7 @@ offset = Vector2(0, 6)
 
 [node name="moveColl" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2(1.5, 10)
-shape = SubResource("RectangleShape2D_ulk3y")
-debug_color = Color(0.951482, 2.31028e-06, 0.563434, 0.42)
-
-[node name="moveColl2" type="CollisionShape2D" parent="."]
-visible = false
-z_index = 1
-position = Vector2(-3, 7)
+position = Vector2(-1, 6)
 shape = SubResource("RectangleShape2D_ulk3y")
 debug_color = Color(0.951482, 2.31028e-06, 0.563434, 0.42)
 
