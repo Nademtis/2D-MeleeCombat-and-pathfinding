@@ -1,5 +1,6 @@
-res://
+res://assets/breakables
 res://EnvironmentScenes/breakables
+res://
 res://autoloads
 res://Camera
 res://misc/shaders
