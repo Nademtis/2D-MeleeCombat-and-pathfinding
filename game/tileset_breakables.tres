@@ -1,0 +1,26 @@
+[gd_resource type="TileSet" load_steps=10 format=3 uid="uid://h14u06va8axy"]
+
+[ext_resource type="PackedScene" uid="uid://bauhlwbhxs5h5" path="res://EnvironmentScenes/breakables/box1.tscn" id="1_watwp"]
+[ext_resource type="PackedScene" uid="uid://bsqev0odu7ajv" path="res://EnvironmentScenes/breakables/box2.tscn" id="2_gad8r"]
+[ext_resource type="PackedScene" uid="uid://d4r3sywpr581" path="res://EnvironmentScenes/breakables/box3.tscn" id="3_2fbgo"]
+[ext_resource type="PackedScene" uid="uid://gn6jc355mn2j" path="res://EnvironmentScenes/breakables/box4.tscn" id="4_k3kx6"]
+[ext_resource type="PackedScene" uid="uid://do0orsq04163y" path="res://EnvironmentScenes/breakables/box5.tscn" id="5_n7qoy"]
+[ext_resource type="PackedScene" uid="uid://bgrpqkj2k8hwt" path="res://EnvironmentScenes/breakables/vase1.tscn" id="6_rfd5n"]
+[ext_resource type="PackedScene" uid="uid://cn4ctiy1t1xs7" path="res://EnvironmentScenes/breakables/vase2.tscn" id="7_g7v41"]
+[ext_resource type="PackedScene" uid="uid://dcnsgpxh1oeq2" path="res://EnvironmentScenes/breakables/vase3.tscn" id="8_jf1p0"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_wnl1u"]
+resource_name = "breakables"
+scenes/1/scene = ExtResource("1_watwp")
+scenes/2/scene = ExtResource("2_gad8r")
+scenes/3/scene = ExtResource("3_2fbgo")
+scenes/4/scene = ExtResource("4_k3kx6")
+scenes/5/scene = ExtResource("5_n7qoy")
+scenes/6/scene = ExtResource("6_rfd5n")
+scenes/7/scene = ExtResource("7_g7v41")
+scenes/8/scene = ExtResource("8_jf1p0")
+
+[resource]
+physics_layer_0/collision_layer = 16
+physics_layer_0/collision_mask = 3
+sources/1 = SubResource("TileSetScenesCollectionSource_wnl1u")

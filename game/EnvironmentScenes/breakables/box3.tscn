@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://d4r3sywpr581"]
+
+[ext_resource type="Script" uid="uid://ct7y10fojmy0r" path="res://EnvironmentScenes/breakables/breakable.gd" id="1_e580p"]
+[ext_resource type="Texture2D" uid="uid://dhm37726wm87r" path="res://assets/breakables/box_3.png" id="2_e580p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ulk3y"]
+size = Vector2(7, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n1j46"]
+size = Vector2(14.5, 14)
+
+[node name="breakable" type="StaticBody2D"]
+y_sort_enabled = true
+collision_layer = 16
+collision_mask = 3
+script = ExtResource("1_e580p")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_e580p")
+offset = Vector2(0, 6)
+
+[node name="moveColl" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, 10)
+shape = SubResource("RectangleShape2D_ulk3y")
+debug_color = Color(0.951482, 2.31028e-06, 0.563434, 0.42)
+
+[node name="moveColl2" type="CollisionShape2D" parent="."]
+z_index = 1
+position = Vector2(-3, 7)
+shape = SubResource("RectangleShape2D_ulk3y")
+debug_color = Color(0.951482, 2.31028e-06, 0.563434, 0.42)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+y_sort_enabled = true
+position = Vector2(-1, 5)
+shape = SubResource("RectangleShape2D_n1j46")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
