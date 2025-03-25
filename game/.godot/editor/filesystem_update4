@@ -1,4 +1,4 @@
-res://EnvironmentScenes/breakables/breakablePS.tscn
+res://main.tscn
 res://tileset.tres
 res://enemy/hitShader.gdshader
 res://ai/trees/enemy1.tres
@@ -6,16 +6,8 @@ res://misc/shaders/water.gdshader
 res://misc/shaders/waterShader_material.tres
 res://misc/shaders/SpecialwaterShader_material.tres
 res://tileset_breakables.tres
-res://EnvironmentScenes/breakables/breakable.gd
-res://main.tscn
+res://assets/testAssets/bow_test_export.gd
 res://player/player.tscn
 res://enemy/slasher/slasher.tscn
+res://EnvironmentScenes/breakables/breakablePS.tscn
 res://EnvironmentScenes/breakables/box1.tscn
-res://misc/particleFX/dash_particle_fx.tscn
-res://EnvironmentScenes/breakables/box2.tscn
-res://EnvironmentScenes/breakables/box3.tscn
-res://EnvironmentScenes/breakables/box4.tscn
-res://EnvironmentScenes/breakables/box5.tscn
-res://EnvironmentScenes/breakables/vase1.tscn
-res://EnvironmentScenes/breakables/vase2.tscn
-res://EnvironmentScenes/breakables/vase3.tscn
