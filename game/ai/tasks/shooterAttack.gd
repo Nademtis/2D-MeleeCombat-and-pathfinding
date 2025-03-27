@@ -62,4 +62,3 @@ func attack() -> void:
 	var arrow_instance : Projectile = SHOOTER_ARROW.instantiate()
 	arrow_instance.setup_projectile(1, 125, attack_direction)
 	agent.add_child(arrow_instance)
-	print("shooter shoot")

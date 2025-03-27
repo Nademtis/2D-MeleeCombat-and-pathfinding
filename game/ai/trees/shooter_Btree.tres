@@ -23,7 +23,7 @@ towards_player = false
 animation_name = "roll"
 
 [sub_resource type="BTProbability" id="BTProbability_ig8kn"]
-run_chance = 0.03
+run_chance = 0.1
 children = [SubResource("BTAction_rg5jx")]
 
 [sub_resource type="BTSequence" id="BTSequence_qvxbw"]
