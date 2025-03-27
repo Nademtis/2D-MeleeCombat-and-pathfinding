@@ -6,11 +6,8 @@ res://misc/shaders/water.gdshader
 res://misc/shaders/waterShader_material.tres
 res://misc/shaders/SpecialwaterShader_material.tres
 res://tileset_breakables.tres
+res://ai/trees/shooter_Btree.tres
 res://player/player.tscn
 res://enemy/slasher/slasher.tscn
-res://EnvironmentScenes/breakables/breakablePS.tscn
-res://EnvironmentScenes/breakables/box1.tscn
-res://enemy/slasher/slasher.gd
 res://enemy/shooter/shooter.tscn
 res://enemy/shooter/shooter.gd
-res://ai/trees/shooter_Btree.tres

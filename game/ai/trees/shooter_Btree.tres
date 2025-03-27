@@ -1,6 +1,56 @@
-[gd_resource type="BehaviorTree" load_steps=2 format=3 uid="uid://ch5xew5wy6ux5"]
+[gd_resource type="BehaviorTree" load_steps=17 format=3 uid="uid://ch5xew5wy6ux5"]
+
+[ext_resource type="Script" uid="uid://cw1d0jtcsgn64" path="res://ai/tasks/checkIsStunned.gd" id="1_5twg5"]
+[ext_resource type="Script" uid="uid://n8qk1j2g05uh" path="res://ai/tasks/enemyRecentlyHit.gd" id="2_bt7wq"]
+[ext_resource type="Script" uid="uid://y4hb8iicihb4" path="res://ai/tasks/dash.gd" id="3_ue36x"]
+[ext_resource type="Script" uid="uid://chm2pee1yt1sy" path="res://ai/tasks/playerIsInRange.gd" id="4_xgdsr"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_4u2ci"]
 
+[sub_resource type="BTAction" id="BTAction_wrjx2"]
+script = ExtResource("1_5twg5")
+
+[sub_resource type="BTAction" id="BTAction_avnf3"]
+script = ExtResource("2_bt7wq")
+
+[sub_resource type="BTAction" id="BTAction_rg5jx"]
+script = ExtResource("3_ue36x")
+total_dash_time = 0.4
+dash_speed = 150.0
+towards_player = false
+animation_name = "roll"
+
+[sub_resource type="BTProbability" id="BTProbability_ig8kn"]
+run_chance = 0.01
+children = [SubResource("BTAction_rg5jx")]
+
+[sub_resource type="BTSequence" id="BTSequence_qvxbw"]
+custom_name = "roll away sequence"
+children = [SubResource("BTAction_avnf3"), SubResource("BTProbability_ig8kn")]
+
+[sub_resource type="BBVariant" id="BBVariant_csdkn"]
+type = 1
+saved_value = true
+resource_name = "true"
+
+[sub_resource type="BTCheckAgentProperty" id="BTCheckAgentProperty_kj4na"]
+property = &"is_aggroed"
+value = SubResource("BBVariant_csdkn")
+
+[sub_resource type="BTAction" id="BTAction_txl1i"]
+script = ExtResource("4_xgdsr")
+range_px = 100
+
+[sub_resource type="BTConsolePrint" id="BTConsolePrint_bt7wq"]
+text = "shoot"
+
+[sub_resource type="BTSequence" id="BTSequence_47d8c"]
+custom_name = "rangedAttackSequence"
+children = [SubResource("BTCheckAgentProperty_kj4na"), SubResource("BTAction_txl1i"), SubResource("BTConsolePrint_bt7wq")]
+
+[sub_resource type="BTSelector" id="BTSelector_4u2ci"]
+children = [SubResource("BTAction_wrjx2"), SubResource("BTSequence_qvxbw"), SubResource("BTSequence_47d8c")]
+
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_4u2ci")
+root_task = SubResource("BTSelector_4u2ci")

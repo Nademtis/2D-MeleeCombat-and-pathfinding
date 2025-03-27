@@ -1,6 +1,6 @@
 [gd_scene load_steps=30 format=3 uid="uid://cw0twtd575n66"]
 
-[ext_resource type="Script" uid="uid://c7eoo2vf0hih6" path="res://enemy/slasher/slasher.gd" id="1_iab3o"]
+[ext_resource type="Script" uid="uid://c7eoo2vf0hih6" path="res://enemy/slasher/enemyMeleeAttack.gd" id="1_iab3o"]
 [ext_resource type="Texture2D" uid="uid://djdaaelwbpj1y" path="res://assets/enemy/slasher/attack/enemy_attack.png" id="2_5x7of"]
 [ext_resource type="Texture2D" uid="uid://ce3cbqqqwu2j5" path="res://assets/enemy/slasher/attack/enemy_attack2.png" id="3_0mjuw"]
 [ext_resource type="Texture2D" uid="uid://vms83mqy1k0q" path="res://assets/enemy/slasher/attack_right2_dagger_only.png" id="4_furdy"]

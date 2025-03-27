@@ -494,7 +494,6 @@ regain_poise_amount = 1.0
 [node name="bow" type="Node2D" parent="."]
 
 [node name="BowAnimatedSprite2D" type="AnimatedSprite2D" parent="bow"]
-position = Vector2(0, 3)
 sprite_frames = SubResource("SpriteFrames_ytb4p")
 autoplay = "default"
 
