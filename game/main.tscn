@@ -95,7 +95,7 @@ texture = ExtResource("1_mmddu")
 y_sort_enabled = true
 
 [node name="player" parent="Ysort" instance=ExtResource("2_4ufcd")]
-position = Vector2(206, 110)
+position = Vector2(199, 123)
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Ysort/player"]
 visible = false
@@ -212,7 +212,7 @@ ignore_time_scale = true
 
 [node name="Camera2D" type="Camera2D" parent="CameraManager"]
 physics_interpolation_mode = 1
-position = Vector2(206, 110)
+position = Vector2(199, 123)
 zoom = Vector2(3.5, 3.5)
 process_callback = 0
 limit_left = -496
@@ -228,7 +228,7 @@ script = ExtResource("12_w48qg")
 
 [node name="FollowPcam" type="Node2D" parent="CameraManager" node_paths=PackedStringArray("follow_target")]
 top_level = true
-position = Vector2(206, 110)
+position = Vector2(199, 123)
 script = ExtResource("13_vivmo")
 priority = 1
 follow_mode = 5

@@ -3,9 +3,8 @@
 [ext_resource type="Script" uid="uid://ba86gymeid4w" path="res://enemy/shooter/shooter.gd" id="1_hq8q1"]
 [ext_resource type="Texture2D" uid="uid://buy2sp1nd6guw" path="res://assets/enemy/shooter/shooter_bow_attack.png" id="2_hq8q1"]
 [ext_resource type="Shader" uid="uid://ix5hd8ouejhu" path="res://enemy/hitShader.gdshader" id="2_hs8iu"]
-[ext_resource type="Texture2D" uid="uid://gmg84k6nfrbj" path="res://assets/enemy/slasher/attack_left2.png" id="3_am131"]
 [ext_resource type="Texture2D" uid="uid://5a1upq78my2r" path="res://assets/enemy/shooter/idle.png" id="4_naudl"]
-[ext_resource type="Texture2D" uid="uid://p6n5u1mgeys7" path="res://assets/enemy/slasher/attack_right2.png" id="4_r7l8c"]
+[ext_resource type="Texture2D" uid="uid://fvbbq8ugmb7e" path="res://assets/enemy/shooter/shooter_attack_right.png" id="4_yxdot"]
 [ext_resource type="Texture2D" uid="uid://c2nrn85fdp3by" path="res://assets/enemy/slasher/roll.png" id="6_tos0d"]
 [ext_resource type="Texture2D" uid="uid://dnon1r8wrfgs5" path="res://assets/enemy/shooter/walk_left.png" id="6_yxdot"]
 [ext_resource type="Texture2D" uid="uid://b42vkejjax8ht" path="res://assets/enemy/shooter/walk_right.png" id="7_hq8q1"]
@@ -20,23 +19,23 @@
 [ext_resource type="Texture2D" uid="uid://dc2ir513ky840" path="res://assets/enemy/slasher/attack/indicator/enemy_indicator4.png" id="17_upoml"]
 [ext_resource type="Texture2D" uid="uid://c28jj86bw85wm" path="res://assets/enemy/slasher/attack/indicator/enemy_indicator5.png" id="18_t7c55"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_f6t4q"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_hq8q1"]
 atlas = ExtResource("2_hq8q1")
 region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kuikp"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_f6t4q"]
 atlas = ExtResource("2_hq8q1")
 region = Rect2(64, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qmiqt"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_kuikp"]
 atlas = ExtResource("2_hq8q1")
 region = Rect2(128, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_s5fq6"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_qmiqt"]
 atlas = ExtResource("2_hq8q1")
 region = Rect2(192, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bg7kt"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_s5fq6"]
 atlas = ExtResource("2_hq8q1")
 region = Rect2(256, 0, 64, 64)
 
@@ -48,6 +47,9 @@ region = Rect2(0, 0, 64, 64)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_hq8q1")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_f6t4q")
 }, {
 "duration": 1.0,
@@ -58,13 +60,10 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_s5fq6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bg7kt")
 }],
 "loop": false,
 "name": &"attack",
-"speed": 10.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -79,13 +78,17 @@ animations = [{
 shader = ExtResource("2_hs8iu")
 shader_parameter/flash_amount = 0.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qk727"]
-atlas = ExtResource("3_am131")
+[sub_resource type="AtlasTexture" id="AtlasTexture_bg7kt"]
+atlas = ExtResource("4_yxdot")
 region = Rect2(0, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ljgtw"]
-atlas = ExtResource("4_r7l8c")
-region = Rect2(384, 0, 128, 128)
+[sub_resource type="AtlasTexture" id="AtlasTexture_ytb4p"]
+atlas = ExtResource("4_yxdot")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ykkoc"]
+atlas = ExtResource("4_yxdot")
+region = Rect2(256, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4krqn"]
 atlas = ExtResource("4_naudl")
@@ -203,15 +206,13 @@ region = Rect2(896, 0, 128, 128)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qk727")
-}],
-"loop": false,
-"name": &"attack_left",
-"speed": 5.0
+"texture": SubResource("AtlasTexture_bg7kt")
 }, {
-"frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ljgtw")
+"texture": SubResource("AtlasTexture_ytb4p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ykkoc")
 }],
 "loop": false,
 "name": &"attack_right",
@@ -490,19 +491,23 @@ script = ExtResource("1_hq8q1")
 hp = 9.0
 max_poise = 25.0
 regain_poise_amount = 1.0
+ranged_attack_charge_time = 1.5
 
 [node name="bow" type="Node2D" parent="."]
 
 [node name="BowAnimatedSprite2D" type="AnimatedSprite2D" parent="bow"]
-position = Vector2(0, 3)
+z_index = 1
 sprite_frames = SubResource("SpriteFrames_ytb4p")
 autoplay = "default"
+offset = Vector2(0, 5)
 
 [node name="animatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_c5g5k")
 sprite_frames = SubResource("SpriteFrames_dwchd")
-animation = &"idle"
+animation = &"attack_right"
 autoplay = "idle"
+frame = 2
+frame_progress = 1.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

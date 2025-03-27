@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://cay6gnbqewioe"]
+
+[ext_resource type="Script" uid="uid://4c40aglhjdsw" path="res://enemy/projectile.gd" id="1_0fnxx"]
+[ext_resource type="Texture2D" uid="uid://c8ysj0p8srapv" path="res://assets/enemy/shooter/arrow_test.png" id="2_iy3g2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sgq7m"]
+atlas = ExtResource("2_iy3g2")
+region = Rect2(0, 0, 12, 5)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3uvcm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sgq7m")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rnokl"]
+radius = 2.0
+
+[node name="shooterArrow" type="Node2D" groups=["enemy_attack"]]
+script = ExtResource("1_0fnxx")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_3uvcm")
+autoplay = "default"
+
+[node name="killTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[node name="hitBoxArea2D" type="Area2D" parent="." groups=["enemy_attack"]]
+collision_layer = 2
+collision_mask = 0
+
+[node name="hitboxColl" type="CollisionShape2D" parent="hitBoxArea2D"]
+position = Vector2(4, 0)
+shape = SubResource("CircleShape2D_rnokl")
+
+[connection signal="timeout" from="killTimer" to="." method="_on_kill_timer_timeout"]

@@ -1,9 +1,11 @@
-[gd_resource type="BehaviorTree" load_steps=17 format=3 uid="uid://ch5xew5wy6ux5"]
+[gd_resource type="BehaviorTree" load_steps=20 format=3 uid="uid://ch5xew5wy6ux5"]
 
 [ext_resource type="Script" uid="uid://cw1d0jtcsgn64" path="res://ai/tasks/checkIsStunned.gd" id="1_5twg5"]
 [ext_resource type="Script" uid="uid://n8qk1j2g05uh" path="res://ai/tasks/enemyRecentlyHit.gd" id="2_bt7wq"]
 [ext_resource type="Script" uid="uid://y4hb8iicihb4" path="res://ai/tasks/dash.gd" id="3_ue36x"]
 [ext_resource type="Script" uid="uid://chm2pee1yt1sy" path="res://ai/tasks/playerIsInRange.gd" id="4_xgdsr"]
+[ext_resource type="Script" uid="uid://c6u5v6xk6q13g" path="res://ai/tasks/shooterAttack.gd" id="5_ue36x"]
+[ext_resource type="Script" uid="uid://nrx3pk7vh85q" path="res://ai/tasks/AnimAndWait.gd" id="6_xgdsr"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_4u2ci"]
 
@@ -21,7 +23,7 @@ towards_player = false
 animation_name = "roll"
 
 [sub_resource type="BTProbability" id="BTProbability_ig8kn"]
-run_chance = 0.01
+run_chance = 0.03
 children = [SubResource("BTAction_rg5jx")]
 
 [sub_resource type="BTSequence" id="BTSequence_qvxbw"]
@@ -41,12 +43,17 @@ value = SubResource("BBVariant_csdkn")
 script = ExtResource("4_xgdsr")
 range_px = 100
 
-[sub_resource type="BTConsolePrint" id="BTConsolePrint_bt7wq"]
-text = "shoot"
+[sub_resource type="BTAction" id="BTAction_xgdsr"]
+script = ExtResource("5_ue36x")
+
+[sub_resource type="BTAction" id="BTAction_ig8kn"]
+script = ExtResource("6_xgdsr")
+anim_name = "idle"
+wait_time = 0.5
 
 [sub_resource type="BTSequence" id="BTSequence_47d8c"]
 custom_name = "rangedAttackSequence"
-children = [SubResource("BTCheckAgentProperty_kj4na"), SubResource("BTAction_txl1i"), SubResource("BTConsolePrint_bt7wq")]
+children = [SubResource("BTCheckAgentProperty_kj4na"), SubResource("BTAction_txl1i"), SubResource("BTAction_xgdsr"), SubResource("BTAction_ig8kn")]
 
 [sub_resource type="BTSelector" id="BTSelector_4u2ci"]
 children = [SubResource("BTAction_wrjx2"), SubResource("BTSequence_qvxbw"), SubResource("BTSequence_47d8c")]

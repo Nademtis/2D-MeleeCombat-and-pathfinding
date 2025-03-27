@@ -1,7 +1,6 @@
 extends CharacterBody2D
+class_name Shooter
 
-#@onready var animated_sprite_2d: AnimatedSprite2D = $animatedSprite2D
-#@onready var bow_sprite_2d: Sprite2D = $bow/bowSprite2D
 @onready var bow_animated_sprite_2d: AnimatedSprite2D = $bow/BowAnimatedSprite2D
 
 #test variables
@@ -33,6 +32,7 @@ var current_poise = max_poise
 
 #combat
 var is_aggroed = false
+@export var ranged_attack_charge_time : float = 3
 
 # Knockback variables
 @export var knockback_duration: float = 0.05
@@ -44,19 +44,32 @@ func _ready() -> void:
 	health_bar.init_health(hp)
 	poise_bar.init_poise(max_poise)
 	
+	blackboard = bt_player.blackboard
+	blackboard.set_var("is_charging_attack", false)
+	
 	if animated_sprite_2d.material is ShaderMaterial:
 		animated_sprite_2d.material = animated_sprite_2d.material.duplicate()
 
 func _process(delta: float) -> void:
+	#is for regaining poise when not stunned and not max poise
+	if not is_stunned():
+		if current_poise < max_poise and regain_poise_timer.is_stopped():
+			regain_poise_timer.start()
 	
 	#this below is for shooting, and should not be here, should be in Btree
 	point_bow_towards_player(delta)
 	bow_y_sort()
 	
-	if PlayerStats.player_position.x < global_position.x:
-		animated_sprite_2d.play("attack_left")
+	if blackboard.get_var("is_charging_attack") == true:
+		bow_animated_sprite_2d.visible = true
 	else:
-		animated_sprite_2d.play("attack_right")
+		animated_sprite_2d.play("idle")
+		bow_animated_sprite_2d.visible = false
+		
+	#if PlayerStats.player_position.x < global_position.x:
+		#animated_sprite_2d.play("attack_left")
+	#else:
+		#animated_sprite_2d.play("attack_right")
 		
 
 func _physics_process(_delta: float) -> void:
@@ -65,7 +78,12 @@ func _physics_process(_delta: float) -> void:
 		knockback_timer -= _delta
 		
 		# Gradually reduce knockback force (smooth stop)
-		knockback_force = knockback_force.lerp(Vector2.ZERO, _delta * 22)
+		knockback_force = knockback_force.lerp(Vector2.ZERO, _delta * 10)
+	else:
+		pass
+		knockback_force = Vector2.ZERO
+		velocity = velocity.lerp(Vector2.ZERO, _delta * 8)
+		
 	move_and_slide()
 
 func point_bow_towards_player(delta: float)-> void:

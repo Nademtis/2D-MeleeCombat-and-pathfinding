@@ -713,6 +713,7 @@ disabled = true
 
 [node name="hurtbox" type="Area2D" parent="."]
 visible = false
+collision_mask = 2
 monitorable = false
 
 [node name="hurtboxColl" type="CollisionShape2D" parent="hurtbox"]

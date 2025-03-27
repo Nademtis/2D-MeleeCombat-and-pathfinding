@@ -1,4 +1,5 @@
 res://assets/enemy/shooter
+res://enemy
 res://ai/trees
 res://assets/testAssets
 res://assets/breakables
@@ -12,7 +13,6 @@ res://misc
 res://assets/enemy/slasher
 res://assets/enemy
 res://ui
-res://enemy
 res://player
 res://nav
 res://assets/player
