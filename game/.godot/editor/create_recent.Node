@@ -1,9 +1,9 @@
+Sprite2D
+Node2D
 PointLight2D
 CollisionShape2D
 StaticBody2D
 Area2D
-Sprite2D
-Node2D
 TileMapLayer
 GPUParticles2D
 Timer
@@ -12,4 +12,3 @@ Node
 CanvasLayer
 CPUParticles2D
 WorldEnvironment
-AnimatedSprite2D

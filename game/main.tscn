@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://twwuip55prjl"]
+[gd_scene load_steps=32 format=4 uid="uid://twwuip55prjl"]
 
 [ext_resource type="Texture2D" uid="uid://do8w6k3c3cbwe" path="res://assets/BG/Space Background (6).png" id="1_mmddu"]
 [ext_resource type="PackedScene" uid="uid://bgcsvqqyjw1qp" path="res://player/player.tscn" id="2_4ufcd"]
@@ -18,8 +18,7 @@
 [ext_resource type="Script" uid="uid://c2ar1ibtv8pnu" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="14_2cqfq"]
 [ext_resource type="PackedScene" uid="uid://bq8qotefamth2" path="res://Camera/fixedp_cam.tscn" id="16_2cqfq"]
 [ext_resource type="PackedScene" uid="uid://cu1pxa20k8tls" path="res://Camera/freeze_camera_axis_area.tscn" id="17_yaehf"]
-[ext_resource type="Texture2D" uid="uid://bfuim4n3b551g" path="res://assets/testAssets/bow_test_export.png" id="19_82xsv"]
-[ext_resource type="Script" uid="uid://c4rvx750pb4eq" path="res://assets/testAssets/bow_test_export.gd" id="20_getpj"]
+[ext_resource type="PackedScene" uid="uid://bipo4jopb3k76" path="res://enemy/shooter/shooter.tscn" id="21_getpj"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_3ejb3"]
 outlines = Array[PackedVector2Array]([PackedVector2Array(-432, 41, -449, 236, -313, 355, 307, 398, 513, -6, 137, -288, -426, -253)])
@@ -260,10 +259,8 @@ freeze_axis = 1
 [node name="CollisionShape2D" parent="CameraManager/FreezeCameraAxisArea" index="0"]
 shape = SubResource("RectangleShape2D_yaehf")
 
-[node name="BowTestExport" type="Sprite2D" parent="."]
-position = Vector2(258, 123)
-texture = ExtResource("19_82xsv")
-script = ExtResource("20_getpj")
+[node name="slasher" parent="." instance=ExtResource("21_getpj")]
+position = Vector2(236, 122)
 
 [connection signal="timeout" from="CameraManager/changeLookAheadTimer" to="CameraManager" method="_on_change_look_ahead_timer_timeout"]
 
