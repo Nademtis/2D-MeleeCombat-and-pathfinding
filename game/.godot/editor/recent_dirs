@@ -1,3 +1,4 @@
+res://autoloads
 res://worldScenes/checkpoint
 res://assets/enemy/shooter
 res://enemy
@@ -6,7 +7,6 @@ res://assets/testAssets
 res://assets/breakables
 res://EnvironmentScenes/breakables
 res://
-res://autoloads
 res://Camera
 res://misc/shaders
 res://assets/particleFX

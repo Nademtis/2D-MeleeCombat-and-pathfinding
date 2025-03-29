@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bbcdfiwmb0pcc"]
+[gd_scene load_steps=8 format=3 uid="uid://bbcdfiwmb0pcc"]
 
 [ext_resource type="Texture2D" uid="uid://h8byowr6rvq6" path="res://assets/gameplay/checkpoint/checkpoint_orange_fill.png" id="1_63iqm"]
 [ext_resource type="Script" uid="uid://8ocl5vqlusdj" path="res://worldScenes/checkpoint/checkpoint.gd" id="1_85iwb"]
@@ -67,19 +67,12 @@ _data = {
 &"active": SubResource("Animation_sl8aq")
 }
 
-[sub_resource type="Environment" id="Environment_85iwb"]
-background_mode = 3
-glow_enabled = true
-glow_intensity = 3.12
-adjustment_brightness = 3.65
-
 [node name="checkpointArea" type="Area2D"]
 collision_layer = 32
 script = ExtResource("1_85iwb")
 
 [node name="orangeFillSprite2D" type="Sprite2D" parent="."]
 visible = false
-clip_children = 2
 position = Vector2(0, -1)
 scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("1_63iqm")
@@ -95,8 +88,5 @@ shape = SubResource("RectangleShape2D_0bwvl")
 libraries = {
 &"": SubResource("AnimationLibrary_w5v86")
 }
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_85iwb")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
