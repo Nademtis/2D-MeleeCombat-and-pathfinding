@@ -8,6 +8,15 @@ func _ready() -> void:
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemy_attack"):
-		hp -= 1
+		take_damage(1)
 		Events.emit_signal("player_hp_changed", hp)
 		print("player was hit")
+	
+func take_damage(damage_taken:float) -> void:
+	hp -= damage_taken
+	
+	if hp <= 0:
+		die()
+	
+func die() -> void:
+	LevelManager.player_died()

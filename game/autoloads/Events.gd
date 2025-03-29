@@ -12,3 +12,7 @@ signal camera_freeze_axis(axis : Enums.AXIS)
 
 @warning_ignore("unused_signal")
 signal camera_stop_freeze_axis()
+
+
+#levels
+signal load_level()

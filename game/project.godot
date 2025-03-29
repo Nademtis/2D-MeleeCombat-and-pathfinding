@@ -23,6 +23,7 @@ ParticleFX="*res://autoloads/ParticleFX.gd"
 PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
 Enums="*res://autoloads/Enums.gd"
 CheckpointManager="*res://autoloads/CheckpointManager.gd"
+LevelManager="*res://autoloads/LevelManager.gd"
 
 [debug]
 
