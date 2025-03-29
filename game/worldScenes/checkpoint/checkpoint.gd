@@ -5,14 +5,9 @@ extends Area2D
 var level_name : String
 
 func _ready() -> void:
-	#level_name = LevelManager.get_active_level_name()
-	level_name = get_parent().get_parent().name # might be to hardcoded
-	
-	print("from checkpoint my level name is: ", level_name)
-	#print("levelName:", level_name)
-	#should play active or reset animation bases on if is active checkpoint
-	pass
-
+	Events.connect("new_active_checkpoint", am_i_active)
+	level_name = get_parent().get_parent().name # might be too hardcoded
+	am_i_active()
 
 
 func _on_body_entered(body: Node2D) -> void:
@@ -24,5 +19,11 @@ func _on_body_entered(body: Node2D) -> void:
 			print("not the same")
 			CheckpointManager.set_active_checkpoint(new_checkpoint)
 			animation_player.play("active")
-		else:
-			print("the same")
+
+
+func am_i_active() -> void:
+	var this_checkpoint = Checkpoint.new(level_name, global_position)
+	if this_checkpoint.is_same_as(CheckpointManager.get_active_checkpoint()):
+		animation_player.play("active")
+	else:
+		animation_player.play("RESET")

@@ -40,13 +40,20 @@ func player_died() -> void:
 	
 
 func load_level_from_checkpoint(checkpoint: Checkpoint) -> void:
-	if checkpoint == null:
-		printerr("No active checkpoint to load from!")
-		return
-
+	await load_level(get_level_from_level_name(checkpoint.level_name))
+	
+	var player = get_tree().get_first_node_in_group("player")
+	if player:
+		print("moved player to checkpoint")
+		player.global_position = checkpoint.position
 
 func get_active_level() -> Level:
 	return active_level
 	
 func get_active_level_name() -> String:
 	return active_level.level_name
+
+func get_level_from_level_name(level_name : String) -> Level:
+	var level_path = "res://levels/" + level_name + ".tscn"
+	return Level.new(level_path, level_name)
+	

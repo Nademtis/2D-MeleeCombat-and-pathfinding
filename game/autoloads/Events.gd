@@ -16,3 +16,7 @@ signal camera_stop_freeze_axis()
 
 #levels
 signal load_level()
+
+
+#checkpoint
+signal new_active_checkpoint
