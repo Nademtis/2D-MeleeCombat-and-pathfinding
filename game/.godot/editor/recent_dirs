@@ -1,3 +1,4 @@
+res://worldScenes/checkpoint
 res://assets/enemy/shooter
 res://enemy
 res://ai/trees
@@ -19,4 +20,3 @@ res://assets/player
 res://assets/player/attack
 res://assets/tileset
 res://plants
-res://assets

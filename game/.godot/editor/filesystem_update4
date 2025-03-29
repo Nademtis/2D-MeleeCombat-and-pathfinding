@@ -9,11 +9,7 @@ res://tileset_breakables.tres
 res://ai/trees/shooter_Btree.tres
 res://player/player.tscn
 res://enemy/slasher/slasher.tscn
+res://Camera/FixedCamera.gd
+res://worldScenes/checkpoint/checkpoint.tscn
+res://worldScenes/checkpoint/checkpoint.gd
 res://enemy/shooter/shooter.tscn
-res://enemy/projectile.gd
-res://enemy/projectile.tscn
-res://enemy/shooter/shooter.gd
-res://enemy/shooter/shooter_arrow.tscn
-res://ai/tasks/shooterAttack.gd
-res://enemy/slasher/enemyAttack.tscn
-res://player/playerHp.gd
