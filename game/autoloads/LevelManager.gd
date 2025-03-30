@@ -27,7 +27,9 @@ func load_level(new_level : Level)->void:
 	
 	if main:
 		main.add_child(instansiated_level)
-		active_level = new_level # set new active level
+		active_level = new_level # set new active levela
+		
+	Engine.time_scale = 1
 
 func player_died() -> void:
 	# Reload the level from the last active checkpoint

@@ -108,7 +108,7 @@ texture = ExtResource("1_uuq13")
 y_sort_enabled = true
 
 [node name="player" parent="Ysort" instance=ExtResource("2_58gyl")]
-position = Vector2(8, 519)
+position = Vector2(16, 521)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="Ysort"]
 y_sort_enabled = true
@@ -259,7 +259,7 @@ ignore_time_scale = true
 
 [node name="Camera2D" type="Camera2D" parent="CameraManager"]
 physics_interpolation_mode = 1
-position = Vector2(7.99993, 519)
+position = Vector2(16, 521)
 zoom = Vector2(3.5, 3.5)
 process_callback = 0
 limit_left = -832
@@ -275,7 +275,7 @@ script = ExtResource("15_w633q")
 
 [node name="FollowPcam" type="Node2D" parent="CameraManager" node_paths=PackedStringArray("follow_target")]
 top_level = true
-position = Vector2(8, 519)
+position = Vector2(16, 521)
 script = ExtResource("16_q6gno")
 priority = 1
 follow_mode = 5
@@ -371,6 +371,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Label" type="Label" parent="."]
+offset_left = -506.0
+offset_top = 811.0
+offset_right = -396.0
+offset_bottom = 834.0
+text = "xD you did it"
 
 [connection signal="timeout" from="CameraManager/changeLookAheadTimer" to="CameraManager" method="_on_change_look_ahead_timer_timeout"]
 
