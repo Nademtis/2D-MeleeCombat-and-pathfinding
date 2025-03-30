@@ -21,13 +21,6 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		#queue_free()
 		pass
 
-	#for enemy destroying	
-	#if area.is_in_group("enemy_attack"):
-		##particles should spawn
-		##queue_free()
-		#pass
-
-
 func _on_gpu_particles_2d_finished() -> void:
 	queue_free()
 
