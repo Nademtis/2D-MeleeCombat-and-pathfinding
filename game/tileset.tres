@@ -1591,6 +1591,11 @@ texture = ExtResource("1_731so")
 0:10/0 = 0
 0:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, -5.71429, -8, 8, 8, 8)
 0:10/0/custom_data_0 = &"left"
+9:0/0 = 0
+10:0/0 = 0
+11:0/0 = 0
+12:0/0 = 0
+13:0/0 = 0
 
 [resource]
 occlusion_layer_0/light_mask = 2
