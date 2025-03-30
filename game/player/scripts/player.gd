@@ -51,6 +51,8 @@ var attack_dash_direction: Vector2 = Vector2.ZERO
 @onready var health_bar: HealthBar = %healthBar
 @onready var canvas_layer: CanvasLayer = $CanvasLayer
 
+#used when dashing -turning on and off
+@onready var hurtbox_coll: CollisionShape2D = $hurtbox/hurtboxColl
 
 enum MovementState{WALKING, ATTACKING, DASHING}
 var movement_state = MovementState.WALKING
@@ -69,6 +71,10 @@ func _process(_delta: float) -> void:
 	PlayerStats.player_position = global_position #update player position for global access
 	#PlayerStats.player_velocity = velocity
 	
+	if movement_state == MovementState.DASHING:
+		hurtbox_coll.disabled = true
+	else:
+		hurtbox_coll.disabled = false
 	
 	left_click_held_down = Input.is_action_pressed("click")
 	dash_held_down = Input.is_action_pressed("dash")
@@ -282,10 +288,6 @@ func turn_on_attack_collision(direction: String):
 	coll_shape_down.disabled = true
 	coll_shape_right.disabled = true
 	coll_shape_left.disabled = true
-
-
-	
-	
 
 func _on_attack_cool_down_timeout() -> void: 
 	#attack and combo finished - go back to walking

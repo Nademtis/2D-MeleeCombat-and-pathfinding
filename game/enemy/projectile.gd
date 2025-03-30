@@ -26,3 +26,13 @@ func _process(delta: float) -> void:
 func _on_kill_timer_timeout() -> void:
 	#for when projectile has been alive for too long
 	queue_free()
+
+
+func _on_hit_box_area_2d_body_entered(body: Node2D) -> void:
+	queue_free()
+	pass # Replace with function body.
+
+
+func _on_hit_box_area_2d_area_entered(area: Area2D) -> void:
+	queue_free()
+	pass # Replace with function body.
