@@ -15,8 +15,10 @@ signal camera_stop_freeze_axis()
 
 
 #levels
+@warning_ignore("unused_signal")
 signal load_level()
 
 
 #checkpoint
+@warning_ignore("unused_signal")
 signal new_active_checkpoint

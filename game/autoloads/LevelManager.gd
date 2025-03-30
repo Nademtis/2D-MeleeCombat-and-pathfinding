@@ -11,7 +11,7 @@ func _ready() -> void:
 	
 	#load level 1 if there is no active level
 	if active_level == null:
-		var new_level = Level.new("res://levels/level_1.tscn", "level_1")
+		var new_level = Level.new("res://levels/level_0.tscn", "level_0")
 		load_level(new_level)
 	
 func load_level(new_level : Level)->void:

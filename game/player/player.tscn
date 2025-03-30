@@ -675,6 +675,7 @@ rotation = 1.57079
 shape = SubResource("CapsuleShape2D_32hag")
 
 [node name="attackHitbox" type="Node2D" parent="."]
+visible = false
 
 [node name="CollShapeLeft" type="Area2D" parent="attackHitbox" groups=["player_attack"]]
 visible = false

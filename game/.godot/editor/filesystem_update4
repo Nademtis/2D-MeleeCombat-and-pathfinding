@@ -1,4 +1,4 @@
-res://levels/level_1.tscn
+res://levels/level_0.tscn
 res://ai/trees/enemy1.tres
 res://tileset.tres
 res://misc/shaders/SpecialwaterShader_material.tres
@@ -6,6 +6,15 @@ res://misc/shaders/waterShader_material.tres
 res://tileset_breakables.tres
 res://ai/trees/shooter_Btree.tres
 res://main.tscn
+res://levels/level_1.tscn
+res://autoloads/LevelManager.gd
+res://autoloads/Events.gd
+res://EnvironmentScenes/breakables/box1.tscn
+res://EnvironmentScenes/breakables/breakablePS.tscn
+res://EnvironmentScenes/breakables/box2.tscn
+res://EnvironmentScenes/breakables/breakable.gd
 res://player/player.tscn
 res://enemy/slasher/slasher.tscn
-res://worldScenes/checkpoint/checkpoint.tscn
+res://enemy/shooter/shooter.tscn
+res://world_environment.tscn
+res://world_environment1.tscn

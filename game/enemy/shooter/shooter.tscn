@@ -391,7 +391,7 @@ radius = 4.0
 radius = 3.16228
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mw23b"]
-radius = 66.0
+radius = 132.015
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_fyrno"]
 

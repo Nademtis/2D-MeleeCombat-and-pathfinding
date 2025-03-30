@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://yqoa8dw6hyyy"]
+[gd_scene load_steps=30 format=4 uid="uid://yqoa8dw6hyyy"]
 
 [ext_resource type="Texture2D" uid="uid://do8w6k3c3cbwe" path="res://assets/BG/Space Background (6).png" id="1_jkxa6"]
 [ext_resource type="PackedScene" uid="uid://bgcsvqqyjw1qp" path="res://player/player.tscn" id="2_w75he"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://bq8qotefamth2" path="res://Camera/fixedp_cam.tscn" id="18_5t0se"]
 [ext_resource type="PackedScene" uid="uid://cu1pxa20k8tls" path="res://Camera/freeze_camera_axis_area.tscn" id="19_tqj1w"]
 [ext_resource type="PackedScene" uid="uid://bbcdfiwmb0pcc" path="res://worldScenes/checkpoint/checkpoint.tscn" id="20_gtrna"]
+[ext_resource type="PackedScene" uid="uid://hxih0riwfl56" path="res://world_environment1.tscn" id="21_w75he"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_3ejb3"]
 outlines = Array[PackedVector2Array]([PackedVector2Array(-432, 41, -449, 236, -313, 355, 307, 398, 513, -6, 137, -288, -426, -253)])
@@ -27,37 +28,21 @@ source_geometry_mode = 2
 source_geometry_group_name = &"navigation"
 agent_radius = 5.0
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_074og"]
-polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kek77"]
 texture = ExtResource("6_ntdhj")
 0:0/0 = 0
-0:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_074og")
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_cegan"]
-polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w48qg"]
 texture = ExtResource("7_0fu15")
 0:0/0 = 0
-0:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_cegan")
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_82xsv"]
-polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vivmo"]
 texture = ExtResource("8_4knja")
 0:0/0 = 0
-0:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_82xsv")
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_getpj"]
-polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2cqfq"]
 texture = ExtResource("9_voubc")
 0:0/0 = 0
-0:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_getpj")
 
 [sub_resource type="TileSet" id="TileSet_5vw27"]
 occlusion_layer_0/light_mask = 16
@@ -83,24 +68,41 @@ size = Vector2(300.5, 133.063)
 metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="BG"]
-visible = false
 modulate = Color(1, 1, 1, 0.858824)
 light_mask = 512
 z_index = -10
-position = Vector2(-143, -22)
+position = Vector2(-207, 254)
 texture = ExtResource("1_jkxa6")
 
 [node name="Ysort" type="Node2D" parent="."]
 y_sort_enabled = true
 
 [node name="player" parent="Ysort" instance=ExtResource("2_w75he")]
-position = Vector2(199, 123)
+position = Vector2(-16, 53)
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Ysort/player"]
-visible = false
-position = Vector2(0, 1)
+position = Vector2(-32, -5)
 amount = 75
 lifetime = 10.0
+preprocess = 2.0
+randomness = 0.2
+lifetime_randomness = 0.25
+emission_shape = 3
+emission_rect_extents = Vector2(100, 125)
+gravity = Vector2(0, 0)
+initial_velocity_min = 0.1
+initial_velocity_max = 10.0
+scale_amount_min = 0.5
+scale_amount_max = 2.0
+color = Color(0.329295, 0.48547, 0.692779, 1)
+hue_variation_min = -0.08
+hue_variation_max = 0.95
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="Ysort/player"]
+position = Vector2(-318, 179)
+amount = 75
+lifetime = 10.0
+preprocess = 2.0
 randomness = 0.2
 lifetime_randomness = 0.25
 emission_shape = 3
@@ -183,26 +185,17 @@ y_sort_enabled = true
 [node name="enemy" parent="ENEMIES" instance=ExtResource("12_06ecp")]
 position = Vector2(-60, 283)
 
-[node name="enemy4" parent="ENEMIES" instance=ExtResource("12_06ecp")]
-position = Vector2(-192, -237)
-
 [node name="enemy2" parent="ENEMIES" instance=ExtResource("12_06ecp")]
-position = Vector2(-292, -205)
+position = Vector2(-277, -194)
 
 [node name="enemy3" parent="ENEMIES" instance=ExtResource("12_06ecp")]
 position = Vector2(-335, 219)
 
-[node name="enemy5" parent="ENEMIES" instance=ExtResource("12_06ecp")]
-position = Vector2(283, -26)
-
-[node name="enemy6" parent="ENEMIES" instance=ExtResource("12_06ecp")]
-position = Vector2(413, 28)
-
-[node name="enemy7" parent="ENEMIES" instance=ExtResource("12_06ecp")]
-position = Vector2(-372, 34)
-
 [node name="shooter" parent="ENEMIES" instance=ExtResource("13_ohjdc")]
-position = Vector2(391, -20)
+position = Vector2(-204, -206)
+
+[node name="slasher" parent="ENEMIES" instance=ExtResource("12_06ecp")]
+position = Vector2(250, -37)
 
 [node name="CameraManager" type="Node" parent="."]
 script = ExtResource("14_e5brb")
@@ -214,7 +207,7 @@ ignore_time_scale = true
 
 [node name="Camera2D" type="Camera2D" parent="CameraManager"]
 physics_interpolation_mode = 1
-position = Vector2(199, 123)
+position = Vector2(-16, 53)
 zoom = Vector2(3.5, 3.5)
 process_callback = 0
 limit_left = -496
@@ -230,7 +223,7 @@ script = ExtResource("15_rf48r")
 
 [node name="FollowPcam" type="Node2D" parent="CameraManager" node_paths=PackedStringArray("follow_target")]
 top_level = true
-position = Vector2(199, 123)
+position = Vector2(-16, 53)
 script = ExtResource("16_toluw")
 priority = 1
 follow_mode = 5
@@ -266,10 +259,12 @@ shape = SubResource("RectangleShape2D_yaehf")
 [node name="CHECKPOINTS" type="Node" parent="."]
 
 [node name="checkpointArea" parent="CHECKPOINTS" instance=ExtResource("20_gtrna")]
-position = Vector2(304, 155)
+position = Vector2(235, 168)
 
 [node name="checkpointArea2" parent="CHECKPOINTS" instance=ExtResource("20_gtrna")]
-position = Vector2(178, 94)
+position = Vector2(-196, 287)
+
+[node name="WorldEnvironment1" parent="." instance=ExtResource("21_w75he")]
 
 [connection signal="timeout" from="CameraManager/changeLookAheadTimer" to="CameraManager" method="_on_change_look_ahead_timer_timeout"]
 
