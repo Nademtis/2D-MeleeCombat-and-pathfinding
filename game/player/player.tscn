@@ -648,6 +648,7 @@ script = ExtResource("1_f8ifd")
 [node name="hp" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("2_2qend")
+hp = 5.0
 
 [node name="attackDelay" type="Timer" parent="."]
 wait_time = 0.2

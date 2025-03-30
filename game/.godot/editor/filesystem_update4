@@ -28,3 +28,4 @@ res://enemy/shooter/shooter.gd
 res://misc/shaders/vignette.gdshader
 res://misc/juice/juiceManager.gd
 res://player/playerHp.gd
+res://enemy/slasher/dead_slasher.tscn
