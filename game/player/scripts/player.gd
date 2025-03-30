@@ -129,8 +129,9 @@ func attack(_point : Vector2):
 	combo_count += 1
 	can_attack = false
 	
+	
 	if combo_count >= max_combo:
-		#freeze_frame(0.15, 0.25)
+		Events.emit_signal("freeze_frame", 0.15, 0.5) ##freeze_frame(0.15, 0.25)
 		attack_cool_down.start()
 	else:
 		attack_small_delay.start()
@@ -282,13 +283,7 @@ func turn_on_attack_collision(direction: String):
 	coll_shape_right.disabled = true
 	coll_shape_left.disabled = true
 
-func freeze_frame(duration: float, slow_motion_scale: float = 0.0) -> void:
-	#Engine.time_scale = slow_motion_scale
-	#await get_tree().create_timer(duration, false).timeout  # Run timer in unscaled time
-	#Engine.time_scale = 1.0  # Restore normal speed
-	Engine.time_scale = slow_motion_scale
-	await(get_tree().create_timer(duration, true, false, true).timeout)
-	Engine.time_scale = 1
+
 	
 	
 

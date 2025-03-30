@@ -18,3 +18,13 @@ res://enemy/slasher/slasher.tscn
 res://enemy/shooter/shooter.tscn
 res://world_environment.tscn
 res://world_environment1.tscn
+res://enemy/shooter/shooter_arrow.tscn
+res://player/scripts/player.gd
+res://Camera/fixedp_cam.tscn
+res://Camera/FixedCamera.gd
+res://Camera/CameraShake.tres
+res://enemy/slasher/enemy.gd
+res://enemy/shooter/shooter.gd
+res://misc/shaders/vignette.gdshader
+res://misc/juice/juiceManager.gd
+res://player/playerHp.gd

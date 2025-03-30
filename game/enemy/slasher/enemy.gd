@@ -133,6 +133,10 @@ func take_damage():
 		await get_tree().create_timer(0.1).timeout  # Flash duration
 		mat.set_shader_parameter("flash_amount", 0.0)  # Reset
 	
+	#apply camera shake
+	Events.emit_signal("combat_camera_shake")
+
+	
 	#everything UI and visualss
 	animation_player.play("enemy_hit")
 	hp -= 1
@@ -142,6 +146,7 @@ func take_damage():
 		current_poise = current_poise - 1*7
 		if current_poise <= 0: # stun logic
 			stunned_birds.visible = true
+			Events.emit_signal("freeze_frame", 0.15, 0.25) ##freeze_frame(0.15, 0.25)
 			animated_sprite_2d.play("idle")
 			hit_stun_timer.start()
 			poise_bar.start_poise_regeneration(hit_stun_timer.wait_time)

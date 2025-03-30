@@ -15,6 +15,9 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 func take_damage(damage_taken:float) -> void:
 	hp -= damage_taken
 	
+	Events.emit_signal("player_hit")
+	Events.emit_signal("freeze_frame", 1, 0.25)
+	
 	if hp <= 0:
 		die()
 	

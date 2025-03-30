@@ -116,6 +116,9 @@ func take_damage():
 		await get_tree().create_timer(0.1).timeout  # Flash duration
 		mat.set_shader_parameter("flash_amount", 0.0)  # Reset
 	
+	#apply camera shake
+	Events.emit_signal("combat_camera_shake")
+	
 	#everything UI and visualss
 	animation_player.play("enemy_hit")
 	hp -= 1
