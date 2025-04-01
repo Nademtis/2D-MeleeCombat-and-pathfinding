@@ -9,3 +9,4 @@ res://Camera/CameraShake.tres
 res://misc/shaders/vignette.gdshader
 res://levels/level_1.tscn
 res://misc/juice/juiceManager.gd
+res://autoloads/Events.gd

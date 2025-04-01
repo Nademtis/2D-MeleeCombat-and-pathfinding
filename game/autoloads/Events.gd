@@ -19,6 +19,7 @@ signal camera_stop_freeze_axis()
 signal load_level()
 
 #juice
+@warning_ignore("unused_signal")
 signal player_hit()
 
 #checkpoint
@@ -28,4 +29,5 @@ signal new_active_checkpoint
 #camera signals
 @warning_ignore("unused_signal")
 signal combat_camera_shake
+@warning_ignore("unused_signal")
 signal freeze_frame(duration: float, slow_motion_scale: float)
