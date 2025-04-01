@@ -4,6 +4,7 @@ extends CanvasLayer
 @onready var vignette_material: ShaderMaterial = player_hit_vignette.material
 
 func _ready() -> void:
+	visible = true
 	Events.connect("player_hit", turn_on_red_vignette)
 	
 func turn_on_red_vignette() -> void:

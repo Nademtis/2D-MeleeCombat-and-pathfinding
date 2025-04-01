@@ -8,7 +8,4 @@ res://ai/trees/shooter_Btree.tres
 res://Camera/CameraShake.tres
 res://misc/shaders/vignette.gdshader
 res://levels/level_1.tscn
-res://player/player.tscn
-res://enemy/slasher/slasher.tscn
-res://enemy/shooter/shooter_arrow.tscn
-res://EnvironmentScenes/breakables/breakable.gd
+res://misc/juice/juiceManager.gd
