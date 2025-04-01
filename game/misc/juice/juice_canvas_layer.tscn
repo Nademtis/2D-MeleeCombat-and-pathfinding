@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1ma82qsbi7x6"]
+
+[ext_resource type="Script" uid="uid://bpn5ks6amukpd" path="res://misc/juice/juiceManager.gd" id="1_0kd46"]
+[ext_resource type="Shader" uid="uid://d2t6d32pdqejc" path="res://misc/shaders/vignette.gdshader" id="2_m7mo2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8mki0"]
+shader = ExtResource("2_m7mo2")
+shader_parameter/vignette_intensity = 0.15
+shader_parameter/vignette_opacity = 0.5
+shader_parameter/vignette_rgb = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gxks1"]
+shader = ExtResource("2_m7mo2")
+shader_parameter/vignette_intensity = 0.65
+shader_parameter/vignette_opacity = 0.75
+shader_parameter/vignette_rgb = Color(0.717647, 0, 0, 1)
+
+[node name="JuiceCanvasLayer" type="CanvasLayer"]
+visible = false
+script = ExtResource("1_0kd46")
+
+[node name="vignette" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_8mki0")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="playerHitVignette" type="ColorRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_gxks1")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

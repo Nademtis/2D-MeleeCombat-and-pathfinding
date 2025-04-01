@@ -17,6 +17,8 @@ signal camera_stop_freeze_axis()
 #levels
 @warning_ignore("unused_signal")
 signal load_level()
+signal new_level_loaded() #for when a new level has been loaded
+
 
 #juice
 @warning_ignore("unused_signal")
@@ -31,3 +33,6 @@ signal new_active_checkpoint
 signal combat_camera_shake
 @warning_ignore("unused_signal")
 signal freeze_frame(duration: float, slow_motion_scale: float)
+
+signal fade_to_black(duration:float)
+signal immobilize_player()

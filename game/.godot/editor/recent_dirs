@@ -1,6 +1,7 @@
-res://misc/tools
 res://misc/juice
+res://misc/cutscene
 res://misc/shaders
+res://misc/tools
 res://Camera
 res://
 res://levels
@@ -19,4 +20,3 @@ res://assets/enemy
 res://ui
 res://player
 res://nav
-res://assets/player

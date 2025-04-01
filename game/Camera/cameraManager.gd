@@ -1,6 +1,9 @@
 extends Node
 class_name CameraManager
 
+@onready var follow_pcam: PhantomCamera2D = $FollowPcam
+@onready var player_zoomed_camera: PhantomCamera2D = $PlayerZoomedCamera
+
 var look_ahead : bool = true
 @onready var change_look_ahead_timer: Timer = $changeLookAheadTimer
 
@@ -10,10 +13,13 @@ var last_input_vector: Vector2 = Vector2.ZERO  # Stores last movement direction
 @export var follow_offset_strength : float = 15
 @export var y_multiplier: float = 1.5  # Increase Y offset strength
 
-@onready var follow_pcam: PhantomCamera2D = $FollowPcam
+
+
 func _ready() -> void:
 	Events.connect("camera_freeze_axis", freeze_axis)
 	Events.connect("camera_stop_freeze_axis", stop_freeze_axis)
+	Events.connect("new_level_loaded", func(): follow_pcam.global_position = PlayerStats.player_position)
+	start_level_camera() #starts zoomed in on player
 
 func _process(delta: float) -> void:
 	if look_ahead:
@@ -24,7 +30,17 @@ func _process(delta: float) -> void:
 	if last_input_vector != current_input_vector and current_input_vector != Vector2.ZERO:
 		last_input_vector = current_input_vector
 		change_look_ahead_timer.start()
+
+func start_level_camera() -> void:
+	follow_pcam.priority = 0
+	player_zoomed_camera.priority = 1
 	
+	
+	await get_tree().create_timer(1).timeout
+	player_zoomed_camera.priority = 0
+	follow_pcam.priority = 1
+	
+
 func camera_lookahead() -> void:
 	var target_offset : Vector2 = look_ahead_direction * follow_offset_strength
 	target_offset.y *= y_multiplier #add to y, since screen format - player need to look further down
@@ -42,7 +58,6 @@ func stop_freeze_axis () -> void:
 	print("stop freeze axis")
 	follow_pcam.set_lock_axis(0)
 
-
 func get_direction_from_side(side:Vector2) -> Enums.DIRECTION:
 	var direction : Enums.DIRECTION
 	match side:
@@ -56,7 +71,6 @@ func get_direction_from_side(side:Vector2) -> Enums.DIRECTION:
 		Vector2(-1, -1): direction = Enums.DIRECTION.SW
 	#print(Enums.DIRECTION.keys()[direction])
 	return direction
-
 
 func _on_change_look_ahead_timer_timeout() -> void:
 	# only change look ahead direction if same input is held for some time

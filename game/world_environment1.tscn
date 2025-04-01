@@ -3,7 +3,7 @@
 [sub_resource type="Environment" id="Environment_jkxa6"]
 background_mode = 3
 glow_enabled = true
-glow_intensity = 1.0
+glow_intensity = 1.2
 glow_strength = 0.8
 glow_mix = 0.166
 glow_blend_mode = 0

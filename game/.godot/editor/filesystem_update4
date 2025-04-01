@@ -10,3 +10,15 @@ res://misc/shaders/vignette.gdshader
 res://levels/level_1.tscn
 res://misc/juice/juiceManager.gd
 res://autoloads/Events.gd
+res://Camera/cameraManager.gd
+res://Camera/fixedp_cam.tscn
+res://misc/shaders/blackScreen.gdshader
+res://misc/cutscene/fade_to_black_canvas_layer.gd
+res://autoloads/LevelManager.gd
+res://main.tscn
+res://world_environment1.tscn
+res://player/player.tscn
+res://misc/cutscene/fade_to_black_canvas_layer.tscn
+res://misc/juice/juice_canvas_layer.tscn
+res://player/scripts/player.gd
+res://player/playerHp.gd

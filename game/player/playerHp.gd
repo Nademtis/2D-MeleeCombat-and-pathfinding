@@ -22,4 +22,5 @@ func take_damage(damage_taken:float) -> void:
 		die()
 	
 func die() -> void:
+	
 	LevelManager.player_died()

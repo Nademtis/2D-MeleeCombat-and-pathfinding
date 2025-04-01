@@ -8,6 +8,8 @@ class_name Player
 @export var acceleration: float = 12
 @export var deceleration: float = 95
 
+var is_dead = false
+
 #input
 var left_click_held_down = false
 var dash_held_down = false
@@ -60,6 +62,7 @@ var movement_state = MovementState.WALKING
 func _ready() -> void:
 	Events.connect("player_attacked", setup_attack_dash) #TODO
 	Events.connect("player_hp_changed", update_hp_ui)
+	Events.connect("immobilize_player", player_died)
 	
 	#this is only to not show the healthbar in main scene
 	canvas_layer.visible = true
@@ -68,6 +71,9 @@ func _ready() -> void:
 	health_bar.init_health(player_hp_node.hp, true)  # Set initial health
 
 func _process(_delta: float) -> void:
+	if is_dead:
+		return
+		
 	PlayerStats.player_position = global_position #update player position for global access
 	#PlayerStats.player_velocity = velocity
 	
@@ -99,6 +105,8 @@ func _input(_event: InputEvent) -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
+	if is_dead:
+		return
 	#var stair_direction : String = check_for_stairs()
 	#print(stair_direction)
 	
@@ -272,6 +280,12 @@ func get_attack_direction() -> String:
 		return "up"
 	else:
 		return "right"
+
+func player_died()-> void:
+	is_dead = true
+	hurtbox_coll.set_deferred("disabled", true)  # Disable collision
+	#animated_sprite_2d.play("death")#
+	
 
 func turn_on_attack_collision(direction: String):
 	match direction:
