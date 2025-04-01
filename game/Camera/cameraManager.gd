@@ -13,15 +13,17 @@ var last_input_vector: Vector2 = Vector2.ZERO  # Stores last movement direction
 @export var follow_offset_strength : float = 15
 @export var y_multiplier: float = 1.5  # Increase Y offset strength
 
+#@onready var phantom_camera_host: PhantomCameraHost = $Camera2D/PhantomCameraHost
 
 
 func _ready() -> void:
 	Events.connect("camera_freeze_axis", freeze_axis)
 	Events.connect("camera_stop_freeze_axis", stop_freeze_axis)
-	Events.connect("new_level_loaded", func(): follow_pcam.global_position = PlayerStats.player_position)
+	#Events.connect("new_level_loaded", func(): follow_pcam.global_position = PlayerStats.player_position)
 	start_level_camera() #starts zoomed in on player
 
 func _process(delta: float) -> void:
+	#print(phantom_camera_host._active_pcam_2d.name)
 	if look_ahead:
 		camera_lookahead()
 		
