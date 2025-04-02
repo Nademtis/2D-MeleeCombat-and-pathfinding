@@ -16,7 +16,7 @@ func _ready() -> void:
 		var new_level = Level.new("res://levels/level_0.tscn", "level_0")
 		load_level(new_level)
 	
-func load_level(new_level : Level)->void:
+func load_level(new_level : Level) -> void:
 	if active_level:
 		for child in main.get_node("LevelContainer").get_children():
 			child.queue_free()

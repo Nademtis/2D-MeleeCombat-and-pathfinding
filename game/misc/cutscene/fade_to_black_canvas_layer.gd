@@ -7,6 +7,7 @@ func _ready() -> void:
 	Events.connect("fade_to_black", fade_to_black)
 
 func play_intro_cutscene() -> void:
+	black_overlay_texture_rect.material.set_shader_parameter("radius", 0.0)
 	black_overlay_texture_rect.visible = true
 	
 	var tween = get_tree().create_tween()
@@ -19,6 +20,7 @@ func play_intro_cutscene() -> void:
 	await tween.finished
 	black_overlay_texture_rect.visible = false  # Hide when done
 
+#this tweens the black circle inwards
 func fade_to_black(duration : float) -> void:
 	print("fade to black starting")
 	black_overlay_texture_rect.material.set_shader_parameter("radius", 1.5)
@@ -30,3 +32,4 @@ func fade_to_black(duration : float) -> void:
 		.set_ease(Tween.EASE_IN)
 	
 	await tween.finished
+	

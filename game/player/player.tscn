@@ -666,6 +666,9 @@ one_shot = true
 wait_time = 0.5
 one_shot = true
 
+[node name="invincibleTimer" type="Timer" parent="."]
+one_shot = true
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_rfhv2")
 animation = &"idle_down"
@@ -745,5 +748,6 @@ layout_mode = 2
 [connection signal="timeout" from="attackCombo" to="." method="_on_attack_combo_timeout"]
 [connection signal="timeout" from="attackCoolDown" to="." method="_on_attack_cool_down_timeout"]
 [connection signal="timeout" from="dashCooldown" to="." method="_on_dash_cooldown_timeout"]
+[connection signal="timeout" from="invincibleTimer" to="hp" method="_on_invincible_timer_timeout"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="area_entered" from="hurtbox" to="hp" method="_on_hurtbox_area_entered"]

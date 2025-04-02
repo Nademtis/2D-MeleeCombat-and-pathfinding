@@ -14,7 +14,6 @@ layer = 2
 script = ExtResource("1_mytit")
 
 [node name="blackOverlayTextureRect" type="ColorRect" parent="."]
-visible = false
 material = SubResource("ShaderMaterial_2sfss")
 clip_contents = true
 anchors_preset = 15

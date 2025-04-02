@@ -1,14 +1,14 @@
-Node
+Timer
+Path2D
 PhantomCamera2D
+Node
 ColorRect
 CanvasLayer
 TextureRect
 Polygon2D
 Panel
-Timer
 PhantomCameraNoiseEmitter2D
 Label
 WorldEnvironment
 Shooter
 Node2D
-SubViewport

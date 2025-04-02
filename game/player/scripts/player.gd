@@ -8,6 +8,7 @@ class_name Player
 @export var acceleration: float = 12
 @export var deceleration: float = 95
 
+#hp and state
 var is_dead = false
 
 #input

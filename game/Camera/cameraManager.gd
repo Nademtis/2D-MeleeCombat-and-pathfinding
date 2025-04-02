@@ -24,7 +24,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	#print(phantom_camera_host._active_pcam_2d.name)
 	#print(PlayerStats.player_position)
-	print
 	if look_ahead:
 		camera_lookahead()
 		

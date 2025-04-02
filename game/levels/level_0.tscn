@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=4 uid="uid://biv22d6ejtgkf"]
+[gd_scene load_steps=41 format=4 uid="uid://biv22d6ejtgkf"]
 
 [ext_resource type="Texture2D" uid="uid://do8w6k3c3cbwe" path="res://assets/BG/Space Background (6).png" id="1_uuq13"]
 [ext_resource type="PackedScene" uid="uid://bgcsvqqyjw1qp" path="res://player/player.tscn" id="2_58gyl"]
@@ -70,6 +70,12 @@ sources/0 = SubResource("TileSetAtlasSource_x1db4")
 sources/5 = SubResource("TileSetAtlasSource_x8hdd")
 sources/6 = SubResource("TileSetAtlasSource_jwc5o")
 
+[sub_resource type="Resource" id="Resource_gxks1"]
+script = ExtResource("17_lf4l6")
+duration = 1.0
+transition = 0
+ease = 2
+
 [sub_resource type="Resource" id="Resource_yaehf"]
 script = ExtResource("17_lf4l6")
 duration = 1.0
@@ -86,7 +92,7 @@ size = Vector2(224, 98)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8mki0"]
 resource_local_to_scene = true
-size = Vector2(91.5, 108.125)
+size = Vector2(91.5, 118.063)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gxks1"]
 resource_local_to_scene = true
@@ -282,6 +288,7 @@ priority = 1
 follow_mode = 1
 follow_target = NodePath("../../Ysort/player")
 zoom = Vector2(5, 5)
+tween_resource = SubResource("Resource_gxks1")
 tween_on_load = false
 draw_limits = true
 metadata/_custom_type_script = "uid://dd1a2amguahsk"
@@ -313,9 +320,9 @@ position = Vector2(-647, 353)
 
 [node name="freezed" type="Node" parent="CameraManager"]
 script = ExtResource("19_gxks1")
+toggle_visibility = true
 
 [node name="FreezeCameraAxisArea" parent="CameraManager/freezed" instance=ExtResource("19_g1jay")]
-visible = false
 position = Vector2(34, 502)
 freeze_axis = 1
 
@@ -324,7 +331,6 @@ position = Vector2(22, 19)
 shape = SubResource("RectangleShape2D_58gyl")
 
 [node name="FreezeCameraAxisArea2" parent="CameraManager/freezed" instance=ExtResource("19_g1jay")]
-visible = false
 position = Vector2(8, 701)
 freeze_axis = 1
 
@@ -333,15 +339,13 @@ position = Vector2(38, -5)
 shape = SubResource("RectangleShape2D_ggct0")
 
 [node name="FreezeCameraAxisArea3" parent="CameraManager/freezed" instance=ExtResource("19_g1jay")]
-visible = false
 position = Vector2(-225, 509)
 
 [node name="CollisionShape2D" parent="CameraManager/freezed/FreezeCameraAxisArea3" index="0"]
-position = Vector2(-7, 8.9375)
+position = Vector2(-10, -2.03125)
 shape = SubResource("RectangleShape2D_8mki0")
 
 [node name="FreezeCameraAxisArea4" parent="CameraManager/freezed" instance=ExtResource("19_g1jay")]
-visible = false
 position = Vector2(-500, 102)
 freeze_axis = 1
 
@@ -350,7 +354,6 @@ position = Vector2(-23.75, -6)
 shape = SubResource("RectangleShape2D_gxks1")
 
 [node name="FreezeCameraAxisArea5" parent="CameraManager/freezed" instance=ExtResource("19_g1jay")]
-visible = false
 position = Vector2(-573, 545)
 freeze_axis = 1
 
