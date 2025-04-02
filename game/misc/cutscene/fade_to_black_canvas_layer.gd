@@ -20,6 +20,7 @@ func play_intro_cutscene() -> void:
 	black_overlay_texture_rect.visible = false  # Hide when done
 
 func fade_to_black(duration : float) -> void:
+	print("fade to black starting")
 	black_overlay_texture_rect.material.set_shader_parameter("radius", 1.5)
 	black_overlay_texture_rect.visible = true
 	

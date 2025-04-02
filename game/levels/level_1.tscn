@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://yqoa8dw6hyyy"]
+[gd_scene load_steps=29 format=4 uid="uid://yqoa8dw6hyyy"]
 
 [ext_resource type="Texture2D" uid="uid://do8w6k3c3cbwe" path="res://assets/BG/Space Background (6).png" id="1_jkxa6"]
 [ext_resource type="PackedScene" uid="uid://bgcsvqqyjw1qp" path="res://player/player.tscn" id="2_w75he"]
@@ -20,7 +20,6 @@
 [ext_resource type="PackedScene" uid="uid://bq8qotefamth2" path="res://Camera/fixedp_cam.tscn" id="18_5t0se"]
 [ext_resource type="PackedScene" uid="uid://cu1pxa20k8tls" path="res://Camera/freeze_camera_axis_area.tscn" id="19_tqj1w"]
 [ext_resource type="PackedScene" uid="uid://bbcdfiwmb0pcc" path="res://worldScenes/checkpoint/checkpoint.tscn" id="20_gtrna"]
-[ext_resource type="PackedScene" uid="uid://hxih0riwfl56" path="res://world_environment1.tscn" id="21_w75he"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_3ejb3"]
 outlines = Array[PackedVector2Array]([PackedVector2Array(-432, 41, -449, 236, -313, 355, 307, 398, 513, -6, 137, -288, -426, -253)])
@@ -263,8 +262,6 @@ position = Vector2(235, 168)
 
 [node name="checkpointArea2" parent="CHECKPOINTS" instance=ExtResource("20_gtrna")]
 position = Vector2(-196, 287)
-
-[node name="WorldEnvironment1" parent="." instance=ExtResource("21_w75he")]
 
 [connection signal="timeout" from="CameraManager/changeLookAheadTimer" to="CameraManager" method="_on_change_look_ahead_timer_timeout"]
 

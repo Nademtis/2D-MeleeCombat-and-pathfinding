@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://twwuip55prjl"]
+[gd_scene load_steps=5 format=3 uid="uid://twwuip55prjl"]
 
 [ext_resource type="PackedScene" uid="uid://b87tksxs3rtvm" path="res://misc/cutscene/fade_to_black_canvas_layer.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://hxih0riwfl56" path="res://world_environment1.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://c1ma82qsbi7x6" path="res://misc/juice/juice_canvas_layer.tscn" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://df7x8rv3pj7q1" path="res://misc/debug/debug_controller.gd" id="4_1bvp3"]
 
 [node name="main" type="Node2D"]
 
@@ -13,3 +14,6 @@
 [node name="WorldEnvironment1" parent="." instance=ExtResource("2_0xm2m")]
 
 [node name="JuiceCanvasLayer" parent="." instance=ExtResource("3_h2yge")]
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("4_1bvp3")

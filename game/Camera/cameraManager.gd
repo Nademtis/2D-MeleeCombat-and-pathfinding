@@ -13,17 +13,18 @@ var last_input_vector: Vector2 = Vector2.ZERO  # Stores last movement direction
 @export var follow_offset_strength : float = 15
 @export var y_multiplier: float = 1.5  # Increase Y offset strength
 
-#@onready var phantom_camera_host: PhantomCameraHost = $Camera2D/PhantomCameraHost
+@onready var phantom_camera_host: PhantomCameraHost = $Camera2D/PhantomCameraHost
 
 
 func _ready() -> void:
 	Events.connect("camera_freeze_axis", freeze_axis)
 	Events.connect("camera_stop_freeze_axis", stop_freeze_axis)
-	#Events.connect("new_level_loaded", func(): follow_pcam.global_position = PlayerStats.player_position)
 	start_level_camera() #starts zoomed in on player
 
 func _process(delta: float) -> void:
 	#print(phantom_camera_host._active_pcam_2d.name)
+	#print(PlayerStats.player_position)
+	print
 	if look_ahead:
 		camera_lookahead()
 		
@@ -34,11 +35,18 @@ func _process(delta: float) -> void:
 		change_look_ahead_timer.start()
 
 func start_level_camera() -> void:
+	#if spawning at checkpoint in same level set start cameras to correct position
+	var active_checkpoint : Checkpoint = CheckpointManager.get_active_checkpoint()
+	
+	follow_pcam.set_follow_damping(false)
+	
+	#start at zoomed in
 	follow_pcam.priority = 0
 	player_zoomed_camera.priority = 1
 	
-	
+	#then go to follow pcam
 	await get_tree().create_timer(1).timeout
+	follow_pcam.set_follow_damping(true)
 	player_zoomed_camera.priority = 0
 	follow_pcam.priority = 1
 	
@@ -57,7 +65,7 @@ func freeze_axis (axis: Enums.AXIS) -> void:
 		follow_pcam.set_lock_axis(2)
 
 func stop_freeze_axis () -> void:
-	print("stop freeze axis")
+	#print("stop freeze axis")
 	follow_pcam.set_lock_axis(0)
 
 func get_direction_from_side(side:Vector2) -> Enums.DIRECTION:

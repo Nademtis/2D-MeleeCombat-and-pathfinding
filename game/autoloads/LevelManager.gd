@@ -37,7 +37,7 @@ func load_level(new_level : Level)->void:
 func player_died() -> void:
 	#fade to black
 	Events.emit_signal("immobilize_player")
-	Events.emit_signal("fade_to_black", 1.5)
+	Events.emit_signal("fade_to_black", 1)
 	await get_tree().create_timer(1.5).timeout
 	
 	# Reload the level from the last active checkpoint

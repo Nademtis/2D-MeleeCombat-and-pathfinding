@@ -1,3 +1,4 @@
+res://misc/debug
 res://misc/juice
 res://misc/cutscene
 res://misc/shaders
@@ -19,4 +20,3 @@ res://assets/enemy/slasher
 res://assets/enemy
 res://ui
 res://player
-res://nav
