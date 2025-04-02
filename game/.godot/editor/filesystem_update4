@@ -19,3 +19,4 @@ res://autoloads/LevelManager.gd
 res://Camera/cameraManager.gd
 res://player/scripts/player.gd
 res://player/playerHp.gd
+res://misc/shaders/water.gdshader
