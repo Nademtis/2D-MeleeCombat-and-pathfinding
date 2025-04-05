@@ -682,7 +682,6 @@ shape = SubResource("CapsuleShape2D_32hag")
 visible = false
 
 [node name="CollShapeLeft" type="Area2D" parent="attackHitbox" groups=["player_attack"]]
-visible = false
 monitoring = false
 
 [node name="collShapeLeft" type="CollisionPolygon2D" parent="attackHitbox/CollShapeLeft"]

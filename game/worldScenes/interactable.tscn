@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhlndaegu8dwm"]
+
+[ext_resource type="Script" uid="uid://dhwxsn7eejoek" path="res://worldScenes/interactable.gd" id="1_f84xh"]
+
+[node name="interactable" type="Node"]
+editor_description = "Uses OnOffObject to enable or disable
+"
+script = ExtResource("1_f84xh")

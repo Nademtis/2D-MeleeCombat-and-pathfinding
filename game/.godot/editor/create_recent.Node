@@ -1,7 +1,10 @@
+Node
+CollisionShape2D
+Area2D
+AnimatedSprite2D
 Timer
 Path2D
 PhantomCamera2D
-Node
 ColorRect
 CanvasLayer
 TextureRect
@@ -9,6 +12,3 @@ Polygon2D
 Panel
 PhantomCameraNoiseEmitter2D
 Label
-WorldEnvironment
-Shooter
-Node2D

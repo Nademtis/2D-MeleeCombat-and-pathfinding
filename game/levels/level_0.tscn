@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=4 uid="uid://biv22d6ejtgkf"]
+[gd_scene load_steps=42 format=4 uid="uid://biv22d6ejtgkf"]
 
 [ext_resource type="Texture2D" uid="uid://do8w6k3c3cbwe" path="res://assets/BG/Space Background (6).png" id="1_uuq13"]
 [ext_resource type="PackedScene" uid="uid://bgcsvqqyjw1qp" path="res://player/player.tscn" id="2_58gyl"]
@@ -23,6 +23,8 @@
 [ext_resource type="PackedScene" uid="uid://cu1pxa20k8tls" path="res://Camera/freeze_camera_axis_area.tscn" id="19_g1jay"]
 [ext_resource type="Script" uid="uid://dns5suwa0mpp7" path="res://misc/tools/tool_visibility.gd" id="19_gxks1"]
 [ext_resource type="PackedScene" uid="uid://bbcdfiwmb0pcc" path="res://worldScenes/checkpoint/checkpoint.tscn" id="20_2fv0q"]
+[ext_resource type="PackedScene" uid="uid://c14i0to7taaaa" path="res://worldScenes/lever.tscn" id="24_gxks1"]
+[ext_resource type="PackedScene" uid="uid://bsk5yvwawsd3c" path="res://worldScenes/door/door.tscn" id="25_osodt"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_3ejb3"]
 outlines = Array[PackedVector2Array]([PackedVector2Array(-825, 809, -455, 908, 326, 715, 307, 398, 152, 16, -819, 7)])
@@ -118,7 +120,7 @@ y_sort_enabled = true
 
 [node name="player" parent="Ysort" instance=ExtResource("2_58gyl")]
 unique_name_in_owner = true
-position = Vector2(-622, 129)
+position = Vector2(17, 520)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="Ysort"]
 y_sort_enabled = true
@@ -269,7 +271,7 @@ ignore_time_scale = true
 
 [node name="Camera2D" type="Camera2D" parent="CameraManager"]
 physics_interpolation_mode = 1
-position = Vector2(-622, 129)
+position = Vector2(17, 520)
 zoom = Vector2(5, 5)
 process_callback = 0
 editor_draw_limits = true
@@ -281,7 +283,7 @@ script = ExtResource("15_w633q")
 
 [node name="PlayerZoomedCamera" type="Node2D" parent="CameraManager" node_paths=PackedStringArray("follow_target")]
 top_level = true
-position = Vector2(-622, 129)
+position = Vector2(17, 520)
 script = ExtResource("16_q6gno")
 priority = 1
 follow_mode = 1
@@ -294,7 +296,7 @@ metadata/_custom_type_script = "uid://dd1a2amguahsk"
 
 [node name="FollowPcam" type="Node2D" parent="CameraManager" node_paths=PackedStringArray("follow_target")]
 top_level = true
-position = Vector2(-622, 129)
+position = Vector2(17, 520)
 script = ExtResource("16_q6gno")
 follow_mode = 5
 follow_target = NodePath("../../Ysort/player")
@@ -381,6 +383,16 @@ offset_top = 811.0
 offset_right = -396.0
 offset_bottom = 834.0
 text = "xD you did it"
+
+[node name="Door" parent="." node_paths=PackedStringArray("triggers") instance=ExtResource("25_osodt")]
+position = Vector2(127, 494)
+triggers = [NodePath("../lever"), NodePath("../lever2")]
+
+[node name="lever" parent="." instance=ExtResource("24_gxks1")]
+position = Vector2(72, 497)
+
+[node name="lever2" parent="." instance=ExtResource("24_gxks1")]
+position = Vector2(173, 538)
 
 [connection signal="timeout" from="CameraManager/changeLookAheadTimer" to="CameraManager" method="_on_change_look_ahead_timer_timeout"]
 

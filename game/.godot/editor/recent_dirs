@@ -1,3 +1,7 @@
+res://assets/gameplay/door
+res://worldScenes
+res://assets/gameplay/interactables
+res://worldScenes/door
 res://misc/debug
 res://misc/juice
 res://misc/cutscene
@@ -16,7 +20,3 @@ res://assets/breakables
 res://EnvironmentScenes/breakables
 res://assets/particleFX
 res://misc
-res://assets/enemy/slasher
-res://assets/enemy
-res://ui
-res://player
