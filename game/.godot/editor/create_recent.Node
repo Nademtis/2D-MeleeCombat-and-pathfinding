@@ -1,9 +1,10 @@
+ColorRect
+TextureRect
 CollisionShape2D
 StaticBody2D
 LightOccluder2D
 PointLight2D
 DirectionalLight2D
-TextureRect
 Sprite2D
 Node
 Area2D
@@ -11,4 +12,3 @@ AnimatedSprite2D
 Timer
 Path2D
 PhantomCamera2D
-ColorRect

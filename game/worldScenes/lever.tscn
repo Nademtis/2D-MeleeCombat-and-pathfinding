@@ -1,5 +1,6 @@
-[gd_scene load_steps=18 format=3 uid="uid://c14i0to7taaaa"]
+[gd_scene load_steps=20 format=3 uid="uid://c14i0to7taaaa"]
 
+[ext_resource type="Shader" uid="uid://cqvgqlw8foeav" path="res://misc/shaders/highlight.gdshader" id="1_chi5k"]
 [ext_resource type="Script" uid="uid://bw2dc0i6tl8ei" path="res://worldScenes/on_off_object.gd" id="1_equkm"]
 [ext_resource type="Texture2D" uid="uid://c4fthpvf7fkmd" path="res://assets/gameplay/interactables/lever_anim.png" id="1_yun6o"]
 
@@ -100,6 +101,20 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_chi5k"]
+resource_local_to_scene = true
+shader = ExtResource("1_chi5k")
+shader_parameter/Line_Smoothness = 0.045
+shader_parameter/Line_Width = 0.063
+shader_parameter/Brightness = 3.0
+shader_parameter/Rotation_deg = 30.0
+shader_parameter/Distortion = 1.8
+shader_parameter/Speed = 0.35
+shader_parameter/Position = 0.0
+shader_parameter/Position_Min = 0.25
+shader_parameter/Position_Max = 0.5
+shader_parameter/Alpha = 0.106
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_chi5k"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_equkm"]
@@ -107,12 +122,21 @@ radius = 1.5
 height = 12.0
 
 [node name="lever" type="Node2D"]
+clip_children = 1
 script = ExtResource("1_equkm")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+clip_children = 2
 position = Vector2(1, -13)
 sprite_frames = SubResource("SpriteFrames_prarl")
 animation = &"turn_on"
+
+[node name="ColorRect" type="ColorRect" parent="AnimatedSprite2D"]
+material = SubResource("ShaderMaterial_chi5k")
+offset_left = -21.0
+offset_top = -10.0
+offset_right = 19.0
+offset_bottom = 30.0
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false

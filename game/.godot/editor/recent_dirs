@@ -1,3 +1,4 @@
+res://misc/shaders
 res://worldScenes/lamp
 res://
 res://assets/gameplay/door
@@ -7,7 +8,6 @@ res://worldScenes/door
 res://misc/debug
 res://misc/juice
 res://misc/cutscene
-res://misc/shaders
 res://misc/tools
 res://Camera
 res://levels
