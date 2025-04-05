@@ -22,3 +22,6 @@ res://worldScenes/lever.tscn
 res://EnvironmentScenes/breakables/box1.tscn
 res://worldScenes/interactable.tscn
 res://wall_coll_tileset.tres
+res://worldScenes/checkpoint/checkpoint.tscn
+res://worldScenes/lamp/lamp.gd
+res://worldScenes/lamp/lamp.tscn

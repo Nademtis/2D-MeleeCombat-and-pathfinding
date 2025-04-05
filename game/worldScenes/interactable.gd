@@ -16,7 +16,7 @@ func _on_trigger_toggled(_state: bool) -> void:
 
 func _update_is_enabled() -> void:
 	if triggers.is_empty():
-		print("this interactable is empty, will never open")
+		print("this interactable is empty, will never enable")
 		return
 	
 	var all_enabled = triggers.all(func(trigger : OnOffObject): return trigger.is_on)
