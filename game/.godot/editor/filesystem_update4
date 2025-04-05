@@ -25,3 +25,4 @@ res://wall_coll_tileset.tres
 res://worldScenes/checkpoint/checkpoint.tscn
 res://worldScenes/lamp/lamp.gd
 res://worldScenes/lamp/lamp.tscn
+res://misc/cutscene/fade_to_black_canvas_layer.tscn

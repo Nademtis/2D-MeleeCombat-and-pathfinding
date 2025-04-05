@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c14i0to7taaaa"]
+[gd_scene load_steps=18 format=3 uid="uid://c14i0to7taaaa"]
 
 [ext_resource type="Script" uid="uid://bw2dc0i6tl8ei" path="res://worldScenes/on_off_object.gd" id="1_equkm"]
 [ext_resource type="Texture2D" uid="uid://c4fthpvf7fkmd" path="res://assets/gameplay/interactables/lever_anim.png" id="1_yun6o"]
@@ -102,6 +102,10 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_chi5k"]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_equkm"]
+radius = 1.5
+height = 12.0
+
 [node name="lever" type="Node2D"]
 script = ExtResource("1_equkm")
 
@@ -111,11 +115,21 @@ sprite_frames = SubResource("SpriteFrames_prarl")
 animation = &"turn_on"
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 collision_layer = 16
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_chi5k")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 16
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 0.5)
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_equkm")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
