@@ -12,16 +12,14 @@ func initialize() -> void:
 	_update_is_enabled()
 	
 func _on_trigger_toggled(_state: bool) -> void:
-	print(_state)
 	_update_is_enabled()
 
 func _update_is_enabled() -> void:
 	if triggers.is_empty():
-		print("this is empty")
+		print("this interactable is empty, will never open")
 		return
 	
 	var all_enabled = triggers.all(func(trigger : OnOffObject): return trigger.is_on)
 	if is_enabled != all_enabled:
 		is_enabled = all_enabled
 		emit_signal("enabled_changed", is_enabled)
-		print("emitted:" , is_enabled)

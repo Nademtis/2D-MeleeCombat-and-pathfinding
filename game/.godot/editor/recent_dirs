@@ -1,3 +1,4 @@
+res://
 res://assets/gameplay/door
 res://worldScenes
 res://assets/gameplay/interactables
@@ -8,7 +9,6 @@ res://misc/cutscene
 res://misc/shaders
 res://misc/tools
 res://Camera
-res://
 res://levels
 res://autoloads
 res://worldScenes/checkpoint

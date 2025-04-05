@@ -1,5 +1,6 @@
-Node
 CollisionShape2D
+StaticBody2D
+Node
 Area2D
 AnimatedSprite2D
 Timer
@@ -11,4 +12,3 @@ TextureRect
 Polygon2D
 Panel
 PhantomCameraNoiseEmitter2D
-Label

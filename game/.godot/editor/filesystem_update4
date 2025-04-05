@@ -21,3 +21,4 @@ res://worldScenes/on_off_object.gd
 res://worldScenes/lever.tscn
 res://EnvironmentScenes/breakables/box1.tscn
 res://worldScenes/interactable.tscn
+res://wall_coll_tileset.tres

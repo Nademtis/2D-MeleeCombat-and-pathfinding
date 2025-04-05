@@ -15,4 +15,3 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		else:
 			animated_sprite_2d.play("turn_off")
 		emit_signal("toggled", is_on)
-		#print(self, " emitted ", is_on)
