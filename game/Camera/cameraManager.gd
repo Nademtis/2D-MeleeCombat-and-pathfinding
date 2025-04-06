@@ -19,6 +19,9 @@ var last_input_vector: Vector2 = Vector2.ZERO  # Stores last movement direction
 func _ready() -> void:
 	Events.connect("camera_freeze_axis", freeze_axis)
 	Events.connect("camera_stop_freeze_axis", stop_freeze_axis)
+	Events.connect("zoom_camera", camera_zoom)
+
+	
 	start_level_camera() #starts zoomed in on player
 
 func _process(delta: float) -> void:
@@ -62,6 +65,20 @@ func freeze_axis (axis: Enums.AXIS) -> void:
 		follow_pcam.set_lock_axis(1)
 	if axis == Enums.AXIS.Yaxis:
 		follow_pcam.set_lock_axis(2)
+
+
+func camera_zoom(zoom_amount : float, duration : float):
+	var camera : PhantomCamera2D = phantom_camera_host.get_active_pcam()
+	if not camera:
+		return
+	
+	var original_zoom = camera.get_zoom()
+	var target_zoom = original_zoom + Vector2(zoom_amount, zoom_amount)
+	
+	var tween := create_tween()
+	tween.tween_property(camera, "zoom", target_zoom, duration * 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.tween_property(camera, "zoom", original_zoom, duration * 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	#set camera.zoom = new zoom then lerp back to original zoom
 
 func stop_freeze_axis () -> void:
 	#print("stop freeze axis")

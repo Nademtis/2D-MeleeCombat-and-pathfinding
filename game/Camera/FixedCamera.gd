@@ -18,6 +18,7 @@ func _on_body_exited(body: Node2D) -> void:
 		#print("player exited")
 		fixedp_cam.priority = 0
 
+
 func shake_camera() -> void:
 	fixedp_cam.set_noise(CAMERA_SHAKE)
 	await get_tree().create_timer(0.15).timeout  # Wait for 0.3 seconds

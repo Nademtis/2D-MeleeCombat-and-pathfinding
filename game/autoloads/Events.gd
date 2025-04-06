@@ -33,6 +33,9 @@ signal new_active_checkpoint
 signal combat_camera_shake
 @warning_ignore("unused_signal")
 signal freeze_frame(duration: float, slow_motion_scale: float)
+@warning_ignore("unused_signal")
+signal zoom_camera(zoom_amount : float, duration : float)
+
 
 signal fade_to_black(duration:float)
 signal immobilize_player()

@@ -1,3 +1,6 @@
+CPUParticles2D
+GPUParticles2D
+TileMapLayer
 ColorRect
 TextureRect
 CollisionShape2D
@@ -9,6 +12,3 @@ Sprite2D
 Node
 Area2D
 AnimatedSprite2D
-Timer
-Path2D
-PhantomCamera2D
