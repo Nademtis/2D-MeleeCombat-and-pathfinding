@@ -14,8 +14,4 @@ res://main.tscn
 res://worldScenes/lamp/lamp.tscn
 res://worldScenes/lever.tscn
 res://misc/cutscene/fade_to_black_canvas_layer.tscn
-res://autoloads/Events.gd
-res://Camera/cameraManager.gd
-res://Camera/FixedCamera.gd
-res://player/scripts/player.gd
 res://player/player.tscn
