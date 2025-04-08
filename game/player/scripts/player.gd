@@ -57,7 +57,7 @@ var attack_dash_direction: Vector2 = Vector2.ZERO
 #used when dashing -turning on and off
 @onready var hurtbox_coll: CollisionShape2D = $hurtbox/hurtboxColl
 
-enum MovementState{WALKING, ATTACKING, DASHING}
+enum MovementState{IDLE, WALKING, ATTACKING, DASHING}
 var movement_state = MovementState.WALKING
 
 func _ready() -> void:
@@ -95,22 +95,12 @@ func _process(_delta: float) -> void:
 	if Input.is_action_pressed("dash") && can_dash && movement_state == MovementState.WALKING or dash_held_down && can_dash && movement_state == MovementState.WALKING:
 		setup_dash()
 
-func _input(_event: InputEvent) -> void:
-	#if event.is_action_pressed("click") && can_attack or left_click_held_down && can_attack:
-		#var point = get_global_mouse_position()
-		#var direction = point - global_position
-		#setup_attack_dash(direction)
-		#attack(point)
-	#if event.is_action_pressed("dash") && can_dash && movement_state == MovementState.WALKING or dash_held_down && can_dash && movement_state == MovementState.WALKING:
-		#setup_dash()
-	pass
-
 func _physics_process(delta: float) -> void:
 	if is_dead:
 		return
 	#var stair_direction : String = check_for_stairs()
 	#print(stair_direction)
-	
+	#print(MovementState.keys()[movement_state])
 	match movement_state:
 		MovementState.WALKING:
 			move_player(delta)
@@ -197,6 +187,8 @@ func set_movement_state(new_state : MovementState):
 	#var old_state: MovementState = movement_state
 	#print(MovementState.keys()[new_state])
 	match new_state:
+		MovementState.IDLE:
+			movement_state = MovementState.IDLE
 		MovementState.WALKING:
 			movement_state = MovementState.WALKING
 		MovementState.ATTACKING:
@@ -327,7 +319,6 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite_2d.animation.begins_with("attack_"):
 		#print(animated_sprite_2d.animation + " finished")
 		set_movement_state(MovementState.WALKING)
-
 
 func _on_dash_cooldown_timeout() -> void:
 	can_dash = true

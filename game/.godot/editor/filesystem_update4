@@ -1,4 +1,4 @@
-res://levels/level_0.tscn
+res://main.tscn
 res://misc/shaders/blackScreen.gdshader
 res://misc/shaders/vignette.gdshader
 res://tileset.tres
@@ -10,8 +10,12 @@ res://ai/trees/shooter_Btree.tres
 res://wall_coll_tileset.tres
 res://Camera/CameraShake.tres
 res://misc/shaders/highlight.gdshader
-res://main.tscn
+res://misc/shaders/waterShader_material.tres
+res://levels/level_0.tscn
 res://worldScenes/lamp/lamp.tscn
 res://worldScenes/lever.tscn
 res://misc/cutscene/fade_to_black_canvas_layer.tscn
 res://player/player.tscn
+res://default_bus_layout.tres
+res://player/scripts/player.gd
+res://player/sfxPlayer.gd
