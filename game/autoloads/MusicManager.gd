@@ -14,13 +14,13 @@ var current_audio_player_index : int = 0
 func _ready() -> void:
 	get_current_audio_player().play()
 	
-#func _input(event: InputEvent) -> void:
-	#if event.is_action_pressed("k"):
-		##level_up(true)
-		#print(get_current_audio_player())
-		#print("current level ", current_audio_player_index)
-	#if event.is_action_pressed("l"):
-		#level_up(true)
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("k"):
+		#level_up(true)s
+		print(get_current_audio_player())
+		print("current level ", current_audio_player_index)
+	if event.is_action_pressed("l"):
+		level_up(true)
 
 
 func level_up(on : bool) -> void:

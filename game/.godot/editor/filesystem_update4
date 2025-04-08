@@ -18,3 +18,4 @@ res://player/player.tscn
 res://enemy/slasher/slasher.tscn
 res://enemy/shooter/shooter.tscn
 res://worldScenes/levelSwapper/level_swapper.tscn
+res://autoloads/MusicManager.gd
