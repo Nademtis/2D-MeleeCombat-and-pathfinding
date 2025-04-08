@@ -1,4 +1,4 @@
-[gd_scene load_steps=103 format=3 uid="uid://bgcsvqqyjw1qp"]
+[gd_scene load_steps=105 format=3 uid="uid://bgcsvqqyjw1qp"]
 
 [ext_resource type="Script" uid="uid://bensbatmgplt2" path="res://player/scripts/player.gd" id="1_f8ifd"]
 [ext_resource type="Script" uid="uid://tqei4hjgp27p" path="res://player/playerHp.gd" id="2_2qend"]
@@ -20,6 +20,8 @@
 [ext_resource type="AudioStream" uid="uid://dvp3myskrtqnm" path="res://audio/SFX/player/step1.wav" id="17_c35mf"]
 [ext_resource type="AudioStream" uid="uid://bu3bukkubn23t" path="res://audio/SFX/player/step2.wav" id="18_65viv"]
 [ext_resource type="AudioStream" uid="uid://cb3iw6yyfh6bk" path="res://audio/SFX/player/step3.wav" id="19_x7c3f"]
+[ext_resource type="AudioStream" uid="uid://42jo10rnygg3" path="res://audio/SFX/player/attack.wav" id="21_x7c3f"]
+[ext_resource type="AudioStream" uid="uid://djethoen4tfnc" path="res://audio/SFX/player/dash.wav" id="22_bjvpn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_trkf0"]
 atlas = ExtResource("2_3cqs7")
@@ -644,7 +646,7 @@ radius = 7.0
 
 [sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_bjvpn"]
 shuffle = true
-fade_time = 0.48
+fade_time = 0.1
 stream_count = 3
 stream_0 = ExtResource("17_c35mf")
 stream_1 = ExtResource("18_65viv")
@@ -759,12 +761,23 @@ layout_mode = 2
 script = ExtResource("17_65viv")
 
 [node name="AudioListener2D" type="AudioListener2D" parent="audio"]
+current = true
 
 [node name="stepPlaylist" type="AudioStreamPlayer2D" parent="audio"]
 stream = SubResource("AudioStreamPlaylist_bjvpn")
-volume_db = -10.0
+volume_db = -15.898
 autoplay = true
 bus = &"SFX"
+
+[node name="attackSFX" type="AudioStreamPlayer2D" parent="audio"]
+stream = ExtResource("21_x7c3f")
+volume_db = -6.624
+bus = &"SFX"
+
+[node name="dashSFX" type="AudioStreamPlayer2D" parent="audio"]
+stream = ExtResource("22_bjvpn")
+volume_db = -3.975
+pitch_scale = 1.38
 
 [connection signal="timeout" from="attackDelay" to="." method="_on_attack_delay_timeout"]
 [connection signal="timeout" from="attackCombo" to="." method="_on_attack_combo_timeout"]

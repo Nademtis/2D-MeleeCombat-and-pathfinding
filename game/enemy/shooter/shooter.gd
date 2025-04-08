@@ -40,6 +40,13 @@ var is_aggroed = false
 var knockback_force: Vector2 = Vector2.ZERO
 var knockback_timer: float = 0.0
 
+@onready var hit_sfx: AudioStreamPlayer2D = $audio/hitSFX
+@onready var scream_sfx: AudioStreamPlayer2D = $audio/screamSFX
+@onready var step_playlist: AudioStreamPlayer2D = $audio/stepPlaylist
+@onready var step_timer: Timer = $audio/stepTimer
+@onready var hitbox: CollisionShape2D = $Area2D/hitbox
+
+
 func _ready() -> void:
 	health_bar.init_health(hp)
 	poise_bar.init_poise(max_poise)
@@ -118,7 +125,8 @@ func take_damage():
 	
 	#apply camera shake
 	Events.emit_signal("combat_camera_shake")
-	
+	SFXutil.play_with_pitch(hit_sfx)
+
 	#everything UI and visualss
 	animation_player.play("enemy_hit")
 	hp -= 1
@@ -137,7 +145,17 @@ func take_damage():
 	if hp <= 0:
 		var corpse = DEAD_SLASHER.instantiate()
 		corpse.global_position = global_position
-		get_tree().root.add_child(corpse)
+		var level_container = get_tree().root.get_node("main/LevelContainer")
+		level_container.add_child(corpse)
+		
+		#scream_sfx.stop()
+		SFXutil.play_with_pitch(scream_sfx, 0.25, 0.50)
+		
+		bt_player.active = false
+		visible = false
+		hitbox.disabled = true
+		
+		await get_tree().create_timer(3.0).timeout
 		queue_free()
 
 

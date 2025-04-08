@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://bo0vn1x8dpsfe"]
+[gd_scene load_steps=80 format=3 uid="uid://bo0vn1x8dpsfe"]
 
 [ext_resource type="Script" uid="uid://bgn2un525vayh" path="res://enemy/slasher/enemy.gd" id="1_gbhi2"]
 [ext_resource type="Texture2D" uid="uid://dfdvayqy3jk5c" path="res://assets/enemy/slasher/idle.png" id="2_wi76p"]
@@ -18,6 +18,11 @@
 [ext_resource type="Texture2D" uid="uid://imhxa21lfrer" path="res://assets/enemy/slasher/attack/indicator/enemy_indicator3.png" id="16_qk2qc"]
 [ext_resource type="Texture2D" uid="uid://dc2ir513ky840" path="res://assets/enemy/slasher/attack/indicator/enemy_indicator4.png" id="17_qrim6"]
 [ext_resource type="Texture2D" uid="uid://c28jj86bw85wm" path="res://assets/enemy/slasher/attack/indicator/enemy_indicator5.png" id="18_yynyb"]
+[ext_resource type="AudioStream" uid="uid://dlafa3okd58wq" path="res://audio/SFX/enemy/hit.wav" id="19_5x6p2"]
+[ext_resource type="AudioStream" uid="uid://qhow488wdncd" path="res://audio/SFX/enemy/scream.wav" id="20_5ykx1"]
+[ext_resource type="AudioStream" uid="uid://dkuangbt4n1ya" path="res://audio/SFX/enemy/step1.wav" id="21_wcmmp"]
+[ext_resource type="AudioStream" uid="uid://diddchfg327oo" path="res://audio/SFX/enemy/step2.wav" id="22_qrwfi"]
+[ext_resource type="AudioStream" uid="uid://dfl0e4uxssh5s" path="res://audio/SFX/enemy/step3.wav" id="23_8ai0s"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c5g5k"]
 shader = ExtResource("2_xxny7")
@@ -467,6 +472,12 @@ _data = {
 &"indicateAttacking": SubResource("Animation_ujavc")
 }
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_stmna"]
+streams_count = 3
+stream_0/stream = ExtResource("21_wcmmp")
+stream_1/stream = ExtResource("22_qrwfi")
+stream_2/stream = ExtResource("23_8ai0s")
+
 [node name="slasher" type="CharacterBody2D"]
 y_sort_enabled = true
 collision_layer = 2
@@ -592,6 +603,26 @@ offset = Vector2(0.5, 0)
 [node name="EnemyIndicator5" type="Sprite2D" parent="attackIndicator"]
 position = Vector2(17.5, -0.5)
 texture = ExtResource("18_yynyb")
+
+[node name="audio" type="Node2D" parent="."]
+
+[node name="hitSFX" type="AudioStreamPlayer2D" parent="audio"]
+stream = ExtResource("19_5x6p2")
+
+[node name="screamSFX" type="AudioStreamPlayer2D" parent="audio"]
+stream = ExtResource("20_5ykx1")
+pitch_scale = 0.39
+
+[node name="stepPlaylist" type="AudioStreamPlayer2D" parent="audio"]
+stream = SubResource("AudioStreamRandomizer_stmna")
+volume_db = -21.197
+max_distance = 503.0
+attenuation = 0.435275
+bus = &"SFX"
+
+[node name="stepTimer" type="Timer" parent="audio"]
+wait_time = 0.35
+one_shot = true
 
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
 [connection signal="timeout" from="startNav" to="." method="_on_start_nav_timeout"]

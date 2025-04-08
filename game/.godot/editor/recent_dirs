@@ -1,3 +1,4 @@
+res://autoloads
 res://misc/shaders
 res://worldScenes/lamp
 res://
@@ -11,7 +12,6 @@ res://misc/cutscene
 res://misc/tools
 res://Camera
 res://levels
-res://autoloads
 res://worldScenes/checkpoint
 res://assets/enemy/shooter
 res://enemy

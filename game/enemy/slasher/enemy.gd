@@ -41,6 +41,14 @@ const DEAD_SLASHER = preload("res://enemy/slasher/dead_slasher.tscn")
 @onready var attack_indicator_parent: Node2D = $attackIndicator
 var attack_charge_time : float = 0 #this is used for attack UI, is set in attack task as export variable
 
+@onready var hit_sfx: AudioStreamPlayer2D = $audio/hitSFX
+@onready var scream_sfx: AudioStreamPlayer2D = $audio/screamSFX
+
+@onready var step_playlist: AudioStreamPlayer2D = $audio/stepPlaylist
+@onready var step_timer: Timer = $audio/stepTimer #used for step SFX cooldown
+@onready var hitbox: CollisionShape2D = $Area2D/hitbox
+
+
 func _ready() -> void:
 	@warning_ignore("narrowing_conversion")
 	speed = randi_range(speed - 10, speed + 10)
@@ -135,7 +143,11 @@ func take_damage():
 	
 	#apply camera shake
 	Events.emit_signal("combat_camera_shake")
-
+	
+	#play SFX
+	SFXutil.play_with_pitch(hit_sfx)
+	#SFXutil.play_with_pitch(scream_sfx)
+	
 	
 	#everything UI and visualss
 	animation_player.play("enemy_hit")
@@ -156,7 +168,17 @@ func take_damage():
 	if hp <= 0:
 		var corpse = DEAD_SLASHER.instantiate()
 		corpse.global_position = global_position
-		get_tree().root.add_child(corpse)
+		var level_container = get_tree().root.get_node("main/LevelContainer")
+		level_container.add_child(corpse)
+		
+		#scream_sfx.stop()
+		SFXutil.play_with_pitch(scream_sfx, 0.25, 0.50)
+		
+		bt_player.active = false
+		visible = false
+		hitbox.disabled = true
+		
+		await get_tree().create_timer(3.0).timeout
 		queue_free()
 
 func _physics_process(_delta: float) -> void:
@@ -167,6 +189,14 @@ func _physics_process(_delta: float) -> void:
 		# Gradually reduce knockback force (smooth stop)
 		knockback_force = knockback_force.lerp(Vector2.ZERO, _delta * 22)
 	move_and_slide()
+
+func sfx_step_sound() -> void:
+	#todo play random step
+	if step_timer.is_stopped():
+		SFXutil.play_with_pitch(step_playlist, 1.25, 1.50)
+		step_timer.start()
+		
+
 
 # Used for avoidance
 func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:

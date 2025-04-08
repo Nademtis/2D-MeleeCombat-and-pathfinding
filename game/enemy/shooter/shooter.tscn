@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://bipo4jopb3k76"]
+[gd_scene load_steps=82 format=3 uid="uid://bipo4jopb3k76"]
 
 [ext_resource type="Script" uid="uid://ba86gymeid4w" path="res://enemy/shooter/shooter.gd" id="1_hq8q1"]
 [ext_resource type="Texture2D" uid="uid://buy2sp1nd6guw" path="res://assets/enemy/shooter/shooter_bow_attack.png" id="2_hq8q1"]
@@ -18,6 +18,11 @@
 [ext_resource type="Texture2D" uid="uid://imhxa21lfrer" path="res://assets/enemy/slasher/attack/indicator/enemy_indicator3.png" id="16_xakwk"]
 [ext_resource type="Texture2D" uid="uid://dc2ir513ky840" path="res://assets/enemy/slasher/attack/indicator/enemy_indicator4.png" id="17_upoml"]
 [ext_resource type="Texture2D" uid="uid://c28jj86bw85wm" path="res://assets/enemy/slasher/attack/indicator/enemy_indicator5.png" id="18_t7c55"]
+[ext_resource type="AudioStream" uid="uid://dlafa3okd58wq" path="res://audio/SFX/enemy/hit.wav" id="19_qh1qt"]
+[ext_resource type="AudioStream" uid="uid://qhow488wdncd" path="res://audio/SFX/enemy/scream.wav" id="20_2c7nn"]
+[ext_resource type="AudioStream" uid="uid://dkuangbt4n1ya" path="res://audio/SFX/enemy/step1.wav" id="21_8by82"]
+[ext_resource type="AudioStream" uid="uid://diddchfg327oo" path="res://audio/SFX/enemy/step2.wav" id="22_slth7"]
+[ext_resource type="AudioStream" uid="uid://dfl0e4uxssh5s" path="res://audio/SFX/enemy/step3.wav" id="23_mw5su"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hq8q1"]
 atlas = ExtResource("2_hq8q1")
@@ -482,6 +487,12 @@ _data = {
 &"indicateAttacking": SubResource("Animation_ujavc")
 }
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_i3a5o"]
+streams_count = 3
+stream_0/stream = ExtResource("21_8by82")
+stream_1/stream = ExtResource("22_slth7")
+stream_2/stream = ExtResource("23_mw5su")
+
 [node name="shooter" type="CharacterBody2D"]
 y_sort_enabled = true
 collision_layer = 2
@@ -618,6 +629,26 @@ offset = Vector2(0.5, 0)
 [node name="EnemyIndicator5" type="Sprite2D" parent="attackIndicator"]
 position = Vector2(17.5, -0.5)
 texture = ExtResource("18_t7c55")
+
+[node name="audio" type="Node2D" parent="."]
+
+[node name="hitSFX" type="AudioStreamPlayer2D" parent="audio"]
+stream = ExtResource("19_qh1qt")
+
+[node name="screamSFX" type="AudioStreamPlayer2D" parent="audio"]
+stream = ExtResource("20_2c7nn")
+pitch_scale = 0.39
+
+[node name="stepPlaylist" type="AudioStreamPlayer2D" parent="audio"]
+stream = SubResource("AudioStreamRandomizer_i3a5o")
+volume_db = -21.197
+max_distance = 503.0
+attenuation = 0.435275
+bus = &"SFX"
+
+[node name="stepTimer" type="Timer" parent="audio"]
+wait_time = 0.35
+one_shot = true
 
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
 [connection signal="timeout" from="startNav" to="." method="_on_start_nav_timeout"]

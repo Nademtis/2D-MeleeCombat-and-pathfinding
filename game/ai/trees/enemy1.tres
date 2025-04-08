@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=33 format=3 uid="uid://bydt1cu64pyu2"]
+[gd_resource type="BehaviorTree" load_steps=35 format=3 uid="uid://bydt1cu64pyu2"]
 
 [ext_resource type="Script" uid="uid://cw1d0jtcsgn64" path="res://ai/tasks/checkIsStunned.gd" id="1_4e3ku"]
 [ext_resource type="Script" uid="uid://b02x37lc8f0d0" path="res://ai/tasks/chasePlayer.gd" id="1_5n44a"]
@@ -102,9 +102,17 @@ script = ExtResource("1_5n44a")
 [sub_resource type="BTAction" id="BTAction_cu66n"]
 script = ExtResource("2_2772s")
 
+[sub_resource type="BBNode" id="BBNode_x16su"]
+saved_value = NodePath(".")
+resource_name = "."
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_x16su"]
+node = SubResource("BBNode_x16su")
+method = &"sfx_step_sound"
+
 [sub_resource type="BTSequence" id="BTSequence_trfhn"]
 custom_name = "Chase Logic Sequence"
-children = [SubResource("BTCheckAgentProperty_lrjtb"), SubResource("BTAction_ny1iw"), SubResource("BTAction_cu66n")]
+children = [SubResource("BTCheckAgentProperty_lrjtb"), SubResource("BTAction_ny1iw"), SubResource("BTAction_cu66n"), SubResource("BTCallMethod_x16su")]
 
 [sub_resource type="BTSelector" id="BTSelector_ccgqp"]
 children = [SubResource("BTAction_eot6s"), SubResource("BTSequence_rlhlw"), SubResource("BTSequence_tlaf4"), SubResource("BTSequence_trfhn")]

@@ -58,7 +58,9 @@ var attack_dash_direction: Vector2 = Vector2.ZERO
 @onready var hurtbox_coll: CollisionShape2D = $hurtbox/hurtboxColl
 
 enum MovementState{IDLE, WALKING, ATTACKING, DASHING}
-var movement_state = MovementState.WALKING
+var movement_state = MovementState.IDLE
+@onready var sfx: PlayerSFX = $audio
+
 
 func _ready() -> void:
 	Events.connect("player_attacked", setup_attack_dash) #TODO
@@ -78,6 +80,12 @@ func _process(_delta: float) -> void:
 	PlayerStats.player_position = global_position #update player position for global access
 	#PlayerStats.player_velocity = velocity
 	
+	#set idle if not attack and dashing and not moving
+	#if movement_state != MovementState.ATTACKING and movement_state != MovementState.DASHING:
+		#if PlayerStats.player_input_vector == Vector2.ZERO:
+			#set_movement_state(MovementState.IDLE)
+	
+	#disable hurtbox when dashing
 	if movement_state == MovementState.DASHING:
 		hurtbox_coll.disabled = true
 	else:
@@ -92,8 +100,11 @@ func _process(_delta: float) -> void:
 		var direction = point - global_position
 		setup_attack_dash(direction)
 		attack(point)
-	if Input.is_action_pressed("dash") && can_dash && movement_state == MovementState.WALKING or dash_held_down && can_dash && movement_state == MovementState.WALKING:
-		setup_dash()
+	
+	#dashing
+	if Input.is_action_pressed("dash") && can_dash or dash_held_down && can_dash:
+		if movement_state == MovementState.WALKING:
+			setup_dash()
 
 func _physics_process(delta: float) -> void:
 	if is_dead:
@@ -101,14 +112,15 @@ func _physics_process(delta: float) -> void:
 	#var stair_direction : String = check_for_stairs()
 	#print(stair_direction)
 	#print(MovementState.keys()[movement_state])
+
 	match movement_state:
-		MovementState.WALKING:
+		MovementState.WALKING, MovementState.IDLE:
 			move_player(delta)
 		MovementState.ATTACKING:
 			handle_attack_dash(delta)
 		MovementState.DASHING:
 			handle_dashing(delta)
-	
+
 	move_and_slide()
 
 func check_for_stairs() -> String:
@@ -144,6 +156,7 @@ func attack(_point : Vector2):
 
 func setup_attack_dash(direction: Vector2):
 	set_movement_state(MovementState.ATTACKING)
+	sfx.attack()
 	attack_dash_direction = direction.normalized()
 	attack_dash_elapsed_time = 0.0  # Reset timer
 	
@@ -169,7 +182,7 @@ func setup_dash():
 		dash_start_speed = dash_speed  # Store initial speed
 		dash_cooldown.start()
 		can_dash = false
-		
+		sfx.dash()
 		ParticleFX.spawn_dash_effect(dash_direction, global_position, 0.50)
 
 func handle_dashing(delta: float):
@@ -208,8 +221,10 @@ func move_player(delta):
 	# apply acceleration when input is detected
 	if input_vector != Vector2.ZERO:
 		velocity = lerp(velocity, input_vector * max_speed, acceleration * delta)
+		set_movement_state(MovementState.WALKING)
 	else: # Apply deceleration when no input is detected
 		velocity = lerp(velocity, input_vector * max_speed, deceleration * delta)
+		set_movement_state(MovementState.IDLE)
 	
 	# Check if the player is on stairs
 	var stair_direction = check_for_stairs()

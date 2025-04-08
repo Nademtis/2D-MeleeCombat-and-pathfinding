@@ -8,6 +8,7 @@
 [node name="main" type="Node2D"]
 
 [node name="LevelContainer" type="Node" parent="."]
+unique_name_in_owner = true
 
 [node name="fadeToBlackCanvasLayer" parent="." instance=ExtResource("1_ig7tw")]
 

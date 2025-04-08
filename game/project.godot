@@ -24,6 +24,7 @@ PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_came
 Enums="*res://autoloads/Enums.gd"
 CheckpointManager="*res://autoloads/CheckpointManager.gd"
 LevelManager="*res://autoloads/LevelManager.gd"
+SFXutil="*res://autoloads/SFXutil.gd"
 
 [debug]
 

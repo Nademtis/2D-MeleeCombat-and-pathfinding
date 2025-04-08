@@ -1,7 +1,8 @@
 Node2D
+Timer
 AudioStreamPlayer2D
-AudioListener2D
 Node
+AudioListener2D
 CPUParticles2D
 GPUParticles2D
 TileMapLayer
@@ -11,5 +12,3 @@ CollisionShape2D
 StaticBody2D
 LightOccluder2D
 PointLight2D
-DirectionalLight2D
-Sprite2D
