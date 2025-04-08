@@ -778,6 +778,7 @@ bus = &"SFX"
 stream = ExtResource("22_bjvpn")
 volume_db = -3.975
 pitch_scale = 1.38
+bus = &"SFX"
 
 [connection signal="timeout" from="attackDelay" to="." method="_on_attack_delay_timeout"]
 [connection signal="timeout" from="attackCombo" to="." method="_on_attack_combo_timeout"]

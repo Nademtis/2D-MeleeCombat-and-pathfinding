@@ -1,7 +1,9 @@
-Node2D
-Timer
+AudioStreamPlayer
 AudioStreamPlayer2D
+Timer
+Area2D
 Node
+Node2D
 AudioListener2D
 CPUParticles2D
 GPUParticles2D
@@ -10,5 +12,3 @@ ColorRect
 TextureRect
 CollisionShape2D
 StaticBody2D
-LightOccluder2D
-PointLight2D

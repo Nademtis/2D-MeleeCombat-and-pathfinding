@@ -12,7 +12,8 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("k"): #only for debug - player takes damage
-		take_damage(1)
+		pass
+		#take_damage(1)
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemy_attack"):
