@@ -22,8 +22,8 @@ func load_level(new_level : Level) -> void:
 			child.queue_free()
 	
 	await get_tree().process_frame  # Ensure cleanup before adding a new level
-	
-	var packed_new_level_scene : PackedScene = load(new_level.level_path)
+	print("trying to load: ", new_level.level_path)
+	var packed_new_level_scene : PackedScene = load(new_level.level_path) # error here
 	var instansiated_level = packed_new_level_scene.instantiate()
 	instansiated_level.set_name(new_level.level_name)
 	
@@ -48,6 +48,7 @@ func player_died() -> void:
 		# If no checkpoint exists, just restart the current level
 		load_level(active_level)
 
+#func level_swapper()
 
 func load_level_from_checkpoint(checkpoint: Checkpoint) -> void:
 	await load_level(get_level_from_level_name(checkpoint.level_name))
