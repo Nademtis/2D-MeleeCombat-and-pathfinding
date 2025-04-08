@@ -171,7 +171,7 @@ y_sort_enabled = true
 
 [node name="player" parent="Ysort" instance=ExtResource("2_58gyl")]
 unique_name_in_owner = true
-position = Vector2(186, 556)
+position = Vector2(-652, 823)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="Ysort"]
 y_sort_enabled = true
@@ -341,7 +341,7 @@ ignore_time_scale = true
 
 [node name="Camera2D" type="Camera2D" parent="CameraManager"]
 physics_interpolation_mode = 1
-position = Vector2(186, 556)
+position = Vector2(-652, 823)
 zoom = Vector2(5, 5)
 process_callback = 0
 editor_draw_limits = true
@@ -353,7 +353,7 @@ script = ExtResource("15_w633q")
 
 [node name="PlayerZoomedCamera" type="Node2D" parent="CameraManager" node_paths=PackedStringArray("follow_target")]
 top_level = true
-position = Vector2(186, 556)
+position = Vector2(-652, 823)
 script = ExtResource("16_q6gno")
 priority = 1
 follow_mode = 1
@@ -366,7 +366,7 @@ metadata/_custom_type_script = "uid://dd1a2amguahsk"
 
 [node name="FollowPcam" type="Node2D" parent="CameraManager" node_paths=PackedStringArray("follow_target")]
 top_level = true
-position = Vector2(186, 556)
+position = Vector2(-652, 823)
 script = ExtResource("16_q6gno")
 follow_mode = 5
 follow_target = NodePath("../../Ysort/player")
@@ -454,7 +454,7 @@ position = Vector2(-393, 564)
 [node name="LEVELSWAPPER" type="Node" parent="."]
 
 [node name="levelSwapper" parent="LEVELSWAPPER" instance=ExtResource("26_2sfss")]
-position = Vector2(234, 559)
+position = Vector2(-655, 793)
 next_level_url = "res://levels/level_0.tscn"
 level_name = "level_0"
 

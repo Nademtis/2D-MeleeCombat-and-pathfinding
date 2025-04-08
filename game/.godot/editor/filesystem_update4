@@ -11,15 +11,10 @@ res://ai/trees/shooter_Btree.tres
 res://wall_coll_tileset.tres
 res://Camera/CameraShake.tres
 res://misc/shaders/highlight.gdshader
-res://autoloads/MusicManager.gd
 res://levels/level_0.tscn
 res://worldScenes/lamp/lamp.tscn
 res://worldScenes/lever.tscn
 res://player/player.tscn
 res://enemy/slasher/slasher.tscn
 res://enemy/shooter/shooter.tscn
-res://player/playerHp.gd
-res://worldScenes/levelSwapper/level_swapper.gd
 res://worldScenes/levelSwapper/level_swapper.tscn
-res://autoloads/LevelManager.gd
-res://resources/level_resource.gd
