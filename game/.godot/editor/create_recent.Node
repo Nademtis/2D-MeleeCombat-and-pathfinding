@@ -1,3 +1,5 @@
+LevelSwapper
+SpawnPoint
 Marker2D
 Node
 Node2D
@@ -11,5 +13,3 @@ CPUParticles2D
 GPUParticles2D
 TileMapLayer
 ColorRect
-TextureRect
-StaticBody2D

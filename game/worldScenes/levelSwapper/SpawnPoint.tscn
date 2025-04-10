@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpv5ltkwgltlv"]
+
+[ext_resource type="Script" uid="uid://djwgaa1bxd30x" path="res://worldScenes/levelSwapper/spawn_point.gd" id="1_tscia"]
+
+[node name="SpawnPoint" type="Marker2D"]
+script = ExtResource("1_tscia")

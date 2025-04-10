@@ -11,7 +11,15 @@ res://ai/trees/shooter_Btree.tres
 res://wall_coll_tileset.tres
 res://Camera/CameraShake.tres
 res://misc/shaders/highlight.gdshader
+res://resources/level_resource.gd
 res://main.tscn
 res://worldScenes/lever.tscn
 res://autoloads/LevelManager.gd
-res://resources/level_resource.gd
+res://worldScenes/levelSwapper/level_swapper.tscn
+res://worldScenes/levelSwapper/level_swapper.gd
+res://worldScenes/levelSwapper/SpawnPoint.tscn
+res://worldScenes/levelSwapper/spawn_point.gd
+res://resources/checkpoint_resource.gd
+res://misc/shaders/waterShader_material.tres
+res://player/player.tscn
+res://player/scripts/player.gd
