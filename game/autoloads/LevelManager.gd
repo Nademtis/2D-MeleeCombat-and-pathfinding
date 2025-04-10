@@ -13,7 +13,7 @@ func _ready() -> void:
 	
 	#load level 0 if there is no active level
 	if active_level == null:
-		var new_level = Level.new("res://levels/level_0.tscn", "level_0")
+		var new_level = Level.new("res://levels/level_0.tscn", "level_0", Vector2(235,551.0))
 		load_level(new_level)
 	
 func load_level(new_level : Level) -> void:
@@ -23,7 +23,7 @@ func load_level(new_level : Level) -> void:
 	
 	await get_tree().process_frame  # Ensure cleanup before adding a new level
 	print("trying to load: ", new_level.level_path)
-	var packed_new_level_scene : PackedScene = load(new_level.level_path) # error here
+	var packed_new_level_scene : PackedScene = load(new_level.level_path)
 	var instansiated_level = packed_new_level_scene.instantiate()
 	instansiated_level.set_name(new_level.level_name)
 	
@@ -66,5 +66,5 @@ func get_active_level_name() -> String:
 
 func get_level_from_level_name(level_name : String) -> Level:
 	var level_path = "res://levels/" + level_name + ".tscn"
-	return Level.new(level_path, level_name)
+	return Level.new(level_path, level_name, Vector2.ZERO) # vector2Zero since spawn location is not important when dying
 	

@@ -1,5 +1,5 @@
 res://default_bus_layout.tres
-res://main.tscn
+res://levels/level_0.tscn
 res://misc/shaders/blackScreen.gdshader
 res://misc/shaders/vignette.gdshader
 res://tileset.tres
@@ -11,11 +11,7 @@ res://ai/trees/shooter_Btree.tres
 res://wall_coll_tileset.tres
 res://Camera/CameraShake.tres
 res://misc/shaders/highlight.gdshader
-res://levels/level_0.tscn
-res://worldScenes/lamp/lamp.tscn
+res://main.tscn
 res://worldScenes/lever.tscn
-res://player/player.tscn
-res://enemy/slasher/slasher.tscn
-res://enemy/shooter/shooter.tscn
-res://worldScenes/levelSwapper/level_swapper.tscn
-res://autoloads/MusicManager.gd
+res://autoloads/LevelManager.gd
+res://resources/level_resource.gd

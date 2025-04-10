@@ -491,8 +491,10 @@ knockback_duration = 0.1
 [node name="animatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_c5g5k")
 sprite_frames = SubResource("SpriteFrames_dwchd")
-animation = &"attack_left"
+animation = &"attack_right"
 autoplay = "idle"
+frame = 3
+frame_progress = 1.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
